@@ -15,10 +15,6 @@ public class CampaignPanel extends JPanel {
     JButton normalButton;
     JButton hardButton;
 
-    JButton oneButton;
-    JButton twoButton;
-    JButton threeButton;
-
     /**
      * Constructor for the CampaignPanel class.
      * @param cardLayout The CardLayout used for switching panels.
@@ -87,27 +83,21 @@ public class CampaignPanel extends JPanel {
         difficultyPanel.add(easyButton);
         easyButton.addActionListener(e -> {
             difficulty = Difficulty.EASY;
-            oneButton.setText("Level One - " + difficulty.name());
-            twoButton.setText("Level Two - " + difficulty.name());
-            threeButton.setText("Level Three - " + difficulty.name());
+            System.out.println(difficulty);
         });
 
         normalButton = drawButton("Normal", new Rectangle(50, 125, 200, 50), 20);
         difficultyPanel.add(normalButton);
         normalButton.addActionListener(e -> {
             difficulty = Difficulty.NORMAL;
-            oneButton.setText("Level One - " + difficulty.name());
-            twoButton.setText("Level Two - " + difficulty.name());
-            threeButton.setText("Level Three - " + difficulty.name());
+            System.out.println(difficulty);
         });
 
         hardButton = drawButton("Hard", new Rectangle(50, 200, 200, 50), 20);
         difficultyPanel.add(hardButton);
         hardButton.addActionListener(e -> {
             difficulty = Difficulty.HARD;
-            oneButton.setText("Level One - " + difficulty.name());
-            twoButton.setText("Level Two - " + difficulty.name());
-            threeButton.setText("Level Three - " + difficulty.name());
+            System.out.println(difficulty);
         });
 
         add(difficultyPanel);

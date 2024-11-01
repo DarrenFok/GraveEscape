@@ -24,8 +24,8 @@ public class GameMainMenu extends JFrame {
 
         // Initialize panels
         menuPanel = initializeMenuPanel();
-        campaignPanel = new CampaignPanel();
-        practicePanel = new PracticePanel();
+        campaignPanel = new CampaignPanel(cardLayout, mainPanel);
+        practicePanel = new PracticePanel(cardLayout, mainPanel);
         settingPanel = new SettingsPanel();
 
         // Add panels to main panel
