@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GameMainMenu extends JFrame {
     private JPanel mainPanel;
@@ -25,7 +23,7 @@ public class GameMainMenu extends JFrame {
         // Initialize panels
         menuPanel = initializeMenuPanel();
         campaignPanel = new CampaignPanel();
-        practicePanel = new PracticePanel();
+        practicePanel = new PracticePanel(cardLayout, mainPanel);
         settingPanel = new SettingsPanel();
 
         // Add panels to main panel
@@ -74,6 +72,4 @@ public class GameMainMenu extends JFrame {
     private void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
     }
-
-
 }
