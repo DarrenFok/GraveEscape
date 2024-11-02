@@ -3,13 +3,29 @@ public class Player {
     private int lives;
     private float fieldOfView;
 
-    public Player(Position position, int lives, float fieldOfView) {}
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
-    public void move(Direction direction){}
+    public Position getPosition() {
+        return position;
+    }
 
-    public void collectObjective(){}
+    public int getX(){
+        return position.getX();
+    }
 
-    public void collectBonusPoints(){}
+    public int getY(){
+        return position.getY();
+    }
 
-    public void loseLife(){}
+//    public Player(Position position, int lives, float fieldOfView) {}
+//
+//    public void move(Direction direction){}
+//
+//    public void collectObjective(){}
+//
+//    public void collectBonusPoints(){}
+//
+//    public void loseLife(){}
 }
