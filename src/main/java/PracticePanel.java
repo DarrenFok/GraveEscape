@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * PracticePanel class represents the practice section of the menu.
+ * It allows the player to select a difficulty and certain level to play independently for practice.
+ */
 public class PracticePanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
@@ -15,6 +19,11 @@ public class PracticePanel extends JPanel {
     JButton twoButton;
     JButton threeButton;
 
+    /**
+     * Constructor for the PracticePanel class.
+     * @param cardLayout: The CardLayout used for switching panels
+     * @param mainPanel: The main JPanel containing all cards (panels)
+     */
     public PracticePanel(CardLayout cardLayout, JPanel mainPanel){
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -44,6 +53,13 @@ public class PracticePanel extends JPanel {
         add(panel);
     }
 
+    /**
+     * Creates and returns a button with specified text, location, and font size.
+     * @param text: The text to be displayed on the button.
+     * @param location: The location and size of the button on the panel.
+     * @param fontSize: The font size of the button text.
+     * @return The JButton created
+     */
     public JButton drawButton(String text, Rectangle location, int fontSize){
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, fontSize));
@@ -52,6 +68,9 @@ public class PracticePanel extends JPanel {
         return button;
     }
 
+    /**
+     * Function to draw difficulty selector title, box, and buttons respective to each difficulty.
+     */
     public void drawDifficulties(){
         // Draw text
         JLabel diffcultyTitle = new JLabel("Difficulty Selection");
@@ -94,6 +113,9 @@ public class PracticePanel extends JPanel {
         add(difficultyPanel);
     }
 
+    /**
+     * Function to draw level selector title, box, and buttons respective to each level.
+     */
     public void drawLevelSelector(){
         // Draw text
         JLabel selectorTitle = new JLabel("Pick Your Level:");
@@ -110,6 +132,11 @@ public class PracticePanel extends JPanel {
         // Add level buttons
         oneButton = drawButton("Level One - " + difficulty.name(), new Rectangle(50, 50, 600, 50), 20);
         selectorPanel.add(oneButton);
+        oneButton.addActionListener(e -> {
+            Level level = new Level1();
+            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
+            game.startGame();
+        });
 
         twoButton = drawButton("Level Two - " + difficulty.name(), new Rectangle(50, 125, 600, 50), 20);
         selectorPanel.add(twoButton);
@@ -120,6 +147,10 @@ public class PracticePanel extends JPanel {
         add(selectorPanel);
     }
 
+    /**
+     * Shows a specified panel based on the panel name provided.
+     * @param panelName The name of the panel to be displayed.
+     */
     private void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
     }

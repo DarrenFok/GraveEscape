@@ -1,16 +1,18 @@
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class Level {
-    private int levelNumber;
     private List<Objective> objectives;
     private Player player;
     private List<Enemy> enemies;
+    // TODO: remove enemyPositions, and move its functionality to enemies
     private List<Position> enemyPositions;
     private Grid grid;
-    private int bonusPoints;
-    private int tickCount;
-    private boolean isComplete;
+    private int moveCount;
+//    private int bonusPoints;
+//    private int tickCount;
+//    private boolean isComplete;
 
     /**
      * Constructor for Level object.
@@ -21,15 +23,10 @@ public class Level {
     public Level(int gridSize, Position playerStart, List<Enemy> enemies){
         // Set grid size
         grid = new Grid(gridSize);
-
-        // Set initial position of player
-        player.setPosition(playerStart);
+        player = new Player(playerStart);
 
         // Set initial positions of enemies
         this.enemies = enemies;
-        for(int i = 0; i < enemies.size(); i++){
-            enemyPositions.set(i, enemies.get(i).getPosition());
-        }
     }
 
     /**
@@ -45,7 +42,7 @@ public class Level {
                 }
                 break;
             case DOWN:
-                if(player.getY() < grid.getDimension()){
+                if(player.getY() < grid.getDimension()-1){
                     player.setPosition(new Position(player.getX(), player.getY()+1));
                 }
                 break;
@@ -55,7 +52,7 @@ public class Level {
                 }
                 break;
             case RIGHT:
-                if(player.getX() < grid.getDimension()){
+                if(player.getX() < grid.getDimension()-1){
                     player.setPosition(new Position(player.getX()+1, player.getY()));
                 }
                 break;
@@ -70,31 +67,32 @@ public class Level {
      */
     public void moveEnemies(){
         Random random = new Random();
-        for(int i = 0; i < enemies.size(); i++){
-            int direction = random.nextInt(4);
-            switch(direction){
-                case 0: // Moving up
-                    if(enemies.get(i).getY() > 0){
-                        enemyPositions.set(i, new Position(enemies.get(i).getX(), enemies.get(i).getY()-1));
-                    }
-                    break;
-                case 1: // Moving down
-                    if(enemies.get(i).getY() < grid.getDimension()){
-                        enemyPositions.set(i, new Position(enemies.get(i).getX(), enemies.get(i).getY()+1));
-                    }
-                    break;
-                case 2: // Moving left
-                    if(enemies.get(i).getX() > 0){
-                        enemyPositions.set(i, new Position(enemies.get(i).getX()-1, enemies.get(i).getY()));
-                    }
-                    break;
-                case 3:
-                    if(enemies.get(i).getX() < grid.getDimension()){
-                        enemyPositions.set(i, new Position(enemies.get(i).getX()+1, enemies.get(i).getY()));
-                    }
-                    break;
+        for(Enemy enemy : enemies){
+            if (enemy instanceof MovingEnemy){
+                int direction = random.nextInt(4);
+                switch(direction){
+                    case 0: // Moving up
+                        if(enemy.getY() > 0){
+                            enemy.setPosition(new Position(enemy.getX(), enemy.getY()-1));
+                        }
+                        break;
+                    case 1: // Moving down
+                        if(enemy.getY() < grid.getDimension()-1){
+                            enemy.setPosition(new Position(enemy.getX(), enemy.getY()+1));
+                        }
+                        break;
+                    case 2: // Moving left
+                        if(enemy.getX() > 0){
+                            enemy.setPosition(new Position(enemy.getX()-1, enemy.getY()));
+                        }
+                        break;
+                    case 3:
+                        if(enemy.getX() < grid.getDimension()-1){
+                            enemy.setPosition(new Position(enemy.getX()+1, enemy.getY()));
+                        }
+                        break;
+                }
             }
-            enemies.get(i).setPosition(enemyPositions.get(i));
         }
     }
 
@@ -124,6 +122,26 @@ public class Level {
         System.out.println(); // extra line
     }
 
+    /**
+     * Method to return Player object within a level, namely for the Player's position
+     * @return: Player object
+     */
+    public Player getPlayer(){
+        return this.player;
+    }
+
+    /**
+     * Method return List of enemies within a level, namely for the Enemy positions
+     * @return: List of enemies
+     */
+    public List<Enemy> getEnemies(){
+        return this.enemies;
+    }
+
+    public int getDimension(){
+        return grid.getDimension();
+    }
+
 
 
 //    public void completeObjective(){}
@@ -138,3 +156,4 @@ public class Level {
 //        return 0;
 //    }
 }
+

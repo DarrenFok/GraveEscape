@@ -1,6 +1,10 @@
 public abstract class Enemy {
     protected Position position;
 
+    public Enemy(Position position){
+        this.position = position;
+    }
+
     public Position getPosition() {
         return position;
     }

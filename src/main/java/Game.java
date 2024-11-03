@@ -1,120 +1,124 @@
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
-import javax.swing.JPanel;
-
-//Runnable is to allow the use of Thread
-public class Game extends JPanel implements Runnable{
-    //Screen Settings
-    final int baseTileSize = 16; //change depending on the number of pixels of characters
-    final int scale = 3;//to make everything look of reasonable size relative to the screen
-
-    final int tileSize = baseTileSize * scale; 
-    final int maxScreenColumn = 16;
-    final int maxScreenRow = 12;
-    final int screenWidth = tileSize * maxScreenColumn;
-    final int screenLength = tileSize * maxScreenRow;
-
+/**
+ * Game class acts as the main controller for the game, handles overall game flow, player interactions, and
+ * game state management.
+ */
+public class Game implements KeyListener {
+    private CardLayout cardLayout;
+    private JPanel mainPanel;
     private List<Level> levels;
-    private Level currentLevel;
-    private int livesRemaining;
-    private int score;
+    private boolean gameOver = false;
     private Difficulty difficulty;
     private GameMode gameMode;
+    private Level level;
+    private GamePanel gamePanel;
 
-    int FPS = 60;
-    Movement keyH = new Movement();
-    Thread gameThread; //once thread starts, it keeps the program running until stopped (keeps updating the current screen)
+    /**
+     * Constructor for Game object. Sets up the GamePanel, switches to it, and puts the keyListener on the
+     * aforementioned GamePanel
+     *
+     * @param cardLayout: CardLayout used to switch between panels
+     * @param mainPanel: The window for the game
+     * @param difficulty: The difficulty of the game
+     * @param gameMode: The game mode selected (practice, campaign)
+     * @param level: The level being played
+     */
+    public Game(CardLayout cardLayout, JPanel mainPanel, Difficulty difficulty, GameMode gameMode, Level level) {
+        this.cardLayout = cardLayout;
+        this.mainPanel = mainPanel;
+        this.difficulty = difficulty;
+        this.gameMode = gameMode;
+        this.level = level;
 
+        // Create game panel, and add to mainPanel
+        setupGamePanel();
+        mainPanel.add(gamePanel, "Game");
 
-    //Setting the initial position of the player (can move this section to the position class later on)
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 5;
-
-    //Game constructor
-    public Game(){
-        this.setPreferredSize(new Dimension(screenWidth, screenLength)); //setting the Dimensions
-        this.setBackground(Color.gray); //setting background color
-        //Draws graphics onto an offscreen buffer, moves the fully rendered image to the screen in one movement
-        this.setDoubleBuffered(true); 
-        this.addKeyListener(keyH);
-        this.setFocusable(true); //GamePanel focuses to recieve a key input
+        // KeyListener in GamePanel
+        gamePanel.addKeyListener(this);
     }
 
-    public void startGameThread() {
-        gameThread = new Thread(this); //passing game class to Thread constructor (instantiating the thread)
-        gameThread.start();
+    /**
+     * Method to set up the Game Panel
+     */
+    private void setupGamePanel(){
+        gamePanel = new GamePanel(level.getDimension(), level.getPlayer(), level.getEnemies());
     }
 
-    @Override //when we start gameThread it automatically calls run()
-    public void run() {
-        while (gameThread != null){
-            System.out.println("Game is continuously running");
+    /**
+     * Method that tells game what to do when key is pressed. Player is moved with arrow keys, and enemies move
+     * whenever the player moves.
+     */
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (gameOver) return;
 
-            double drawInterval = 1000000000/FPS; //0.01667 seconds
-            //nanoTime() returns current system time
-            double nextDrawTime = System.nanoTime() + drawInterval;
+        boolean playerMoved = false;
 
-            //two things that happen in this loop (corresponds to FPS)
-            //1: update information continuously (i.e. position)
-            update();
-            //2: draw screen with updated info
-            repaint(); //calling paintComponent
-            //constantly updates and repaints
-            try {
-            double remainingTime = nextDrawTime - System.nanoTime(); //gives how much more time remaining until the nextDrawTime
-            remainingTime /= 1000000; //converting nano to mili
-
-            if (remainingTime < 0){
-                remainingTime = 0;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP -> {
+                level.movePlayer(Direction.UP);
+                playerMoved = true;
             }
-
-            Thread.sleep((long) remainingTime); //sleep pauses the loop so that it wont do anything until the sleep is over
-
-            nextDrawTime += drawInterval;
-
-            } catch (InterruptedException e){
-                e.printStackTrace();
+            case KeyEvent.VK_DOWN -> {
+                level.movePlayer(Direction.DOWN);
+                playerMoved = true;
+            }
+            case KeyEvent.VK_LEFT -> {
+                level.movePlayer(Direction.LEFT);
+                playerMoved = true;
+            }
+            case KeyEvent.VK_RIGHT -> {
+                level.movePlayer(Direction.RIGHT);
+                playerMoved = true;
             }
         }
+
+        if (playerMoved) {
+            level.moveEnemies();
+            gamePanel.update(level.getPlayer(), level.getEnemies());
+        }
+
+        gameOver = level.checkCollision();
+
+        if (gameOver) {
+            JOptionPane.showMessageDialog(mainPanel, "Game Over");
+            cardLayout.show(mainPanel, "Menu");
+            gameOver = false;
+        }
+
     }
 
-    public void update (){
-        //changing the position of the character depending on the key input
-        if(keyH.goUp == true){
-            playerY -= playerSpeed;
-        }
-        if(keyH.goDown == true){
-            playerY += playerSpeed;
-        }
-        if(keyH.goLeft == true){
-            playerX -= playerSpeed;
-        }
-        if(keyH.goRight == true){
-            playerX += playerSpeed;
-        }
-    }
-    //built in method in java (standard method to draw things on JPanel)
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-
-        //Graphics2D class extends Graphics class providing more control over coordinate transforms and color management
-        Graphics2D g2 = (Graphics2D)g; 
-        //our character object
-        g2.setColor(Color.black);
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
-        g2.dispose(); //releases all resources used by this graphics (saves memory)
+    @Override
+    public void keyTyped(KeyEvent e) {
     }
 
-    //Functions for Game
-    public void startGame(){}
-    public void endGame(){}
-    public void resetGame(){}
-    public void updateScore(){}
-    public void loseLife(){}
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    /**
+     * Starts the game by switching panels to the GamePanel.
+     */
+    public void startGame(){
+        cardLayout.show(mainPanel, "Game");
+        gamePanel.requestFocusInWindow();
+    }
+
+
+//    //Functions for Game
+//    public void startGame(){}
+//    public void endGame(){}
+//    public void resetGame(){}
+//    public void updateScore(){}
+//    public void loseLife(){}
 
 }
