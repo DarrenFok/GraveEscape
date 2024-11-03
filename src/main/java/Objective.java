@@ -1,17 +1,25 @@
 public class Objective {
     private Position position;
-    private String type;
-    private boolean isCollected;
+    private boolean isMandatory;
+
+    public Objective(Position position, boolean isMandatory) {
+        this.position = position;
+        this.isMandatory = isMandatory;
+    }
 
     public Position getPosition() {
         return position;
     }
 
-    public String getType() {
-        return type;
+    public boolean isMandatory() {
+        return isMandatory;
     }
 
-    public boolean isCollected() {
-        return isCollected;
+    public int getX(){
+        return position.getX();
+    }
+
+    public int getY(){
+        return position.getY();
     }
 }

@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class Level {
-    private List<Objective> objectives;
+    private ArrayList<Objective> objectives;
     private Player player;
     private List<Enemy> enemies;
     // TODO: remove enemyPositions, and move its functionality to enemies
@@ -20,13 +21,16 @@ public class Level {
      * @param playerStart: The coordinates of where the player will start on a grid
      * @param enemies: A list of enemies on the grid
      */
-    public Level(int gridSize, Position playerStart, List<Enemy> enemies){
+    public Level(int gridSize, Position playerStart, List<Enemy> enemies, ArrayList<Objective> objectives){
         // Set grid size
         grid = new Grid(gridSize);
         player = new Player(playerStart);
 
         // Set initial positions of enemies
         this.enemies = enemies;
+
+        // Set initial positions of objectives
+        this.objectives = objectives;
     }
 
     /**
@@ -110,16 +114,21 @@ public class Level {
         return false;
     }
 
-    /**
-     * Method to test movement
-     */
-    public void render() {
-        System.out.println("Player Position: [" + player.getX() + ", " + player.getY() + "]");
-        System.out.println("Enemies:");
-        for(int i = 0; i < enemies.size(); i++){
-            System.out.println("[" + enemies.get(i).getX() + ", " + enemies.get(i).getY() + "]");
+    public void checkObjective(){
+        for(int i = 0; i < objectives.size(); i++){
+            Objective objective = objectives.get(i);
+
+            // Check if player's position matches the current Objective in list's position
+            if(player.getX() == objective.getX() && player.getY() == objective.getY()){
+                removeObjective(objective);
+                // Add score of objective
+                break;
+            }
         }
-        System.out.println(); // extra line
+    }
+
+    public void removeObjective(Objective objective){
+        objectives.remove(objective);
     }
 
     /**
@@ -131,11 +140,19 @@ public class Level {
     }
 
     /**
-     * Method return List of enemies within a level, namely for the Enemy positions
+     * Method to return List of enemies within a level, namely for the Enemy positions
      * @return: List of enemies
      */
     public List<Enemy> getEnemies(){
         return this.enemies;
+    }
+
+    /**
+     * Method to return List of Objectives within a level, namely for the Objective positions
+     * @return: List of objectives
+     */
+    public ArrayList<Objective> getObjectives(){
+        return this.objectives;
     }
 
     public int getDimension(){

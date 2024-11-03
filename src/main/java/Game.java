@@ -49,7 +49,12 @@ public class Game implements KeyListener {
      * Method to set up the Game Panel
      */
     private void setupGamePanel(){
-        gamePanel = new GamePanel(level.getDimension(), level.getPlayer(), level.getEnemies());
+        gamePanel = new GamePanel(
+                level.getDimension(),
+                level.getPlayer(),
+                level.getEnemies(),
+                level.getObjectives()
+        );
     }
 
     /**
@@ -83,9 +88,10 @@ public class Game implements KeyListener {
 
         if (playerMoved) {
             level.moveEnemies();
-            gamePanel.update(level.getPlayer(), level.getEnemies());
+            gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives());
         }
 
+        level.checkObjective();
         gameOver = level.checkCollision();
 
         if (gameOver) {
