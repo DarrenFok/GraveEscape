@@ -21,8 +21,8 @@ public class Level1 extends Level {
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(3,3), true));
-        objectives.add(new Objective(new Position(7,7), false));
+        objectives.add(new Objective(new Position(3,3), true, 5));
+        objectives.add(new Objective(new Position(7,7), false, 10));
 
         return objectives;
     }

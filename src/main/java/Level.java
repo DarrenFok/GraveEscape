@@ -7,8 +7,6 @@ public class Level {
     private ArrayList<Objective> objectives;
     private Player player;
     private List<Enemy> enemies;
-    // TODO: remove enemyPositions, and move its functionality to enemies
-    private List<Position> enemyPositions;
     private Grid grid;
     private int moveCount;
 //    private int bonusPoints;
@@ -114,7 +112,7 @@ public class Level {
         return false;
     }
 
-    public void checkObjective(){
+    public int checkObjective(){
         for(int i = 0; i < objectives.size(); i++){
             Objective objective = objectives.get(i);
 
@@ -122,9 +120,10 @@ public class Level {
             if(player.getX() == objective.getX() && player.getY() == objective.getY()){
                 removeObjective(objective);
                 // Add score of objective
-                break;
+                return objective.getScoreValue();
             }
         }
+        return 0;
     }
 
     public void removeObjective(Objective objective){

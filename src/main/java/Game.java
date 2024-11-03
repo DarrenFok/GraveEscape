@@ -19,6 +19,7 @@ public class Game implements KeyListener {
     private GameMode gameMode;
     private Level level;
     private GamePanel gamePanel;
+    private int score;
 
     /**
      * Constructor for Game object. Sets up the GamePanel, switches to it, and puts the keyListener on the
@@ -91,7 +92,9 @@ public class Game implements KeyListener {
             gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives());
         }
 
-        level.checkObjective();
+        score += level.checkObjective();
+        // TODO: Temporary way to test if score is being counted. Remove when implemented in UI
+        System.out.println("Score: " + score);
         gameOver = level.checkCollision();
 
         if (gameOver) {
