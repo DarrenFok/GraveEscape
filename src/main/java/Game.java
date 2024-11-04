@@ -22,6 +22,7 @@ public class Game implements KeyListener {
     private GamePanel gamePanel;
     private int score;
     private boolean onDoor = false;
+    private int lives = 3;
 
     /**
      * Constructor for Game object. Sets up the GamePanel, switches to it, and puts the keyListener on the
@@ -110,9 +111,29 @@ public class Game implements KeyListener {
         gameOver = level.checkCollision();
 
         if (gameOver) {
-            JOptionPane.showMessageDialog(mainPanel, "Game Over");
-            cardLayout.show(mainPanel, "Menu");
-            gameOver = false;
+            if(gameMode == GameMode.PRACTICE){
+                JOptionPane.showMessageDialog(mainPanel, "Game Over");
+                cardLayout.show(mainPanel, "Menu");
+                gameOver = false;
+            }
+            else{
+                lives--;
+                if(lives == 0){
+                    JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
+                    cardLayout.show(mainPanel, "Menu");
+                    gameOver = false;
+                }
+                else{
+                    score = 0;
+                    JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
+                    level.resetLevel();
+                    setupGamePanel();
+                    mainPanel.add(gamePanel, "Game");
+                    gamePanel.addKeyListener(this);
+                    gameOver = false;
+                    startGame();
+                }
+            }
         }
 
         if (onDoor){
