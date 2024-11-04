@@ -51,7 +51,8 @@ public class Game implements KeyListener {
      */
     private void setupGamePanel(){
         gamePanel = new GamePanel(
-                level.getDimension(),
+                level.getNumOfRows(),
+                level.getNumOfCols(),
                 level.getPlayer(),
                 level.getEnemies(),
                 level.getObjectives()

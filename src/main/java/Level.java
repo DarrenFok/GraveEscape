@@ -15,13 +15,14 @@ public class Level {
 
     /**
      * Constructor for Level object.
-     * @param gridSize: Size of a square shaped grid (length and width are the same)
+     * @param numOfRows: Number of rows in the Level's grid (value of max Y-coordinate)
+     * @param numOfCols: Number of columns in the Levels' grid (value of max X-coordinate)
      * @param playerStart: The coordinates of where the player will start on a grid
      * @param enemies: A list of enemies on the grid
      */
-    public Level(int gridSize, Position playerStart, List<Enemy> enemies, ArrayList<Objective> objectives){
+    public Level(int numOfRows, int numOfCols, Position playerStart, List<Enemy> enemies, ArrayList<Objective> objectives){
         // Set grid size
-        grid = new Grid(gridSize);
+        grid = new Grid(numOfRows, numOfCols);
         player = new Player(playerStart);
 
         // Set initial positions of enemies
@@ -44,7 +45,7 @@ public class Level {
                 }
                 break;
             case DOWN:
-                if(player.getY() < grid.getDimension()-1){
+                if(player.getY() < grid.getNumOfRows()-1){
                     player.setPosition(new Position(player.getX(), player.getY()+1));
                 }
                 break;
@@ -54,7 +55,7 @@ public class Level {
                 }
                 break;
             case RIGHT:
-                if(player.getX() < grid.getDimension()-1){
+                if(player.getX() < grid.getNumOfCols()-1){
                     player.setPosition(new Position(player.getX()+1, player.getY()));
                 }
                 break;
@@ -79,7 +80,7 @@ public class Level {
                         }
                         break;
                     case 1: // Moving down
-                        if(enemy.getY() < grid.getDimension()-1){
+                        if(enemy.getY() < grid.getNumOfRows()-1){
                             enemy.setPosition(new Position(enemy.getX(), enemy.getY()+1));
                         }
                         break;
@@ -89,7 +90,7 @@ public class Level {
                         }
                         break;
                     case 3:
-                        if(enemy.getX() < grid.getDimension()-1){
+                        if(enemy.getX() < grid.getNumOfCols()-1){
                             enemy.setPosition(new Position(enemy.getX()+1, enemy.getY()));
                         }
                         break;
@@ -154,8 +155,20 @@ public class Level {
         return this.objectives;
     }
 
-    public int getDimension(){
-        return grid.getDimension();
+    /**
+     * Method to return number of rows within the Level's Grid
+     * @return: Integer value representing number of rows
+     */
+    public int getNumOfRows(){
+        return grid.getNumOfRows();
+    }
+
+    /**
+     * Method to return number of columns within the Level's Grid
+     * @return: Integer value representing number of columns
+     */
+    public int getNumOfCols(){
+        return grid.getNumOfCols();
     }
 
 

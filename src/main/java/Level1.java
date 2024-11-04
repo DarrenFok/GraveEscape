@@ -5,6 +5,7 @@ public class Level1 extends Level {
     public Level1(){
         super(
                 10,
+                15,
                 new Position(5,4),
                 createEnemies(),
                 createObjectives()
