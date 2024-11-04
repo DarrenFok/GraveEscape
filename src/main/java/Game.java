@@ -191,15 +191,15 @@ public class Game implements KeyListener {
     public void initializeLevels(){
         if(difficulty == Difficulty.EASY){
             levels.add(new Level2());
-            // Add easy level three
+            // TODO: Add easy level three
         }
         else if(difficulty == Difficulty.NORMAL){
-            // Add normal level two
-            // Add normal level three
+            // TODO: Add normal level two
+            // TODO: Add normal level three
         }
         else if(difficulty == Difficulty.HARD){
-            // Add hard level two
-            // Add hard level three
+            // TODO: Add hard level two
+            // TODO: Add hard level three
         }
     }
 
