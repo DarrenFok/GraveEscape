@@ -89,6 +89,7 @@ public class Game implements KeyListener {
 
         if (playerMoved) {
             level.moveEnemies();
+            score--;
             gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives());
         }
 
