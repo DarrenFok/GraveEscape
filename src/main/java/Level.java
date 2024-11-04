@@ -315,11 +315,19 @@ public class Level {
     }
 
     /**
-     * Method to return Door object within a level, namely for the Door's position.
+     * Method to return Door object within a level
      * @return: Door object
      */
     public Door getDoor(){
         return this.door;
+    }
+
+    /**
+     * Method to return the initial door position
+     * @return: Position with coordinates to door
+     */
+    public Position getDoorPosition(){
+        return this.doorPosition;
     }
 
     /**

@@ -15,6 +15,7 @@ public class GamePanel extends JPanel{
     private ArrayList<Objective> objectives;
     private Door door;
     private List<Wall> walls;
+    private Position doorPosition;
 
     /**
      * Constructor for GamePanel object.
@@ -32,7 +33,8 @@ public class GamePanel extends JPanel{
             List<Enemy> enemies,
             ArrayList<Objective> objectives,
             Door door,
-            List<Wall> walls
+            List<Wall> walls,
+            Position doorPosition
     ) {
         this.numOfRows = numOfRows;
         this.numOfCols = numOfCols;
@@ -41,6 +43,7 @@ public class GamePanel extends JPanel{
         this.objectives = objectives;
         this.door = door;
         this.walls = walls;
+        this.doorPosition = doorPosition;
     }
 
     /**
@@ -59,6 +62,18 @@ public class GamePanel extends JPanel{
                 Image image = icon.getImage();
                 g.drawImage(image, j*cellSize, i*cellSize, cellSize, cellSize, this);
             }
+        }
+
+        if(door != null){
+            Door door = this.door;// If door exists, then render open door
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Door_Open.png"));
+            Image image = icon.getImage();
+            g.drawImage(image,door.getX()*cellSize, door.getY()*cellSize, cellSize, cellSize, this);
+        }
+        else{ // else, render closed door
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Door_Close.png"));
+            Image image = icon.getImage();
+            g.drawImage(image,doorPosition.getX()*cellSize, doorPosition.getY()*cellSize, cellSize, cellSize, this);
         }
 
         // Draw player
@@ -98,13 +113,6 @@ public class GamePanel extends JPanel{
             ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Tree.png"));
             Image image = icon.getImage();
             g.drawImage(image,wall.getX()*cellSize, wall.getY()*cellSize, cellSize, cellSize, this);
-        }
-
-        // If door exists, then render it
-        if(door != null){
-            Door door = this.door;
-            g.setColor(Color.magenta);
-            g.fillRect(door.getX()*cellSize, door.getY()*cellSize, cellSize, cellSize);
         }
     }
 
