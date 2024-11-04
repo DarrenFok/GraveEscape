@@ -18,9 +18,11 @@ public class Level {
     private int mandatoryCount = 0;
     private boolean isDoorOpen = false;
     private List<Wall> walls;
-//    private int bonusPoints;
-//    private int tickCount;
-//    private boolean isComplete;
+
+    private Position initialPlayerPosition;
+    private List<Position> initialEnemyPositions;
+    private List<Objective> initialObjectives;
+    private boolean initialDoorState;
 
     /**
      * Constructor for Level object.
@@ -39,6 +41,24 @@ public class Level {
             Position doorPosition,
             List<Wall> walls
     ){
+        //Store initial states
+        this.initialPlayerPosition = new Position(playerStart.getX(), playerStart.getY());
+        this.initialEnemyPositions = new ArrayList<>();
+        for(Enemy enemy : enemies){
+            initialEnemyPositions.add(new Position(enemy.getX(), enemy.getY()));
+        }
+        this.initialObjectives = new ArrayList<>();
+        for(Objective objective : objectives){
+            initialObjectives.add(
+                    new Objective(
+                            new Position(objective.getX(), objective.getY()),
+                            objective.isMandatory(),
+                            objective.getScoreValue()
+                    )
+            );
+        }
+        this.initialDoorState = doorPosition != null;
+
         // Set grid size
         grid = new Grid(numOfRows + 2, numOfCols + 2);
         player = new Player(playerStart);
@@ -225,6 +245,34 @@ public class Level {
             }
         }
         return false;
+    }
+
+    public void resetLevel(){
+        // Reset player position
+        player.setPosition(new Position(initialPlayerPosition.getX(), initialPlayerPosition.getY()));
+
+        // Reset enemy positions
+        for(int i = 0; i < enemies.size(); i++){
+            Enemy enemy = enemies.get(i);
+            Position initialPosition = initialEnemyPositions.get(i);
+            enemy.setPosition(new Position(initialPosition.getX(), initialPosition.getY()));
+        }
+
+        // Reset objective positions
+        objectives.clear();
+        for(Objective objective: initialObjectives){
+            objectives.add(
+                    new Objective(
+                            new Position(objective.getX(), objective.getY()),
+                            objective.isMandatory(),
+                            objective.getScoreValue()
+                    ));
+        }
+
+        // Reset door
+        door = null;
+        isDoorOpen = false;
+        mandatoryCount = countMandatory();
     }
 
     /**
