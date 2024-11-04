@@ -3,6 +3,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * GamePanel class represents the panel where the actual game (grid, player, enemy, etc.) are rendered.
+ */
 public class GamePanel extends JPanel{
     private int gridSize;
     private final int cellSize = 50;
@@ -11,6 +14,14 @@ public class GamePanel extends JPanel{
     private ArrayList<Objective> objectives;
     private Door door;
 
+    /**
+     * Constructor for GamePanel object.
+     * @param gridSize: The size of the grid
+     * @param player: Player object
+     * @param enemies: List of enemies
+     * @param objectives: List of objectives
+     * @param door: Door object
+     */
     public GamePanel(int gridSize, Player player, List<Enemy> enemies, ArrayList<Objective> objectives, Door door) {
         this.gridSize = gridSize;
         this.player = player;
@@ -19,6 +30,10 @@ public class GamePanel extends JPanel{
         this.door = door;
     }
 
+    /**
+     * Method to render all objects in the Level
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -57,6 +72,14 @@ public class GamePanel extends JPanel{
         }
     }
 
+    /**
+     * Updates positions of players and enemies, and whether objectives and doors exist in the current state. Then
+     * re-renders the Grid to reflect the update.
+     * @param player: Updated Player object
+     * @param enemies: Enemy list containing updated Enemy positions
+     * @param objectives: Objective list containing updated Objective states
+     * @param door: Updated Door object
+     */
     public void update(Player player, List<Enemy> enemies, ArrayList<Objective> objectives, Door door){
         this.player = player;
         this.enemies = enemies;

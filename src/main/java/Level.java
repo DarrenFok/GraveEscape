@@ -3,6 +3,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Level class represents a template for a level.
+ * It manages the elements and their interactions between one another.
+ */
 public class Level {
     private ArrayList<Objective> objectives;
     private Player player;
@@ -120,6 +124,11 @@ public class Level {
         return false;
     }
 
+    /**
+     * Checks whether a player is on the same position as an Objective. If it is, it will remove it from the grid and
+     * return its score. Furthermore, if the last mandatory objective is collected, it will open the door immediately.
+     * @return: The score of the objective collected
+     */
     public int checkObjective(){
         for(int i = 0; i < objectives.size(); i++){
             Objective objective = objectives.get(i);
@@ -140,10 +149,18 @@ public class Level {
         return 0;
     }
 
+    /**
+     * Function to remove an objective from the Grid.
+     * @param objective: The objective to be removed
+     */
     public void removeObjective(Objective objective){
         objectives.remove(objective);
     }
 
+    /**
+     * Function used to calculate how many mandatory objectives are initially in the level.
+     * @return: The amount of mandatory objectives that are initially in the level
+     */
     private int countMandatory(){
         for(int i = 0; i < objectives.size(); i++){
             if (objectives.get(i).isMandatory()){
@@ -153,6 +170,9 @@ public class Level {
         return mandatoryCount;
     }
 
+    /**
+     * Checks whether all mandatory objectives have been placed. If they have, the door will be placed.
+     */
     public void checkAndPlaceDoor(){
         if(mandatoryCount == 0 && door == null){
             door = new Door(this.doorPosition);
@@ -160,6 +180,10 @@ public class Level {
         }
     }
 
+    /**
+     * Checks whether the player is on the same position as the Door.
+     * @return: Boolean indicating whether play is on the same position as the door
+     */
     public boolean isOnDoor(){
         if(player.getX() == door.getX() && player.getY() == door.getY()){
             return true;
@@ -168,7 +192,7 @@ public class Level {
     }
 
     /**
-     * Method to return Player object within a level, namely for the Player's position
+     * Method to return Player object within a level, namely for the Player's position.
      * @return: Player object
      */
     public Player getPlayer(){
@@ -176,7 +200,7 @@ public class Level {
     }
 
     /**
-     * Method to return List of enemies within a level, namely for the Enemy positions
+     * Method to return List of enemies within a level, namely for the Enemy positions.
      * @return: List of enemies
      */
     public List<Enemy> getEnemies(){
@@ -184,21 +208,33 @@ public class Level {
     }
 
     /**
-     * Method to return List of Objectives within a level, namely for the Objective positions
+     * Method to return List of Objectives within a level, namely for the Objective positions.
      * @return: List of objectives
      */
     public ArrayList<Objective> getObjectives(){
         return this.objectives;
     }
 
+    /**
+     * Method to return Dimension of the Grid.
+     * @return: Integer value representing the grid's dimension
+     */
     public int getDimension(){
         return grid.getDimension();
     }
 
+    /**
+     * Method to return Door object within a level, namely for the Door's position.
+     * @return: Door object
+     */
     public Door getDoor(){
         return this.door;
     }
 
+    /**
+     * Checks whether the door is open.
+     * @return: Boolean value representing whether door is open
+     */
     public boolean isDoorOpen(){
         return isDoorOpen;
     }
