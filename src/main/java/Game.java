@@ -106,8 +106,7 @@ public class Game implements KeyListener {
             }
             gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives(), level.getDoor());
         }
-        // TODO: Temporary way to test if score is being counted. Remove when implemented in UI
-        System.out.println("Score: " + score);
+
         gameOver = level.checkCollision();
 
         if (gameOver) {
@@ -125,12 +124,14 @@ public class Game implements KeyListener {
                 }
                 else{
                     score = 0;
+                    lives = 3;
                     JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
                     level.resetLevel();
                     setupGamePanel();
                     mainPanel.add(gamePanel, "Game");
                     gamePanel.addKeyListener(this);
                     gameOver = false;
+                    System.out.println(level.getMandatoryCount());
                     startGame();
                 }
             }
@@ -201,13 +202,5 @@ public class Game implements KeyListener {
             // Add hard level three
         }
     }
-
-
-//    //Functions for Game
-//    public void startGame(){}
-//    public void endGame(){}
-//    public void resetGame(){}
-//    public void updateScore(){}
-//    public void loseLife(){}
 
 }
