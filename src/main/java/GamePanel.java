@@ -14,6 +14,7 @@ public class GamePanel extends JPanel{
     private List<Enemy> enemies;
     private ArrayList<Objective> objectives;
     private Door door;
+    private List<Wall> walls;
 
     /**
      * Constructor for GamePanel object.
@@ -24,13 +25,22 @@ public class GamePanel extends JPanel{
      * @param objectives: List of objectives
      * @param door: Door object
      */
-    public GamePanel(int numOfRows, int numOfCols, Player player, List<Enemy> enemies, ArrayList<Objective> objectives, Door door) {
+    public GamePanel(
+            int numOfRows,
+            int numOfCols,
+            Player player,
+            List<Enemy> enemies,
+            ArrayList<Objective> objectives,
+            Door door,
+            List<Wall> walls
+    ) {
         this.numOfRows = numOfRows;
         this.numOfCols = numOfCols;
         this.player = player;
         this.enemies = enemies;
         this.objectives = objectives;
         this.door = door;
+        this.walls = walls;
     }
 
     /**
@@ -68,6 +78,13 @@ public class GamePanel extends JPanel{
             g.fillOval(objective.getX()*cellSize, objective.getY()*cellSize, cellSize, cellSize);
         }
 
+        // Draw walls
+        g.setColor(Color.lightGray);
+        for(Wall wall: walls){
+            g.fillRect(wall.getX()*cellSize, wall.getY()*cellSize, cellSize, cellSize);
+        }
+
+        // If door exists, then render it
         if(door != null){
             Door door = this.door;
             g.setColor(Color.magenta);

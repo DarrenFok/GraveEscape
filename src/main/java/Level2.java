@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level1 extends Level {
-    public Level1(){
+public class Level2 extends Level {
+    public Level2(){
         super(
-                10,
-                15,
+                9,
+                9,
                 new Position(5,4),
                 createEnemies(),
                 createObjectives(),
@@ -17,15 +17,13 @@ public class Level1 extends Level {
     private static List<Enemy> createEnemies(){
         return List.of(
                 new MovingEnemy(new Position(0,0)),
-                new MovingEnemy(new Position(9,9)),
-                new StationaryEnemy(new Position(6,7))
+                new MovingEnemy(new Position(3,3))
         );
     }
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(3,3), true, 5));
-        objectives.add(new Objective(new Position(7,7), false, 10));
+        objectives.add(new Objective(new Position(7,7), true, 5));
 
         return objectives;
     }

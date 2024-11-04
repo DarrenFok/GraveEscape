@@ -83,7 +83,9 @@ public class CampaignPanel extends JPanel {
         difficultyPanel.add(easyButton);
         easyButton.addActionListener(e -> {
             difficulty = Difficulty.EASY;
-            System.out.println(difficulty);
+            Level level = new Level1();
+            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.CAMPAIGN, level);
+            game.startGame();
         });
 
         normalButton = drawButton("Normal", new Rectangle(50, 125, 200, 50), 20);

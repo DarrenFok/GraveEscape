@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 public class Game implements KeyListener {
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    private List<Level> levels;
+    private List<Level> levels = new ArrayList<>();
     private boolean gameOver = false;
     private Difficulty difficulty;
     private GameMode gameMode;
@@ -21,6 +22,7 @@ public class Game implements KeyListener {
     private GamePanel gamePanel;
     private int score;
     private boolean onDoor = false;
+    private int lives = 3;
 
     /**
      * Constructor for Game object. Sets up the GamePanel, switches to it, and puts the keyListener on the
@@ -38,6 +40,9 @@ public class Game implements KeyListener {
         this.difficulty = difficulty;
         this.gameMode = gameMode;
         this.level = level;
+
+        // Initialize levels
+        initializeLevels();
 
         // Create game panel, and add to mainPanel
         setupGamePanel();
@@ -57,7 +62,8 @@ public class Game implements KeyListener {
                 level.getPlayer(),
                 level.getEnemies(),
                 level.getObjectives(),
-                level.getDoor()
+                level.getDoor(),
+                level.getWalls()
         );
     }
 
@@ -100,19 +106,39 @@ public class Game implements KeyListener {
             }
             gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives(), level.getDoor());
         }
-        // TODO: Temporary way to test if score is being counted. Remove when implemented in UI
-        System.out.println("Score: " + score);
+
         gameOver = level.checkCollision();
 
         if (gameOver) {
-            JOptionPane.showMessageDialog(mainPanel, "Game Over");
-            cardLayout.show(mainPanel, "Menu");
-            gameOver = false;
+            if(gameMode == GameMode.PRACTICE){
+                JOptionPane.showMessageDialog(mainPanel, "Game Over");
+                cardLayout.show(mainPanel, "Menu");
+                gameOver = false;
+            }
+            else{
+                lives--;
+                if(lives == 0){
+                    JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
+                    cardLayout.show(mainPanel, "Menu");
+                    gameOver = false;
+                }
+                else{
+                    score = 0;
+                    lives = 3;
+                    JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
+                    level.resetLevel();
+                    setupGamePanel();
+                    mainPanel.add(gamePanel, "Game");
+                    gamePanel.addKeyListener(this);
+                    gameOver = false;
+                    System.out.println(level.getMandatoryCount());
+                    startGame();
+                }
+            }
         }
 
         if (onDoor){
-            JOptionPane.showMessageDialog(mainPanel, "Level complete!");
-            cardLayout.show(mainPanel, "Menu");
+            handleLevelCompletion();
             onDoor = false;
         }
 
@@ -133,14 +159,48 @@ public class Game implements KeyListener {
     public void startGame(){
         cardLayout.show(mainPanel, "Game");
         gamePanel.requestFocusInWindow();
+        gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives(), level.getDoor());
     }
 
+    /**
+     * This function handles what level will be loaded next depending on GameMode and Difficulty selected in the menu.
+     */
+    public void handleLevelCompletion(){
+        if(gameMode == GameMode.PRACTICE){
+            JOptionPane.showMessageDialog(mainPanel, "Level complete!");
+            cardLayout.show(mainPanel, "Menu");
+        }
+        else if(gameMode == GameMode.CAMPAIGN){
+            int currentIndex = levels.indexOf(level);
+            if(currentIndex < levels.size()-1){
+                level = levels.get(currentIndex+1);  // Loads next level
+                setupGamePanel();
+                mainPanel.add(gamePanel, "Game");
+                gamePanel.addKeyListener(this);
+                JOptionPane.showMessageDialog(gamePanel, "Level complete! Ready to continue?");
+                startGame();
+            }
+            else{
+                // No more levels, return to main menu
+                JOptionPane.showMessageDialog(mainPanel, difficulty + " Campaign mode complete! Thanks for playing!");
+                cardLayout.show(mainPanel, "Menu");
+            }
+        }
+    }
 
-//    //Functions for Game
-//    public void startGame(){}
-//    public void endGame(){}
-//    public void resetGame(){}
-//    public void updateScore(){}
-//    public void loseLife(){}
+    public void initializeLevels(){
+        if(difficulty == Difficulty.EASY){
+            levels.add(new Level2());
+            // Add easy level three
+        }
+        else if(difficulty == Difficulty.NORMAL){
+            // Add normal level two
+            // Add normal level three
+        }
+        else if(difficulty == Difficulty.HARD){
+            // Add hard level two
+            // Add hard level three
+        }
+    }
 
 }
