@@ -14,7 +14,6 @@ public class Level {
     private Grid grid;
     private Door door;
     private Position doorPosition;
-    private int moveCount;
     private int mandatoryCount = 0;
     private boolean isDoorOpen = false;
     private List<Wall> walls;
@@ -22,7 +21,7 @@ public class Level {
     private Position initialPlayerPosition;
     private List<Position> initialEnemyPositions;
     private List<Objective> initialObjectives;
-    private boolean initialDoorState;
+    private int initialMandatoryCount;
 
     /**
      * Constructor for Level object.
@@ -41,6 +40,23 @@ public class Level {
             Position doorPosition,
             List<Wall> walls
     ){
+        // Set grid size
+        grid = new Grid(numOfRows + 2, numOfCols + 2);
+        player = new Player(playerStart);
+
+        // Set initial positions of enemies
+        this.enemies = enemies;
+
+        // Set initial positions of objectives
+        this.objectives = objectives;
+        // Set initial amount of mandatory objectives
+        mandatoryCount = countMandatory();
+        initialMandatoryCount = mandatoryCount;
+
+        this.doorPosition = doorPosition;
+
+        this.walls = walls;
+
         //Store initial states
         this.initialPlayerPosition = new Position(playerStart.getX(), playerStart.getY());
         this.initialEnemyPositions = new ArrayList<>();
@@ -57,23 +73,6 @@ public class Level {
                     )
             );
         }
-        this.initialDoorState = doorPosition != null;
-
-        // Set grid size
-        grid = new Grid(numOfRows + 2, numOfCols + 2);
-        player = new Player(playerStart);
-
-        // Set initial positions of enemies
-        this.enemies = enemies;
-
-        // Set initial positions of objectives
-        this.objectives = objectives;
-        // Set initial amount of mandatory objectives
-        mandatoryCount = countMandatory();
-
-        this.doorPosition = doorPosition;
-
-        this.walls = walls;
     }
 
     /**
@@ -272,7 +271,7 @@ public class Level {
         // Reset door
         door = null;
         isDoorOpen = false;
-        mandatoryCount = countMandatory();
+        mandatoryCount = initialMandatoryCount;
     }
 
     /**
@@ -338,6 +337,10 @@ public class Level {
             walls.add(new Wall(new Position(getNumOfCols()-1, j)));
         }
         return this.walls;
+    }
+
+    public int getMandatoryCount(){
+        return mandatoryCount;
     }
 }
 
