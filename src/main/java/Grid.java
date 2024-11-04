@@ -1,13 +1,17 @@
 public class Grid {
-    private int dimension;
-    private int[][] grid;
+    private int numOfRows;
+    private int numOfCols;
 
-    public Grid(int dimension) {
-        this.dimension = dimension;
-        int [][] grid = new int[dimension][dimension];
+    public Grid(int numOfRows, int numOfCols) {
+        this.numOfRows = numOfRows;
+        this.numOfCols = numOfCols;
     }
 
-    public int getDimension() {
-        return dimension;
+    public int getNumOfRows() {
+        return this.numOfRows;
+    }
+
+    public int getNumOfCols() {
+        return this.numOfCols;
     }
 }
