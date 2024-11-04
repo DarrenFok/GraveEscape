@@ -7,7 +7,8 @@ public class Level1 extends Level {
                 10,
                 new Position(5,4),
                 createEnemies(),
-                createObjectives()
+                createObjectives(),
+                new Position(2,5)
         );
     }
 

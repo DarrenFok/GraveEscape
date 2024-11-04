@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +9,14 @@ public class GamePanel extends JPanel{
     private Player player;
     private List<Enemy> enemies;
     private ArrayList<Objective> objectives;
+    private Door door;
 
-    public GamePanel(int gridSize, Player player, List<Enemy> enemies, ArrayList<Objective> objectives) {
+    public GamePanel(int gridSize, Player player, List<Enemy> enemies, ArrayList<Objective> objectives, Door door) {
         this.gridSize = gridSize;
         this.player = player;
         this.enemies = enemies;
         this.objectives = objectives;
+        this.door = door;
     }
 
     @Override
@@ -48,12 +49,19 @@ public class GamePanel extends JPanel{
             }
             g.fillOval(objective.getX()*cellSize, objective.getY()*cellSize, cellSize, cellSize);
         }
+
+        if(door != null){
+            Door door = this.door;
+            g.setColor(Color.magenta);
+            g.fillRect(door.getX()*cellSize, door.getY()*cellSize, cellSize, cellSize);
+        }
     }
 
-    public void update(Player player, List<Enemy> enemies, ArrayList<Objective> objectives){
+    public void update(Player player, List<Enemy> enemies, ArrayList<Objective> objectives, Door door){
         this.player = player;
         this.enemies = enemies;
         this.objectives = objectives;
+        this.door = door;
         repaint();
     }
 

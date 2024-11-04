@@ -8,7 +8,11 @@ public class Level {
     private Player player;
     private List<Enemy> enemies;
     private Grid grid;
+    private Door door;
+    private Position doorPosition;
     private int moveCount;
+    private int mandatoryCount = 0;
+    private boolean isDoorOpen = false;
 //    private int bonusPoints;
 //    private int tickCount;
 //    private boolean isComplete;
@@ -19,7 +23,7 @@ public class Level {
      * @param playerStart: The coordinates of where the player will start on a grid
      * @param enemies: A list of enemies on the grid
      */
-    public Level(int gridSize, Position playerStart, List<Enemy> enemies, ArrayList<Objective> objectives){
+    public Level(int gridSize, Position playerStart, List<Enemy> enemies, ArrayList<Objective> objectives, Position doorPosition){
         // Set grid size
         grid = new Grid(gridSize);
         player = new Player(playerStart);
@@ -29,6 +33,10 @@ public class Level {
 
         // Set initial positions of objectives
         this.objectives = objectives;
+        // Set initial amount of mandatory objectives
+        mandatoryCount = countMandatory();
+
+        this.doorPosition = doorPosition;
     }
 
     /**
@@ -119,7 +127,13 @@ public class Level {
             // Check if player's position matches the current Objective in list's position
             if(player.getX() == objective.getX() && player.getY() == objective.getY()){
                 removeObjective(objective);
-                // Add score of objective
+                if(objective.isMandatory()){
+                    mandatoryCount--;
+                }
+                // Immediately check if all mandatory objectives have been collected
+                checkAndPlaceDoor();
+
+                // return score of objective
                 return objective.getScoreValue();
             }
         }
@@ -128,6 +142,29 @@ public class Level {
 
     public void removeObjective(Objective objective){
         objectives.remove(objective);
+    }
+
+    private int countMandatory(){
+        for(int i = 0; i < objectives.size(); i++){
+            if (objectives.get(i).isMandatory()){
+                mandatoryCount++;
+            }
+        }
+        return mandatoryCount;
+    }
+
+    public void checkAndPlaceDoor(){
+        if(mandatoryCount == 0 && door == null){
+            door = new Door(this.doorPosition);
+            isDoorOpen = true;
+        }
+    }
+
+    public boolean isOnDoor(){
+        if(player.getX() == door.getX() && player.getY() == door.getY()){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -156,6 +193,14 @@ public class Level {
 
     public int getDimension(){
         return grid.getDimension();
+    }
+
+    public Door getDoor(){
+        return this.door;
+    }
+
+    public boolean isDoorOpen(){
+        return isDoorOpen;
     }
 
 
