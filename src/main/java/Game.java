@@ -19,6 +19,8 @@ public class Game implements KeyListener {
     private GameMode gameMode;
     private Level level;
     private GamePanel gamePanel;
+    private int score;
+    private boolean onDoor = false;
 
     /**
      * Constructor for Game object. Sets up the GamePanel, switches to it, and puts the keyListener on the
@@ -49,7 +51,14 @@ public class Game implements KeyListener {
      * Method to set up the Game Panel
      */
     private void setupGamePanel(){
-        gamePanel = new GamePanel(level.getDimension(), level.getPlayer(), level.getEnemies());
+        gamePanel = new GamePanel(
+                level.getNumOfRows(),
+                level.getNumOfCols(),
+                level.getPlayer(),
+                level.getEnemies(),
+                level.getObjectives(),
+                level.getDoor()
+        );
     }
 
     /**
@@ -83,15 +92,28 @@ public class Game implements KeyListener {
 
         if (playerMoved) {
             level.moveEnemies();
-            gamePanel.update(level.getPlayer(), level.getEnemies());
+            score--;
+            score += level.checkObjective();
+            level.checkAndPlaceDoor();
+            if(level.isDoorOpen() == true){
+                onDoor = level.isOnDoor();
+            }
+            gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives(), level.getDoor());
         }
-
+        // TODO: Temporary way to test if score is being counted. Remove when implemented in UI
+        System.out.println("Score: " + score);
         gameOver = level.checkCollision();
 
         if (gameOver) {
             JOptionPane.showMessageDialog(mainPanel, "Game Over");
             cardLayout.show(mainPanel, "Menu");
             gameOver = false;
+        }
+
+        if (onDoor){
+            JOptionPane.showMessageDialog(mainPanel, "Level complete!");
+            cardLayout.show(mainPanel, "Menu");
+            onDoor = false;
         }
 
     }

@@ -1,32 +1,48 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Level class represents a template for a level.
+ * It manages the elements and their interactions between one another.
+ */
 public class Level {
-    private List<Objective> objectives;
+    private ArrayList<Objective> objectives;
     private Player player;
     private List<Enemy> enemies;
-    // TODO: remove enemyPositions, and move its functionality to enemies
-    private List<Position> enemyPositions;
     private Grid grid;
+    private Door door;
+    private Position doorPosition;
     private int moveCount;
+    private int mandatoryCount = 0;
+    private boolean isDoorOpen = false;
 //    private int bonusPoints;
 //    private int tickCount;
 //    private boolean isComplete;
 
     /**
      * Constructor for Level object.
-     * @param gridSize: Size of a square shaped grid (length and width are the same)
+     * @param numOfRows: Number of rows in the Level's grid (value of max Y-coordinate)
+     * @param numOfCols: Number of columns in the Levels' grid (value of max X-coordinate)
      * @param playerStart: The coordinates of where the player will start on a grid
      * @param enemies: A list of enemies on the grid
+     * @param doorPosition: The Position of the Door within the Level
      */
-    public Level(int gridSize, Position playerStart, List<Enemy> enemies){
+    public Level(int numOfRows, int numOfCols, Position playerStart, List<Enemy> enemies, ArrayList<Objective> objectives, Position doorPosition){
         // Set grid size
-        grid = new Grid(gridSize);
+        grid = new Grid(numOfRows, numOfCols);
         player = new Player(playerStart);
 
         // Set initial positions of enemies
         this.enemies = enemies;
+
+        // Set initial positions of objectives
+        this.objectives = objectives;
+        // Set initial amount of mandatory objectives
+        mandatoryCount = countMandatory();
+
+        this.doorPosition = doorPosition;
     }
 
     /**
@@ -42,7 +58,7 @@ public class Level {
                 }
                 break;
             case DOWN:
-                if(player.getY() < grid.getDimension()-1){
+                if(player.getY() < grid.getNumOfRows()-1){
                     player.setPosition(new Position(player.getX(), player.getY()+1));
                 }
                 break;
@@ -52,7 +68,7 @@ public class Level {
                 }
                 break;
             case RIGHT:
-                if(player.getX() < grid.getDimension()-1){
+                if(player.getX() < grid.getNumOfCols()-1){
                     player.setPosition(new Position(player.getX()+1, player.getY()));
                 }
                 break;
@@ -77,7 +93,7 @@ public class Level {
                         }
                         break;
                     case 1: // Moving down
-                        if(enemy.getY() < grid.getDimension()-1){
+                        if(enemy.getY() < grid.getNumOfRows()-1){
                             enemy.setPosition(new Position(enemy.getX(), enemy.getY()+1));
                         }
                         break;
@@ -87,7 +103,7 @@ public class Level {
                         }
                         break;
                     case 3:
-                        if(enemy.getX() < grid.getDimension()-1){
+                        if(enemy.getX() < grid.getNumOfCols()-1){
                             enemy.setPosition(new Position(enemy.getX()+1, enemy.getY()));
                         }
                         break;
@@ -111,19 +127,74 @@ public class Level {
     }
 
     /**
-     * Method to test movement
+     * Checks whether a player is on the same position as an Objective. If it is, it will remove it from the grid and
+     * return its score. Furthermore, if the last mandatory objective is collected, it will open the door immediately.
+     * @return: The score of the objective collected
      */
-    public void render() {
-        System.out.println("Player Position: [" + player.getX() + ", " + player.getY() + "]");
-        System.out.println("Enemies:");
-        for(int i = 0; i < enemies.size(); i++){
-            System.out.println("[" + enemies.get(i).getX() + ", " + enemies.get(i).getY() + "]");
+    public int checkObjective(){
+        for(int i = 0; i < objectives.size(); i++){
+            Objective objective = objectives.get(i);
+
+            // Check if player's position matches the current Objective in list's position
+            if(player.getX() == objective.getX() && player.getY() == objective.getY()){
+                removeObjective(objective);
+                if(objective.isMandatory()){
+                    mandatoryCount--;
+                }
+                // Immediately check if all mandatory objectives have been collected
+                checkAndPlaceDoor();
+
+                // return score of objective
+                return objective.getScoreValue();
+            }
         }
-        System.out.println(); // extra line
+        return 0;
     }
 
     /**
-     * Method to return Player object within a level, namely for the Player's position
+     * Function to remove an objective from the Grid.
+     * @param objective: The objective to be removed
+     */
+    public void removeObjective(Objective objective){
+        objectives.remove(objective);
+    }
+
+    /**
+     * Function used to calculate how many mandatory objectives are initially in the level.
+     * @return: The amount of mandatory objectives that are initially in the level
+     */
+    private int countMandatory(){
+        for(int i = 0; i < objectives.size(); i++){
+            if (objectives.get(i).isMandatory()){
+                mandatoryCount++;
+            }
+        }
+        return mandatoryCount;
+    }
+
+    /**
+     * Checks whether all mandatory objectives have been placed. If they have, the door will be placed.
+     */
+    public void checkAndPlaceDoor(){
+        if(mandatoryCount == 0 && door == null){
+            door = new Door(this.doorPosition);
+            isDoorOpen = true;
+        }
+    }
+
+    /**
+     * Checks whether the player is on the same position as the Door.
+     * @return: Boolean indicating whether play is on the same position as the door
+     */
+    public boolean isOnDoor(){
+        if(player.getX() == door.getX() && player.getY() == door.getY()){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Method to return Player object within a level, namely for the Player's position.
      * @return: Player object
      */
     public Player getPlayer(){
@@ -131,15 +202,51 @@ public class Level {
     }
 
     /**
-     * Method return List of enemies within a level, namely for the Enemy positions
+     * Method to return List of enemies within a level, namely for the Enemy positions.
      * @return: List of enemies
      */
     public List<Enemy> getEnemies(){
         return this.enemies;
     }
 
-    public int getDimension(){
-        return grid.getDimension();
+    /**
+     * Method to return List of Objectives within a level, namely for the Objective positions.
+     * @return: List of objectives
+     */
+    public ArrayList<Objective> getObjectives(){
+        return this.objectives;
+    }
+
+    /**
+     * Method to return number of rows within the Level's Grid
+     * @return: Integer value representing number of rows
+     */
+    public int getNumOfRows(){
+        return grid.getNumOfRows();
+    }
+
+    /**
+     * Method to return number of columns within the Level's Grid
+     * @return: Integer value representing number of columns
+     */
+    public int getNumOfCols(){
+        return grid.getNumOfCols();
+    }
+
+    /**
+     * Method to return Door object within a level, namely for the Door's position.
+     * @return: Door object
+     */
+    public Door getDoor(){
+        return this.door;
+    }
+
+    /**
+     * Checks whether the door is open.
+     * @return: Boolean value representing whether door is open
+     */
+    public boolean isDoorOpen(){
+        return isDoorOpen;
     }
 
 
