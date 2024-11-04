@@ -55,7 +55,9 @@ public class GamePanel extends JPanel{
         g.setColor(Color.lightGray);
         for(int i = 0; i < numOfRows; i++){
             for(int j = 0; j < numOfCols; j++){
-                g.drawRect(j*cellSize, i*cellSize, cellSize, cellSize);
+                ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Swamp.png"));
+                Image image = icon.getImage();
+                g.drawImage(image, j*cellSize, i*cellSize, cellSize, cellSize, this);
             }
         }
 
@@ -66,22 +68,36 @@ public class GamePanel extends JPanel{
         // Draw enemies
         g.setColor(Color.red);
         for(Enemy enemy: enemies){
-            g.fillRect(enemy.getX()*cellSize, enemy.getY()*cellSize, cellSize, cellSize);
+            if(enemy instanceof StationaryEnemy){
+                ImageIcon icon = new ImageIcon(getClass().getResource("/Enemies/Thorns.png"));
+                Image image = icon.getImage();
+                g.drawImage(image, enemy.getX()*cellSize, enemy.getY()*cellSize, cellSize, cellSize, this );
+            }
+            else{
+                g.fillRect(enemy.getX()*cellSize, enemy.getY()*cellSize, cellSize, cellSize);
+            }
         }
 
         // Draw objectives
         for(Objective objective: objectives){
-            g.setColor(Color.green);
-            if(objective.isMandatory()){
-                g.setColor(Color.yellow);
+            if(objective.isMandatory()){ //if mandatory
+                ImageIcon icon = new ImageIcon(getClass().getResource("/Objectives/Objective_Key.png"));
+                Image image = icon.getImage();
+                g.drawImage(image, objective.getX()*cellSize, objective.getY()*cellSize, cellSize, cellSize, this );
             }
-            g.fillOval(objective.getX()*cellSize, objective.getY()*cellSize, cellSize, cellSize);
+            else{ // if bonus
+                ImageIcon icon = new ImageIcon(getClass().getResource("/Objectives/Coin.png"));
+                Image image = icon.getImage();
+                g.drawImage(image, objective.getX()*cellSize, objective.getY()*cellSize, cellSize, cellSize, this );
+            }
         }
 
         // Draw walls
         g.setColor(Color.lightGray);
         for(Wall wall: walls){
-            g.fillRect(wall.getX()*cellSize, wall.getY()*cellSize, cellSize, cellSize);
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Tree.png"));
+            Image image = icon.getImage();
+            g.drawImage(image,wall.getX()*cellSize, wall.getY()*cellSize, cellSize, cellSize, this);
         }
 
         // If door exists, then render it

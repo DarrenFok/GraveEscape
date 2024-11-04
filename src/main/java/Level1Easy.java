@@ -16,7 +16,7 @@ public class Level1Easy extends Level {
 
     private static List<Enemy> createEnemies(){
         return List.of(
-                new MovingEnemy(new Position(0,0)),
+                new MovingEnemy(new Position(1,1)),
                 new MovingEnemy(new Position(9,9)),
                 new StationaryEnemy(new Position(6,7))
         );
