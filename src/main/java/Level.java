@@ -17,6 +17,7 @@ public class Level {
     private int moveCount;
     private int mandatoryCount = 0;
     private boolean isDoorOpen = false;
+    private List<Wall> walls;
 //    private int bonusPoints;
 //    private int tickCount;
 //    private boolean isComplete;
@@ -29,9 +30,17 @@ public class Level {
      * @param enemies: A list of enemies on the grid
      * @param doorPosition: The Position of the Door within the Level
      */
-    public Level(int numOfRows, int numOfCols, Position playerStart, List<Enemy> enemies, ArrayList<Objective> objectives, Position doorPosition){
+    public Level(
+            int numOfRows,
+            int numOfCols,
+            Position playerStart,
+            List<Enemy> enemies,
+            ArrayList<Objective> objectives,
+            Position doorPosition,
+            List<Wall> walls
+    ){
         // Set grid size
-        grid = new Grid(numOfRows, numOfCols);
+        grid = new Grid(numOfRows + 2, numOfCols + 2);
         player = new Player(playerStart);
 
         // Set initial positions of enemies
@@ -43,6 +52,8 @@ public class Level {
         mandatoryCount = countMandatory();
 
         this.doorPosition = doorPosition;
+
+        this.walls = walls;
     }
 
     /**
@@ -53,22 +64,22 @@ public class Level {
     public void movePlayer(Direction direction){
         switch(direction){
             case UP:
-                if(player.getY() > 0){
+                if(player.getY() > 0 && !isWall(player.getX(), player.getY()-1)){
                     player.setPosition(new Position(player.getX(), player.getY()-1));
                 }
                 break;
             case DOWN:
-                if(player.getY() < grid.getNumOfRows()-1){
+                if(player.getY() < grid.getNumOfRows()-1 && !isWall(player.getX(), player.getY()+1)){
                     player.setPosition(new Position(player.getX(), player.getY()+1));
                 }
                 break;
             case LEFT:
-                if(player.getX() > 0){
+                if(player.getX() > 0 && !isWall(player.getX()-1, player.getY())){
                     player.setPosition(new Position(player.getX()-1, player.getY()));
                 }
                 break;
             case RIGHT:
-                if(player.getX() < grid.getNumOfCols()-1){
+                if(player.getX() < grid.getNumOfCols()-1 && !isWall(player.getX()+1, player.getY())){
                     player.setPosition(new Position(player.getX()+1, player.getY()));
                 }
                 break;
@@ -88,22 +99,22 @@ public class Level {
                 int direction = random.nextInt(4);
                 switch(direction){
                     case 0: // Moving up
-                        if(enemy.getY() > 0){
+                        if(enemy.getY() > 0 && !isWall(enemy.getX(), enemy.getY()-1)){
                             enemy.setPosition(new Position(enemy.getX(), enemy.getY()-1));
                         }
                         break;
                     case 1: // Moving down
-                        if(enemy.getY() < grid.getNumOfRows()-1){
+                        if(enemy.getY() < grid.getNumOfRows()-1 && !isWall(enemy.getX(), enemy.getY()+1)){
                             enemy.setPosition(new Position(enemy.getX(), enemy.getY()+1));
                         }
                         break;
                     case 2: // Moving left
-                        if(enemy.getX() > 0){
+                        if(enemy.getX() > 0 && !isWall(enemy.getX()-1, enemy.getY())){
                             enemy.setPosition(new Position(enemy.getX()-1, enemy.getY()));
                         }
                         break;
                     case 3:
-                        if(enemy.getX() < grid.getNumOfCols()-1){
+                        if(enemy.getX() < grid.getNumOfCols()-1 && !isWall(enemy.getX()+1, enemy.getY())){
                             enemy.setPosition(new Position(enemy.getX()+1, enemy.getY()));
                         }
                         break;
@@ -194,6 +205,29 @@ public class Level {
     }
 
     /**
+     * Checks whether the door is open.
+     * @return: Boolean value representing whether door is open
+     */
+    public boolean isDoorOpen(){
+        return isDoorOpen;
+    }
+
+    /**
+     * Checks whether the given coordinates are a Wall.
+     * @param x: The x coordinate to be checked
+     * @param y: THe y coordinate to be checked
+     * @return: Boolean value representing whether a coordinate is a Wall
+     */
+    public boolean isWall(int x, int y){
+        for(Wall wall: walls){
+            if(wall.getX() == x && wall.getY() == y){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Method to return Player object within a level, namely for the Player's position.
      * @return: Player object
      */
@@ -242,25 +276,20 @@ public class Level {
     }
 
     /**
-     * Checks whether the door is open.
-     * @return: Boolean value representing whether door is open
+     * Method to return List of Walls within a level, namely for the Wall positions.
+     * @return: List of Walls
      */
-    public boolean isDoorOpen(){
-        return isDoorOpen;
+    public List<Wall> getWalls(){
+        //Add perimeter walls
+        for(int i = 0; i < getNumOfCols(); i++){
+            walls.add(new Wall(new Position(i, 0)));
+            walls.add(new Wall(new Position(i, getNumOfRows()-1)));
+        }
+        for(int j = 0; j < getNumOfRows(); j++){
+            walls.add(new Wall(new Position(0, j)));
+            walls.add(new Wall(new Position(getNumOfCols()-1, j)));
+        }
+        return this.walls;
     }
-
-
-
-//    public void completeObjective(){}
-//
-//    public void openExit(){}
-//
-//    public boolean checkLevelCompletion(){
-//        return false;
-//    }
-//
-//    public int calculateBonusPoints(){
-//        return 0;
-//    }
 }
 

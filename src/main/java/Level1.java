@@ -9,7 +9,8 @@ public class Level1 extends Level {
                 new Position(5,4),
                 createEnemies(),
                 createObjectives(),
-                new Position(2,5)
+                new Position(2,5),
+                createWalls()
         );
     }
 
@@ -27,5 +28,13 @@ public class Level1 extends Level {
         objectives.add(new Objective(new Position(7,7), false, 10));
 
         return objectives;
+    }
+
+    private static ArrayList<Wall> createWalls(){
+        ArrayList<Wall> walls = new ArrayList<>();
+        walls.add(new Wall(new Position(4,5)));
+        walls.add(new Wall(new Position(3,5)));
+
+        return walls;
     }
 }
