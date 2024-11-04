@@ -140,6 +140,11 @@ public class PracticePanel extends JPanel {
 
         twoButton = drawButton("Level Two - " + difficulty.name(), new Rectangle(50, 125, 600, 50), 20);
         selectorPanel.add(twoButton);
+        twoButton.addActionListener(e -> {
+            Level level = new Level2();
+            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
+            game.startGame();
+        });
 
         threeButton = drawButton("Level Three - " + difficulty.name(), new Rectangle(50, 200, 600, 50), 20);
         selectorPanel.add(threeButton);
