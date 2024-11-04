@@ -133,7 +133,18 @@ public class PracticePanel extends JPanel {
         oneButton = drawButton("Level One - " + difficulty.name(), new Rectangle(50, 50, 600, 50), 20);
         selectorPanel.add(oneButton);
         oneButton.addActionListener(e -> {
-            Level level = new Level1();
+            Level level;
+            if(difficulty == Difficulty.EASY){
+                level = new Level1Easy();
+            }
+            else if(difficulty == Difficulty.NORMAL){
+                // TODO: Replace Level1Easy object with Level1Normal (similar to example above in level 1 easy)
+                level = new Level1Easy();
+            }
+            else{
+                // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)
+                level = new Level1Easy();
+            }
             Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
             game.startGame();
         });
@@ -141,6 +152,7 @@ public class PracticePanel extends JPanel {
         twoButton = drawButton("Level Two - " + difficulty.name(), new Rectangle(50, 125, 600, 50), 20);
         selectorPanel.add(twoButton);
         twoButton.addActionListener(e -> {
+            // TODO: Do something similar to action in oneButton on line 135
             Level level = new Level2();
             Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
             game.startGame();
@@ -148,6 +160,7 @@ public class PracticePanel extends JPanel {
 
         threeButton = drawButton("Level Three - " + difficulty.name(), new Rectangle(50, 200, 600, 50), 20);
         selectorPanel.add(threeButton);
+        // TODO: Do something similar to action in oneButton on line 135
 
         add(selectorPanel);
     }

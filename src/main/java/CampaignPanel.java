@@ -83,7 +83,7 @@ public class CampaignPanel extends JPanel {
         difficultyPanel.add(easyButton);
         easyButton.addActionListener(e -> {
             difficulty = Difficulty.EASY;
-            Level level = new Level1();
+            Level level = new Level1Easy();
             Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.CAMPAIGN, level);
             game.startGame();
         });
@@ -92,6 +92,7 @@ public class CampaignPanel extends JPanel {
         difficultyPanel.add(normalButton);
         normalButton.addActionListener(e -> {
             difficulty = Difficulty.NORMAL;
+            // TODO: Implement something similar to line 86 to line 88, but for Level1Normal().
             System.out.println(difficulty);
         });
 
@@ -99,6 +100,7 @@ public class CampaignPanel extends JPanel {
         difficultyPanel.add(hardButton);
         hardButton.addActionListener(e -> {
             difficulty = Difficulty.HARD;
+            // TODO: Implement something similar to line 86 to line 88, but for Level1Hard().
             System.out.println(difficulty);
         });
 
