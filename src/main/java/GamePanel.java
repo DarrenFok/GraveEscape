@@ -7,7 +7,8 @@ import java.util.List;
  * GamePanel class represents the panel where the actual game (grid, player, enemy, etc.) are rendered.
  */
 public class GamePanel extends JPanel{
-    private int gridSize;
+    private int numOfRows;
+    private int numOfCols;
     private final int cellSize = 50;
     private Player player;
     private List<Enemy> enemies;
@@ -16,14 +17,16 @@ public class GamePanel extends JPanel{
 
     /**
      * Constructor for GamePanel object.
-     * @param gridSize: The size of the grid
+     * @param numOfRows: The number of rows in the Level's Grid
+     * @param numOfCols: The number of columns in the Level's Grid
      * @param player: Player object
      * @param enemies: List of enemies
      * @param objectives: List of objectives
      * @param door: Door object
      */
-    public GamePanel(int gridSize, Player player, List<Enemy> enemies, ArrayList<Objective> objectives, Door door) {
-        this.gridSize = gridSize;
+    public GamePanel(int numOfRows, int numOfCols, Player player, List<Enemy> enemies, ArrayList<Objective> objectives, Door door) {
+        this.numOfRows = numOfRows;
+        this.numOfCols = numOfCols;
         this.player = player;
         this.enemies = enemies;
         this.objectives = objectives;
@@ -40,8 +43,8 @@ public class GamePanel extends JPanel{
 
         // Draw grid
         g.setColor(Color.lightGray);
-        for(int i = 0; i < gridSize; i++){
-            for(int j = 0; j < gridSize; j++){
+        for(int i = 0; i < numOfRows; i++){
+            for(int j = 0; j < numOfCols; j++){
                 g.drawRect(j*cellSize, i*cellSize, cellSize, cellSize);
             }
         }

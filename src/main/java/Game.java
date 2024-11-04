@@ -52,7 +52,8 @@ public class Game implements KeyListener {
      */
     private void setupGamePanel(){
         gamePanel = new GamePanel(
-                level.getDimension(),
+                level.getNumOfRows(),
+                level.getNumOfCols(),
                 level.getPlayer(),
                 level.getEnemies(),
                 level.getObjectives(),
@@ -91,6 +92,7 @@ public class Game implements KeyListener {
 
         if (playerMoved) {
             level.moveEnemies();
+            score--;
             score += level.checkObjective();
             level.checkAndPlaceDoor();
             if(level.isDoorOpen() == true){
