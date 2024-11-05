@@ -1,11 +1,11 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  * Game class acts as the main controller for the game, handles overall game flow, player interactions, and
@@ -75,9 +75,9 @@ public class Game implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (gameOver) return;
-
+    
         boolean playerMoved = false;
-
+    
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP -> {
                 level.movePlayer(Direction.UP);
@@ -96,54 +96,58 @@ public class Game implements KeyListener {
                 playerMoved = true;
             }
         }
-
+    
         if (playerMoved) {
-            level.moveEnemies();
+            // Move enemies towards the player after the player moves
+            level.moveEnemies(); // Ensure this method moves the enemies towards the player
+            
+            // Update score and check objectives
             score--;
             score += level.checkObjective();
             level.checkAndPlaceDoor();
-            if(level.isDoorOpen() == true){
+            if (level.isDoorOpen()) {
                 onDoor = level.isOnDoor();
             }
             gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives(), level.getDoor());
         }
-
+    
         gameOver = level.checkCollision();
-
+    
         if (gameOver) {
-            if(gameMode == GameMode.PRACTICE){
-                JOptionPane.showMessageDialog(mainPanel, "Game Over");
-                cardLayout.show(mainPanel, "Menu");
-                gameOver = false;
-            }
-            else{
-                lives--;
-                if(lives == 0){
-                    JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
-                    cardLayout.show(mainPanel, "Menu");
-                    gameOver = false;
-                }
-                else{
-                    score = 0;
-                    lives = 3;
-                    JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
-                    level.resetLevel();
-                    setupGamePanel();
-                    mainPanel.add(gamePanel, "Game");
-                    gamePanel.addKeyListener(this);
-                    gameOver = false;
-                    System.out.println(level.getMandatoryCount());
-                    startGame();
-                }
-            }
+            // Handle game over logic
+            handleGameOver();
         }
-
-        if (onDoor){
+    
+        if (onDoor) {
             handleLevelCompletion();
             onDoor = false;
         }
-
     }
+    
+    private void handleGameOver() {
+        if (gameMode == GameMode.PRACTICE) {
+            JOptionPane.showMessageDialog(mainPanel, "Game Over");
+            cardLayout.show(mainPanel, "Menu");
+            gameOver = false;
+        } else {
+            lives--;
+            if (lives == 0) {
+                JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
+                cardLayout.show(mainPanel, "Menu");
+                gameOver = false;
+            } else {
+                score = 0;
+                JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
+                level.resetLevel();
+                setupGamePanel();
+                mainPanel.add(gamePanel, "Game");
+                gamePanel.addKeyListener(this);
+                gameOver = false;
+                startGame();
+            }
+        }
+    }
+    
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -192,6 +196,7 @@ public class Game implements KeyListener {
     public void initializeLevels(){
         if(difficulty == Difficulty.EASY){
             levels.add(new Level2());
+            levels.add(new Level3());
             // TODO: Add easy level three
         }
         else if(difficulty == Difficulty.NORMAL){

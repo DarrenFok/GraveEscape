@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Level class represents a template for a level.
@@ -111,36 +109,47 @@ public class Level {
      * Method that moves enemies each iteration of the game loop. Only movingEnemy objects are moved. If enemies are
      * at the border of the grid, they will stay in place, rather than moving.
      */
-    public void moveEnemies(){
-        Random random = new Random();
-        for(Enemy enemy : enemies){
-            if (enemy instanceof MovingEnemy){
-                int direction = random.nextInt(4);
-                switch(direction){
-                    case 0: // Moving up
-                        if(enemy.getY() > 0 && !isWall(enemy.getX(), enemy.getY()-1)){
-                            enemy.setPosition(new Position(enemy.getX(), enemy.getY()-1));
+    public void moveEnemies() {
+        for (Enemy enemy : enemies) {
+            if (enemy instanceof MovingEnemy) {
+                MovingEnemy movingEnemy = (MovingEnemy) enemy;
+    
+                // Calculate the difference between the enemy's position and the player's position
+                int deltaX = player.getX() - movingEnemy.getX();
+                int deltaY = player.getY() - movingEnemy.getY();
+    
+                // Determine the direction the enemy should move
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    // Move horizontally first
+                    if (deltaX > 0) {
+                        // Move right
+                        if (movingEnemy.getX() < grid.getNumOfCols() - 1 && !isWall(movingEnemy.getX() + 1, movingEnemy.getY())) {
+                            movingEnemy.setPosition(new Position(movingEnemy.getX() + 1, movingEnemy.getY()));
                         }
-                        break;
-                    case 1: // Moving down
-                        if(enemy.getY() < grid.getNumOfRows()-1 && !isWall(enemy.getX(), enemy.getY()+1)){
-                            enemy.setPosition(new Position(enemy.getX(), enemy.getY()+1));
+                    } else {
+                        // Move left
+                        if (movingEnemy.getX() > 0 && !isWall(movingEnemy.getX() - 1, movingEnemy.getY())) {
+                            movingEnemy.setPosition(new Position(movingEnemy.getX() - 1, movingEnemy.getY()));
                         }
-                        break;
-                    case 2: // Moving left
-                        if(enemy.getX() > 0 && !isWall(enemy.getX()-1, enemy.getY())){
-                            enemy.setPosition(new Position(enemy.getX()-1, enemy.getY()));
+                    }
+                } else {
+                    // Move vertically
+                    if (deltaY > 0) {
+                        // Move down
+                        if (movingEnemy.getY() < grid.getNumOfRows() - 1 && !isWall(movingEnemy.getX(), movingEnemy.getY() + 1)) {
+                            movingEnemy.setPosition(new Position(movingEnemy.getX(), movingEnemy.getY() + 1));
                         }
-                        break;
-                    case 3:
-                        if(enemy.getX() < grid.getNumOfCols()-1 && !isWall(enemy.getX()+1, enemy.getY())){
-                            enemy.setPosition(new Position(enemy.getX()+1, enemy.getY()));
+                    } else {
+                        // Move up
+                        if (movingEnemy.getY() > 0 && !isWall(movingEnemy.getX(), movingEnemy.getY() - 1)) {
+                            movingEnemy.setPosition(new Position(movingEnemy.getX(), movingEnemy.getY() - 1));
                         }
-                        break;
+                    }
                 }
             }
         }
     }
+    
 
     /**
      * This method checks whether a player has collided with an enemy.

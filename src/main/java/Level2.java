@@ -4,19 +4,23 @@ import java.util.List;
 public class Level2 extends Level {
     public Level2(){
         super(
-                9,
-                9,
-                new Position(5,4),
+                10,
+                15,
+                new Position(12,5),
                 createEnemies(),
                 createObjectives(),
-                new Position(2,5),
+                new Position(3,4),
                 createWalls()
         );
     }
 
     private static List<Enemy> createEnemies(){
         return List.of(
-                new StationaryEnemy(new Position(1,1))
+            new MovingEnemy(new Position(5,5)),
+            new MovingEnemy(new Position(8,10)),
+            new StationaryEnemy(new Position(1,1)),
+            new StationaryEnemy(new Position(4,4)),
+            new StationaryEnemy(new Position(8,10))
         );
     }
 
@@ -31,6 +35,15 @@ public class Level2 extends Level {
         ArrayList<Wall> walls = new ArrayList<>();
         walls.add(new Wall(new Position(4,5)));
         walls.add(new Wall(new Position(3,5)));
+        walls.add(new Wall(new Position(10,1)));
+        walls.add(new Wall(new Position(10,1)));
+        walls.add(new Wall(new Position(10,2)));
+        walls.add(new Wall(new Position(10,3)));
+        walls.add(new Wall(new Position(10,4)));
+        walls.add(new Wall(new Position(10,5)));
+        walls.add(new Wall(new Position(10,6)));
+
+
 
         return walls;
     }

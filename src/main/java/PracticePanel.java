@@ -1,5 +1,13 @@
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Rectangle;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * PracticePanel class represents the practice section of the menu.
@@ -153,15 +161,45 @@ public class PracticePanel extends JPanel {
         selectorPanel.add(twoButton);
         twoButton.addActionListener(e -> {
             // TODO: Do something similar to action in oneButton on line 135
+            /* 
             Level level = new Level2();
+            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
+            game.startGame();*/
+            Level level;
+            if(difficulty == Difficulty.EASY){
+                level = new Level2();
+            }
+            else if(difficulty == Difficulty.NORMAL){
+                // TODO: Replace Level1Easy object with Level1Normal (similar to example above in level 1 easy)
+                level = new Level2();
+            }
+            else{
+                // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)
+                level = new Level2();
+            }
             Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
             game.startGame();
         });
 
         threeButton = drawButton("Level Three - " + difficulty.name(), new Rectangle(50, 200, 600, 50), 20);
         selectorPanel.add(threeButton);
+        threeButton.addActionListener(e -> {
         // TODO: Do something similar to action in oneButton on line 135
-
+        Level level;
+        if(difficulty == Difficulty.EASY){
+            level = new Level3();
+        }
+        else if(difficulty == Difficulty.NORMAL){
+            // TODO: Replace Level1Easy object with Level1Normal (similar to example above in level 1 easy)
+            level = new Level3();
+        }
+        else{
+            // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)
+            level = new Level3();
+        }
+        Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
+        game.startGame();
+        });
         add(selectorPanel);
     }
 
