@@ -63,7 +63,8 @@ public class Game implements KeyListener {
                 level.getEnemies(),
                 level.getObjectives(),
                 level.getDoor(),
-                level.getWalls()
+                level.getWalls(),
+                level.getDoorPosition()
         );
     }
 

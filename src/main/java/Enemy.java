@@ -1,5 +1,7 @@
 public abstract class Enemy {
     protected Position position;
+    private Direction facing;
+    private int matchPrevMove;
 
     public Enemy(Position position){
         this.position = position;
@@ -10,7 +12,26 @@ public abstract class Enemy {
     }
 
     public void setPosition(Position p) {
-        position = p;
+            Direction prevMove = this.facing;
+
+            if(p.getX() - this.position.getX() > 0) {
+                this.facing = Direction.RIGHT;
+            } else if(p.getX() - this.position.getX() < 0) {
+                this.facing = Direction.LEFT;
+            } else if(p.getY() - this.position.getY() > 0) {
+                this.facing = Direction.DOWN;
+            } else {
+                this.facing = Direction.UP;
+            }
+
+            if(prevMove == this.facing) {
+                this.matchPrevMove++;
+            } else {
+                this.matchPrevMove--;
+            }
+
+            this.position = p;
+
     }
 
     public int getX() {
@@ -19,5 +40,12 @@ public abstract class Enemy {
 
     public int getY() {
         return position.getY();
+    }
+    
+    public Direction getFacing() {
+        return facing;
+    }
+    public int isMatchPrevMove() {
+        return matchPrevMove;
     }
 }
