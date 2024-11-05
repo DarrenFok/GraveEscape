@@ -19,9 +19,9 @@ public class Player {
         } else if(position.getX() - this.position.getX() < 0) {
             this.facing = Direction.LEFT;
         } else if(position.getY() - this.position.getY() > 0) {
-            this.facing = Direction.UP;
-        } else {
             this.facing = Direction.DOWN;
+        } else {
+            this.facing = Direction.UP;
         }
 
         if(prevMove == this.facing) {
