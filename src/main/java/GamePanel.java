@@ -77,8 +77,23 @@ public class GamePanel extends JPanel{
         }
 
         // Draw player
-        g.setColor(Color.blue);
-        g.fillOval(player.getX()*cellSize, player.getY()*cellSize, cellSize, cellSize);
+        String playerImgName = new String();
+        if(player.getFacing() == Direction.RIGHT) {
+            playerImgName = "/Player/Hero_Right_1.png";
+        } else if(player.getFacing() == Direction.LEFT) {
+            playerImgName = "/Player/Hero_Left_1.png";
+        } else if(player.getFacing() == Direction.UP) {
+            playerImgName = "/Player/Hero_Up_1.png";
+        } else if(player.getFacing() == Direction.DOWN) {
+            playerImgName = "/Player/Hero_Down_1.png";
+        }
+
+        if(player.isMatchPrevMove() % 2 == 0) {
+            playerImgName = playerImgName.replace('1', '2');
+        }
+        ImageIcon playerIcon = new ImageIcon(getClass().getResource(playerImgName));
+        Image playerImg = playerIcon.getImage();
+        g.drawImage(playerImg, player.getX() * cellSize, player.getY() * cellSize, cellSize, cellSize, this);
 
         // Draw enemies
         g.setColor(Color.red);
