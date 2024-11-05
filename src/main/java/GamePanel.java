@@ -104,7 +104,22 @@ public class GamePanel extends JPanel{
                 g.drawImage(image, enemy.getX()*cellSize, enemy.getY()*cellSize, cellSize, cellSize, this );
             }
             else{
-                g.fillRect(enemy.getX()*cellSize, enemy.getY()*cellSize, cellSize, cellSize);
+                String enemyImgName = new String();
+                if(enemy.getFacing() == Direction.RIGHT) {
+                    enemyImgName = "/Enemies/Ghost_Right_1.png";
+                } else if(enemy.getFacing() == Direction.LEFT) {
+                    enemyImgName = "/Enemies/Ghost_Left_1.png";
+                } else if(enemy.getFacing() == Direction.UP) {
+                    enemyImgName = "/Enemies/Ghost_Up_1.png";
+                } else if(enemy.getFacing() == Direction.DOWN) {
+                    enemyImgName = "/Enemies/Ghost_Down_1.png";
+                }
+                if(enemy.isMatchPrevMove() % 2 == 0) {
+                    enemyImgName = enemyImgName.replace('1', '2');
+                }
+                ImageIcon enemyIcon = new ImageIcon(getClass().getResource(enemyImgName));
+                Image enemyImg = enemyIcon.getImage();
+                g.drawImage(enemyImg, enemy.getX() * cellSize, enemy.getY() * cellSize, cellSize, cellSize, this);
             }
         }
 
