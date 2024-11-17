@@ -1,5 +1,13 @@
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Rectangle;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * CampaignPanel class represents the campaign selection menu in the game.
@@ -100,6 +108,9 @@ public class CampaignPanel extends JPanel {
         difficultyPanel.add(hardButton);
         hardButton.addActionListener(e -> {
             difficulty = Difficulty.HARD;
+            Level level = new Level1Hard();
+            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.CAMPAIGN, level);
+            game.startGame();
             // TODO: Implement something similar to line 86 to line 88, but for Level1Hard().
             System.out.println(difficulty);
         });

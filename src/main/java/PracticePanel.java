@@ -151,7 +151,7 @@ public class PracticePanel extends JPanel {
             }
             else{
                 // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)
-                level = new Level1Easy();
+                level = new Level1Hard();
             }
             Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
             game.startGame();
@@ -175,7 +175,7 @@ public class PracticePanel extends JPanel {
             }
             else{
                 // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)
-                level = new Level2();
+                level = new Level2Hard();
             }
             Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
             game.startGame();
@@ -195,7 +195,7 @@ public class PracticePanel extends JPanel {
         }
         else{
             // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)
-            level = new Level3();
+            level = new Level3Hard();
         }
         Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
         game.startGame();
