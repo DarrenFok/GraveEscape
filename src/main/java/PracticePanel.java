@@ -147,7 +147,7 @@ public class PracticePanel extends JPanel {
             }
             else if(difficulty == Difficulty.NORMAL){
                 // TODO: Replace Level1Easy object with Level1Normal (similar to example above in level 1 easy)
-                level = new Level1Easy();
+                level = new Level1Normal();
             }
             else{
                 // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)
@@ -167,11 +167,11 @@ public class PracticePanel extends JPanel {
             game.startGame();*/
             Level level;
             if(difficulty == Difficulty.EASY){
-                level = new Level2();
+                level = new Level2Easy();
             }
             else if(difficulty == Difficulty.NORMAL){
                 // TODO: Replace Level1Easy object with Level1Normal (similar to example above in level 1 easy)
-                level = new Level2();
+                level = new Level2Normal();
             }
             else{
                 // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)
@@ -187,11 +187,11 @@ public class PracticePanel extends JPanel {
         // TODO: Do something similar to action in oneButton on line 135
         Level level;
         if(difficulty == Difficulty.EASY){
-            level = new Level3();
+            level = new Level3Easy();
         }
         else if(difficulty == Difficulty.NORMAL){
             // TODO: Replace Level1Easy object with Level1Normal (similar to example above in level 1 easy)
-            level = new Level3();
+            level = new Level3Normal();
         }
         else{
             // TODO: Replace Level1Easy object with Level1Hard (similar to example above in level 1 easy)

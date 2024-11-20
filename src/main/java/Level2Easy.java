@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level2 extends Level {
-    public Level2(){
+public class Level2Easy extends Level {
+    public Level2Easy(){
         super(
                 10,
                 15,

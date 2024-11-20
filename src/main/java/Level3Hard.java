@@ -18,6 +18,8 @@ public class Level3Hard extends Level {
         return List.of(
                 new MovingEnemy(new Position(14,9)),
                 new MovingEnemy(new Position(1,1)),
+                new MovingEnemy(new Position(11,1)),
+
                 new StationaryEnemy(new Position(1,8)),
                 new StationaryEnemy(new Position(1,7)),
                 new StationaryEnemy(new Position(1,3)),
@@ -39,7 +41,9 @@ public class Level3Hard extends Level {
                 new StationaryEnemy(new Position(12,6)),
                 new StationaryEnemy(new Position(12,5)),
                 new StationaryEnemy(new Position(13,5)),
-                new StationaryEnemy(new Position(13,4))
+                new StationaryEnemy(new Position(13,4)),
+                new StationaryEnemy(new Position(9,14))
+
 
         );
     }
