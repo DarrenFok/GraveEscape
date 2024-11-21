@@ -3,11 +3,11 @@ name: Build Test
 on:
   push:
     branches:
-      - main  # Adjust this to your default branch name
+      - main
 
 jobs:
   build:
-    runs-on: [ self-hosted ]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 21
