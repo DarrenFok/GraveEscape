@@ -1,5 +1,6 @@
 package grave_escape.modes;
 
+import grave_escape.game.Game;
 import grave_escape.levels.*;
 
 import java.awt.*;

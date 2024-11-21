@@ -1,9 +1,8 @@
 package grave_escape.modes;
 
-import grave_escape.levels.Level;
-import grave_escape.levels.Level1Easy;
-import grave_escape.levels.Level1Hard;
-import grave_escape.levels.Level1Normal;
+import grave_escape.game.Game;
+import grave_escape.levels.*;
+import grave_escape.objectives.HighestResult;
 
 import java.awt.CardLayout;
 import java.awt.Rectangle;
