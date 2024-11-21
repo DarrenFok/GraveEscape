@@ -11,31 +11,39 @@ public class SettingsPanel extends JPanel {
     private JSlider volumeSlider;
     private JTextField volumeTextBox;
     private int previousVolume;
+
+    private Image backgroundImage;
     
     public SettingsPanel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        backgroundImage = new ImageIcon(getClass().getResource("/Menu/menu_background.png")).getImage();
         setLayout(null);
 
         // Create sound control panel
         JPanel soundPanel = new JPanel();
+        soundPanel.setOpaque(false);
         soundPanel.setLayout(null);
-        soundPanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        soundPanel.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         soundPanel.setBounds((1280 / 2) - (300 / 2), 175, 400, 250);
 
         // Add sound label
         JLabel soundLabel = new JLabel("Settings");
+        soundLabel.setForeground(Color.white);
         soundLabel.setFont(new Font("Arial", Font.BOLD, 20));
         soundLabel.setBounds(50, 20, 200, 30);
         soundPanel.add(soundLabel);
 
         JLabel volumeLabel = new JLabel("Volume: ");
+        volumeLabel.setForeground(Color.white);
         volumeLabel.setFont(new Font("Arial", Font.BOLD, 15));
         volumeLabel.setBounds(50, 120, 200, 30);
         soundPanel.add(volumeLabel);
 
         // Create and configure volume slider
         volumeSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+        volumeSlider.setOpaque(false);
+        volumeSlider.setForeground(Color.white);
         volumeSlider.setBounds(100, 120, 200, 50);
         volumeSlider.setMajorTickSpacing(20);
         volumeSlider.setMinorTickSpacing(5);
@@ -71,6 +79,15 @@ public class SettingsPanel extends JPanel {
         returnButton.addActionListener(e -> showPanel("Menu"));
         soundPanel.add(returnButton);
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // Paint the panel as usual
+        // Draw the background image
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
     private void showPanel(String panelName) {
