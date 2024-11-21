@@ -1,5 +1,11 @@
-import java.awt.*;
-
+import java.awt.CardLayout;
+import java.awt.Rectangle;
+import java.awt.Image;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import java.util.List;
 import javax.swing.*;
 
 
