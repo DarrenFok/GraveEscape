@@ -23,7 +23,7 @@ public class GamePanel extends JPanel{
     String levelName;
     String difficulty;
 
-    int uiBarHeight = 120;
+    int uiHeaderHeight = 130;
 
     /**
      * Constructor for GamePanel object.
@@ -67,7 +67,7 @@ public class GamePanel extends JPanel{
 
         // Calculate offsets to render the grid centered and lower on the panel
         int xOffset = (panelWidth - gridWidth) / 2;
-        int yOffset = (panelHeight - gridHeight) / 2 + uiBarHeight/2;
+        int yOffset = (panelHeight - gridHeight) / 2 + uiHeaderHeight /2;
 
         for(int i = 0; i < numOfRows; i++){
             for(int j = 0; j < numOfCols; j++){
@@ -160,7 +160,7 @@ public class GamePanel extends JPanel{
 
         // Render UI header
         g.setColor(new Color(26,35,21));
-        g.fillRect(0,0, getWidth(), uiBarHeight);  // Background of header
+        g.fillRect(0,0, getWidth(), uiHeaderHeight);  // Background of header
 
         g.setColor(Color.lightGray);
         // Render level and difficulty
