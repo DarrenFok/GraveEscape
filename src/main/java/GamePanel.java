@@ -56,6 +56,10 @@ public class GamePanel extends JPanel{
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
 
+        // Paint background image
+        Image gameBackground = new ImageIcon(getClass().getResource("/Game Background/in_game_background.png")).getImage();
+        g.drawImage(gameBackground, 0, 130, 1349, 599, this);
+
         // Draw grid
         g.setColor(Color.lightGray);
 
@@ -108,8 +112,21 @@ public class GamePanel extends JPanel{
         Image playerImg = playerIcon.getImage();
         g.drawImage(playerImg, xOffset + player.getX() * cellSize, yOffset + player.getY() * cellSize, cellSize, cellSize, this);
 
+        // Draw objectives
+        for(Objective objective: objectives){
+            if(objective.isMandatory()){ //if mandatory
+                ImageIcon icon = new ImageIcon(getClass().getResource("/Objectives/Objective_Key.png"));
+                Image image = icon.getImage();
+                g.drawImage(image, xOffset + objective.getX()*cellSize, yOffset + objective.getY()*cellSize, cellSize, cellSize, this );
+            }
+            else{ // if bonus
+                ImageIcon icon = new ImageIcon(getClass().getResource("/Objectives/Coin.png"));
+                Image image = icon.getImage();
+                g.drawImage(image, xOffset + objective.getX()*cellSize, yOffset + objective.getY()*cellSize, cellSize, cellSize, this );
+            }
+        }
+
         // Draw enemies
-        g.setColor(Color.red);
         for(Enemy enemy: enemies){
             if(enemy instanceof StationaryEnemy){
                 ImageIcon icon = new ImageIcon(getClass().getResource("/Enemies/Thorns.png"));
@@ -117,7 +134,7 @@ public class GamePanel extends JPanel{
                 g.drawImage(image, xOffset + enemy.getX()*cellSize, yOffset + enemy.getY()*cellSize, cellSize, cellSize, this );
             }
             else{
-                String enemyImgName = new String();
+                String enemyImgName = "/Enemies/Ghost_Down_1.png";
                 if(enemy.getFacing() == Direction.RIGHT) {
                     enemyImgName = "/Enemies/Ghost_Right_1.png";
                 } else if(enemy.getFacing() == Direction.LEFT) {
@@ -133,20 +150,6 @@ public class GamePanel extends JPanel{
                 ImageIcon enemyIcon = new ImageIcon(getClass().getResource(enemyImgName));
                 Image enemyImg = enemyIcon.getImage();
                 g.drawImage(enemyImg, xOffset + enemy.getX() * cellSize, yOffset + enemy.getY() * cellSize, cellSize, cellSize, this);
-            }
-        }
-
-        // Draw objectives
-        for(Objective objective: objectives){
-            if(objective.isMandatory()){ //if mandatory
-                ImageIcon icon = new ImageIcon(getClass().getResource("/Objectives/Objective_Key.png"));
-                Image image = icon.getImage();
-                g.drawImage(image, xOffset + objective.getX()*cellSize, yOffset + objective.getY()*cellSize, cellSize, cellSize, this );
-            }
-            else{ // if bonus
-                ImageIcon icon = new ImageIcon(getClass().getResource("/Objectives/Coin.png"));
-                Image image = icon.getImage();
-                g.drawImage(image, xOffset + objective.getX()*cellSize, yOffset + objective.getY()*cellSize, cellSize, cellSize, this );
             }
         }
 

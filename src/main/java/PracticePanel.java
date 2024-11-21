@@ -1,13 +1,6 @@
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Rectangle;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * PracticePanel class represents the practice section of the menu.
@@ -27,6 +20,8 @@ public class PracticePanel extends JPanel {
     JButton twoButton;
     JButton threeButton;
 
+    private Image backgroundImage;
+
     /**
      * Constructor for the PracticePanel class.
      * @param cardLayout: The CardLayout used for switching panels
@@ -35,14 +30,25 @@ public class PracticePanel extends JPanel {
     public PracticePanel(CardLayout cardLayout, JPanel mainPanel){
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
-        setLayout(null);
-        drawBorderedTextBox("Practice", new Rectangle(100, 50, 200, 50), 25);
+        backgroundImage = new ImageIcon(getClass().getResource("/Menu/menu_background.png")).getImage();
 
+        setLayout(null);
+
+        drawBorderedTextBox("Practice", new Rectangle(100, 50, 200, 50), 25);
         drawDifficulties();
         drawLevelSelector();
 
         JButton returnButton = drawButton("Return to Main Menu", new Rectangle(50, 600, 200, 50), 15);
         returnButton.addActionListener(e -> showPanel("Menu"));
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // Paint the panel as usual
+        // Draw the background image
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
     /**
@@ -53,10 +59,12 @@ public class PracticePanel extends JPanel {
      */
     public void drawBorderedTextBox(String text, Rectangle location, int fontSize){
         JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        panel.setOpaque(false);
+        panel.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         panel.setBounds(location);
         JLabel label = new JLabel(text);
         label.setFont(new Font("Arial", Font.BOLD, fontSize));
+        label.setForeground(Color.white);
         panel.add(label, BorderLayout.CENTER);
         add(panel);
     }
@@ -81,14 +89,16 @@ public class PracticePanel extends JPanel {
      */
     public void drawDifficulties(){
         // Draw text
-        JLabel diffcultyTitle = new JLabel("Difficulty Selection");
-        diffcultyTitle.setFont(new Font("Arial", Font.BOLD, 20));
-        diffcultyTitle.setBounds(50, 125, 300, 50);
-        add(diffcultyTitle, BorderLayout.CENTER);
+        JLabel difficultyTitle = new JLabel("Difficulty Selection");
+        difficultyTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        difficultyTitle.setForeground(Color.white);
+        difficultyTitle.setBounds(50, 125, 300, 50);
+        add(difficultyTitle, BorderLayout.CENTER);
         // Draw border
         JPanel difficultyPanel = new JPanel();
+        difficultyPanel.setOpaque(false);
         difficultyPanel.setLayout(null);
-        difficultyPanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        difficultyPanel.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         difficultyPanel.setBounds(50, 175, 300, 300);
         // Draw difficulty buttons
         easyButton = drawButton("Easy", new Rectangle(50, 50, 200, 50), 20);
@@ -128,13 +138,15 @@ public class PracticePanel extends JPanel {
         // Draw text
         JLabel selectorTitle = new JLabel("Pick Your Level:");
         selectorTitle.setFont(new Font("Arial", Font.BOLD, 30));
+        selectorTitle.setForeground(Color.white);
         selectorTitle.setBounds(530, 125, 700, 50);
         add(selectorTitle, BorderLayout.CENTER);
 
         // Draw border
         JPanel selectorPanel = new JPanel();
+        selectorPanel.setOpaque(false);
         selectorPanel.setLayout(null);
-        selectorPanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        selectorPanel.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         selectorPanel.setBounds(530, 175, 700, 300);
 
         // Add level buttons
