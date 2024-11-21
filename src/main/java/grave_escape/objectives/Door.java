@@ -1,5 +1,7 @@
 package grave_escape.objectives;
 
+import grave_escape.game.Position;
+
 /**
  * objectives.Door class represents the door on the game.Grid that appears once all mandatory objectives are collected.
  */

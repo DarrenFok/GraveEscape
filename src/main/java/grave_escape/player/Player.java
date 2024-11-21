@@ -1,5 +1,8 @@
 package grave_escape.player;
 
+import grave_escape.game.Direction;
+import grave_escape.game.Position;
+
 public class Player {
     private Position position;
     private int lives;

@@ -1,8 +1,13 @@
 package grave_escape.levels;
 
-import javax.swing.text.Position;
 import java.util.ArrayList;
 import java.util.List;
+import grave_escape.game.Position;
+import grave_escape.enemy.MovingEnemy;
+import grave_escape.enemy.Enemy;
+import grave_escape.enemy.StationaryEnemy;
+import grave_escape.objectives.Wall;
+import grave_escape.objectives.Objective;
 
 public class Level1Easy extends Level {
     public Level1Easy(){

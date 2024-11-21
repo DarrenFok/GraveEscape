@@ -1,19 +1,28 @@
 package grave_escape.modes;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import grave_escape.game.Game;
+import grave_escape.levels.Difficulty;
+import grave_escape.levels.GameMode;
 import grave_escape.levels.Level;
 import grave_escape.levels.Level1Easy;
 import grave_escape.levels.Level1Hard;
 import grave_escape.levels.Level1Normal;
-
-import java.awt.CardLayout;
-import java.awt.Rectangle;
-import java.awt.Image;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.BorderLayout;
-import java.util.List;
-import javax.swing.*;
+import grave_escape.objectives.HighestResult;
 
 
 /**

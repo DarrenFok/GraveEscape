@@ -2,7 +2,7 @@ package grave_escape.game;
 
 import grave_escape.levels.*;
 import grave_escape.objectives.HighestResult;
-import grave_escape.game.Direction;
+import grave_escape.levels.Level;
 
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;

@@ -1,5 +1,7 @@
 package grave_escape.objectives;
 
+import grave_escape.game.Position;
+
 public class Cell {
     private Position position;
     private boolean isWalkable;

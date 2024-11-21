@@ -3,6 +3,17 @@ package grave_escape.levels;
 import java.util.ArrayList;
 import java.util.List;
 
+import grave_escape.enemy.Enemy;
+import grave_escape.enemy.MovingEnemy;
+import grave_escape.game.Direction;
+import grave_escape.game.Grid;
+import grave_escape.game.Position;
+import grave_escape.objectives.Door;
+import grave_escape.objectives.Objective;
+import grave_escape.objectives.Wall;
+import grave_escape.player.Player;
+
+
 /**
  * levels.Level class represents a template for a level.
  * It manages the elements and their interactions between one another.
@@ -84,22 +95,22 @@ public class Level {
      */
     public void movePlayer(Direction direction){
         switch(direction){
-            case Direction.UP:
+            case UP:
                 if(player.getY() > 0 && !isWall(player.getX(), player.getY()-1)){
                     player.setPosition(new Position(player.getX(), player.getY()-1));
                 }
                 break;
-            case Direction.DOWN:
+            case DOWN:
                 if(player.getY() < grid.getNumOfRows()-1 && !isWall(player.getX(), player.getY()+1)){
                     player.setPosition(new Position(player.getX(), player.getY()+1));
                 }
                 break;
-            case Direction.LEFT:
+            case LEFT:
                 if(player.getX() > 0 && !isWall(player.getX()-1, player.getY())){
                     player.setPosition(new Position(player.getX()-1, player.getY()));
                 }
                 break;
-            case Direction.RIGHT:
+            case RIGHT:
                 if(player.getX() < grid.getNumOfCols()-1 && !isWall(player.getX()+1, player.getY())){
                     player.setPosition(new Position(player.getX()+1, player.getY()));
                 }
