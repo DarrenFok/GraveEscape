@@ -22,7 +22,7 @@ public class Level3Easy extends Level {
                 createWalls()
         );
 
-        this.levelName = "levels.Level 3";
+        this.levelName = "Level 3";
         this.difficulty = "Easy";
     }
 

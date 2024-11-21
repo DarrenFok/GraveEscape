@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.List;
 
+import javax.print.attribute.ResolutionSyntax;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -109,7 +110,7 @@ public class CampaignPanel extends JPanel {
      */
     public void drawDifficulties(){
         // Draw text
-        JLabel diffcultyTitle = new JLabel("levels.Difficulty Selection");
+        JLabel diffcultyTitle = new JLabel("Difficulty Selection");
         diffcultyTitle.setFont(new Font("Arial", Font.BOLD, 20));
         diffcultyTitle.setForeground(Color.white);
         diffcultyTitle.setBounds((1280 / 2) - (300 / 2), 125, 300, 50);
@@ -169,6 +170,7 @@ public class CampaignPanel extends JPanel {
 
         if(leaderboard.isEmpty()){
             JLabel result = new JLabel("No players played yet");
+            result.setForeground(Color.gray);
             result.setFont(new Font("Arial", Font.BOLD, 14));
             result.setBounds(1280 - (700 / 2), 300 + x * 50, 700, 50);
             add(result);
@@ -178,6 +180,7 @@ public class CampaignPanel extends JPanel {
         // for looping the player name with score (Singleton instance for later)
         for (HighestResult.PlayerResult entry : leaderboard) {
             JLabel result = new JLabel(x + ". " + entry.getName() + ": " + entry.getHighestScore());
+            result.setForeground(Color.gray);
             result.setFont(new Font("Arial", Font.BOLD, 14));
             result.setBounds(1280 - (700 / 2), 300 + x * 50, 700, 50);
             add(result, BorderLayout.CENTER);

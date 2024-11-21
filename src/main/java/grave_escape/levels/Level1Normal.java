@@ -22,7 +22,7 @@ public class Level1Normal extends Level {
                 createWalls()
         );
 
-        this.levelName = "levels.Level 1";
+        this.levelName = "Level 1";
         this.difficulty = "Normal";
     }
 

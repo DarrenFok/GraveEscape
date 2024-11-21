@@ -1,7 +1,19 @@
 package grave_escape.menu;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
 
 public class SettingsPanel extends JPanel {
     private CardLayout cardLayout;
@@ -28,14 +40,14 @@ public class SettingsPanel extends JPanel {
         // Add sound label
         JLabel soundLabel = new JLabel("Settings");
         soundLabel.setForeground(Color.white);
-        soundLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        soundLabel.setBounds(50, 20, 200, 30);
+        soundLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        soundLabel.setBounds(136, 30, 200, 30);
         soundPanel.add(soundLabel);
 
         JLabel volumeLabel = new JLabel("Volume: ");
         volumeLabel.setForeground(Color.white);
-        volumeLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        volumeLabel.setBounds(50, 120, 200, 30);
+        volumeLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        volumeLabel.setBounds(40, 120, 200, 30);
         soundPanel.add(volumeLabel);
 
         // Create and configure volume slider

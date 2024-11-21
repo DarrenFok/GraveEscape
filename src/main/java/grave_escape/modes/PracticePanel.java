@@ -95,7 +95,7 @@ public class PracticePanel extends JPanel {
      */
     public void drawDifficulties(){
         // Draw text
-        JLabel difficultyTitle = new JLabel("levels.Difficulty Selection");
+        JLabel difficultyTitle = new JLabel("Difficulty Selection");
         difficultyTitle.setFont(new Font("Arial", Font.BOLD, 20));
         difficultyTitle.setForeground(Color.white);
         difficultyTitle.setBounds(50, 125, 300, 50);
@@ -111,27 +111,27 @@ public class PracticePanel extends JPanel {
         difficultyPanel.add(easyButton);
         easyButton.addActionListener(e -> {
             difficulty = Difficulty.EASY;
-            oneButton.setText("levels.Level One - " + difficulty.name());
-            twoButton.setText("levels.Level Two - " + difficulty.name());
-            threeButton.setText("levels.Level Three - " + difficulty.name());
+            oneButton.setText("Level One - " + difficulty.name());
+            twoButton.setText("Level Two - " + difficulty.name());
+            threeButton.setText("Level Three - " + difficulty.name());
         });
 
         normalButton = drawButton("Normal", new Rectangle(50, 125, 200, 50), 20);
         difficultyPanel.add(normalButton);
         normalButton.addActionListener(e -> {
             difficulty = Difficulty.NORMAL;
-            oneButton.setText("levels.Level One - " + difficulty.name());
-            twoButton.setText("levels.Level Two - " + difficulty.name());
-            threeButton.setText("levels.Level Three - " + difficulty.name());
+            oneButton.setText("Level One - " + difficulty.name());
+            twoButton.setText("Level Two - " + difficulty.name());
+            threeButton.setText("Level Three - " + difficulty.name());
         });
 
         hardButton = drawButton("Hard", new Rectangle(50, 200, 200, 50), 20);
         difficultyPanel.add(hardButton);
         hardButton.addActionListener(e -> {
             difficulty = Difficulty.HARD;
-            oneButton.setText("levels.Level One - " + difficulty.name());
-            twoButton.setText("levels.Level Two - " + difficulty.name());
-            threeButton.setText("levels.Level Three - " + difficulty.name());
+            oneButton.setText("Level One - " + difficulty.name());
+            twoButton.setText("Level Two - " + difficulty.name());
+            threeButton.setText("Level Three - " + difficulty.name());
         });
 
         add(difficultyPanel);
@@ -142,7 +142,7 @@ public class PracticePanel extends JPanel {
      */
     public void drawLevelSelector(){
         // Draw text
-        JLabel selectorTitle = new JLabel("Pick Your levels.Level:");
+        JLabel selectorTitle = new JLabel("Select Your Level:");
         selectorTitle.setFont(new Font("Arial", Font.BOLD, 30));
         selectorTitle.setForeground(Color.white);
         selectorTitle.setBounds(530, 125, 700, 50);
@@ -156,7 +156,7 @@ public class PracticePanel extends JPanel {
         selectorPanel.setBounds(530, 175, 700, 300);
 
         // Add level buttons
-        oneButton = drawButton("levels.Level One - " + difficulty.name(), new Rectangle(50, 50, 600, 50), 20);
+        oneButton = drawButton("Level One - " + difficulty.name(), new Rectangle(50, 50, 600, 50), 20);
         selectorPanel.add(oneButton);
         oneButton.addActionListener(e -> {
             Level level;
@@ -175,7 +175,7 @@ public class PracticePanel extends JPanel {
             game.startGame();
         });
 
-        twoButton = drawButton("levels.Level Two - " + difficulty.name(), new Rectangle(50, 125, 600, 50), 20);
+        twoButton = drawButton("Level Two - " + difficulty.name(), new Rectangle(50, 125, 600, 50), 20);
         selectorPanel.add(twoButton);
         twoButton.addActionListener(e -> {
             // TODO: Do something similar to action in oneButton on line 135
@@ -199,7 +199,7 @@ public class PracticePanel extends JPanel {
             game.startGame();
         });
 
-        threeButton = drawButton("levels.Level Three - " + difficulty.name(), new Rectangle(50, 200, 600, 50), 20);
+        threeButton = drawButton("Level Three - " + difficulty.name(), new Rectangle(50, 200, 600, 50), 20);
         selectorPanel.add(threeButton);
         threeButton.addActionListener(e -> {
         // TODO: Do something similar to action in oneButton on line 135

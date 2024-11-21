@@ -1,11 +1,20 @@
 package grave_escape.menu;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.io.InputStream;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import grave_escape.modes.CampaignPanel;
 import grave_escape.modes.PracticePanel;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.InputStream;
 
 public class GameMainMenu extends JFrame {
     private JPanel mainPanel;
