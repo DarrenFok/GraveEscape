@@ -53,7 +53,7 @@ public class Game implements KeyListener {
 
         // Create game panel, and add to mainPanel
         setupGamePanel();
-        mainPanel.add(gamePanel, "game.Game");
+        mainPanel.add(gamePanel, "Game");
 
         // KeyListener in game.GamePanel
         gamePanel.addKeyListener(this);
@@ -125,20 +125,20 @@ public class Game implements KeyListener {
     
     private void handleGameOver() {
         if (gameMode == GameMode.PRACTICE) {
-            JOptionPane.showMessageDialog(mainPanel, "game.Game Over");
+            JOptionPane.showMessageDialog(mainPanel, "Game Over");
             cardLayout.show(mainPanel, "Menu");
             gameOver = false;
         } else {
             lives--;
             if (lives == 0) {
-                JOptionPane.showMessageDialog(mainPanel, "No more lives. game.Game Over!");
+                JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
                 saveResult();
             } else {
                 score = 0;
                 JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
                 level.resetLevel();
                 setupGamePanel();
-                mainPanel.add(gamePanel, "game.Game");
+                mainPanel.add(gamePanel, "Game");
                 gamePanel.addKeyListener(this);
                 gameOver = false;
                 startGame();
@@ -149,11 +149,14 @@ public class Game implements KeyListener {
 private void saveResult() {
     String username = JOptionPane.showInputDialog(mainPanel,
             "Enter your name:",
-            "game.Game Over - Save Your Score",
+            "Game Over - Save Your Score",
             JOptionPane.PLAIN_MESSAGE);
     cardLayout.show(mainPanel, "Menu");
     gameOver = false;
     HighestResult result = HighestResult.getInstance();
+    if (username == null){
+        username = "Player";
+    }
     result.savePlayerResult(username, score);
 }
     @Override
@@ -169,7 +172,7 @@ private void saveResult() {
      * Starts the game by switching panels to the game.GamePanel.
      */
     public void startGame(){
-        cardLayout.show(mainPanel, "game.Game");
+        cardLayout.show(mainPanel, "Game");
         gamePanel.requestFocusInWindow();
         gamePanel.update(level, lives, score, moves);
     }
@@ -179,7 +182,7 @@ private void saveResult() {
      */
     public void handleLevelCompletion(){
         if(gameMode == GameMode.PRACTICE){
-            JOptionPane.showMessageDialog(mainPanel, "levels.Level complete!");
+            JOptionPane.showMessageDialog(mainPanel, "Level complete!");
             cardLayout.show(mainPanel, "Menu");
         }
         else if(gameMode == GameMode.CAMPAIGN){
@@ -187,9 +190,9 @@ private void saveResult() {
             if(currentIndex < levels.size()-1){
                 level = levels.get(currentIndex+1);  // Loads next level
                 setupGamePanel();
-                mainPanel.add(gamePanel, "game.Game");
+                mainPanel.add(gamePanel, "Game");
                 gamePanel.addKeyListener(this);
-                JOptionPane.showMessageDialog(gamePanel, "levels.Level complete! Ready to continue?");
+                JOptionPane.showMessageDialog(gamePanel, "Level complete! Ready to continue?");
                 startGame();
             }
             else{
