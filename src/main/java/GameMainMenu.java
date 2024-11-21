@@ -13,7 +13,7 @@ public class GameMainMenu extends JFrame {
     private CardLayout cardLayout;
 
     public GameMainMenu() {
-        setTitle("Game Main Menu");
+        setTitle("Grave Escape");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(1366, 768);
