@@ -21,6 +21,8 @@ public class GamePanel extends JPanel{
     int score;
     int moves;
 
+    int uiBarHeight = 120;
+
     /**
      * Constructor for GamePanel object.
      * @param level: The level that will be rendered
@@ -57,11 +59,10 @@ public class GamePanel extends JPanel{
         int panelHeight = getHeight();
         int gridWidth = numOfCols * cellSize;
         int gridHeight = numOfRows * cellSize;
-        int uiBarHeight = 60;
 
         // Calculate offsets to render the grid centered and lower on the panel
         int xOffset = (panelWidth - gridWidth) / 2;
-        int yOffset = (panelHeight - gridHeight) / 2 + uiBarHeight;
+        int yOffset = (panelHeight - gridHeight) / 2 + uiBarHeight/2;
 
         for(int i = 0; i < numOfRows; i++){
             for(int j = 0; j < numOfCols; j++){
@@ -153,7 +154,40 @@ public class GamePanel extends JPanel{
         }
 
         // Render UI header
+        g.setColor(Color.lightGray);
+        g.fillRect(0,0, getWidth(), uiBarHeight);  // Background of header
 
+        g.setColor(Color.black);
+        // Render level and difficulty
+        g.setFont(new Font("Arial", Font.BOLD, 28));
+        g.drawString("Level 1", 20, 50);
+        g.drawString("Difficulty", 20, 85);
+
+        // Lives
+        g.drawString("Lives", 220, 45);
+        ImageIcon heartIcon = new ImageIcon(getClass().getResource("/In-Game UI Header/heart.png"));
+        Image heartImage = heartIcon.getImage();
+        for(int i = 0; i < lives; i++){
+            g.drawImage(heartImage, 220 + (i*60), 60, 50, 50, this);
+        }
+
+        g.setColor(Color.black);
+        // Objectives
+        g.drawString("Objectives", 600, 30);
+        g.setFont(new Font("Arial", Font.PLAIN, 14));
+        // for each objective remaining
+//        g.drawString("battery 1", 310, 45);
+//        g.drawString("battery 2", 310, 60);
+//        g.drawString("battery 3", 310, 75);
+
+        // Moves
+        g.setFont(new Font("Arial", Font.BOLD, 26));
+        g.drawString("Moves:", 900, 68);
+        g.drawString(String.valueOf(moves), 1000, 68);
+
+        // Score
+        g.drawString("Score:", 1150, 68);
+        g.drawString(String.valueOf(score), 1235, 68);
 
     }
 
