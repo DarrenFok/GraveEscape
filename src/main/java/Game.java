@@ -126,8 +126,14 @@ public class Game implements KeyListener {
             lives--;
             if (lives == 0) {
                 JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
+                String username = JOptionPane.showInputDialog(mainPanel,
+                        "Enter your name:",
+                        "Game Over - Save Your Score",
+                        JOptionPane.PLAIN_MESSAGE);
                 cardLayout.show(mainPanel, "Menu");
                 gameOver = false;
+                HighestResult result = HighestResult.getInstance();
+                result.savePlayerResult(username, score);
             } else {
                 score = 0;
                 JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
