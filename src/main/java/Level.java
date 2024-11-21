@@ -6,6 +6,8 @@ import java.util.List;
  * It manages the elements and their interactions between one another.
  */
 public class Level {
+    protected String levelName;
+    protected String difficulty;
     private ArrayList<Objective> objectives;
     private Player player;
     private List<Enemy> enemies;
@@ -358,6 +360,14 @@ public class Level {
 
     public int getMandatoryCount(){
         return mandatoryCount;
+    }
+
+    public String getLevelName(){
+        return levelName;
+    }
+
+    public String getDifficulty(){
+        return difficulty;
     }
 }
 

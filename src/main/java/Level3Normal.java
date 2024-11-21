@@ -12,6 +12,9 @@ public class Level3Normal extends Level {
                 new Position(10,6),//door
                 createWalls()
         );
+
+        this.levelName = "Level 3";
+        this.difficulty = "Normal";
     }
 
     private static List<Enemy> createEnemies(){

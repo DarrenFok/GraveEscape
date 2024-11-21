@@ -20,6 +20,8 @@ public class GamePanel extends JPanel{
     int lives;
     int score;
     int moves;
+    String levelName;
+    String difficulty;
 
     int uiBarHeight = 120;
 
@@ -37,6 +39,9 @@ public class GamePanel extends JPanel{
         this.door = level.getDoor();
         this.walls = level.getWalls();
         this.doorPosition = level.getDoorPosition();
+
+        this.levelName = level.getLevelName();
+        this.difficulty = level.getDifficulty();
 
         this.lives = lives;
         this.score = score;
@@ -154,14 +159,14 @@ public class GamePanel extends JPanel{
         }
 
         // Render UI header
-        g.setColor(Color.lightGray);
+        g.setColor(new Color(26,35,21));
         g.fillRect(0,0, getWidth(), uiBarHeight);  // Background of header
 
-        g.setColor(Color.black);
+        g.setColor(Color.lightGray);
         // Render level and difficulty
         g.setFont(new Font("Arial", Font.BOLD, 28));
-        g.drawString("Level 1", 20, 50);
-        g.drawString("Difficulty", 20, 85);
+        g.drawString(levelName, 20, 50);
+        g.drawString(difficulty, 20, 85);
 
         // Lives
         g.drawString("Lives", 220, 45);
@@ -171,7 +176,6 @@ public class GamePanel extends JPanel{
             g.drawImage(heartImage, 220 + (i*60), 60, 50, 50, this);
         }
 
-        g.setColor(Color.black);
         // Objectives
         g.drawString("Objectives", 600, 45);
         g.setFont(new Font("Arial", Font.PLAIN, 14));

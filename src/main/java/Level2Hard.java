@@ -12,6 +12,9 @@ public class Level2Hard extends Level {
                 new Position(5,6),//door
                 createWalls()
         );
+
+        this.levelName = "Level 2";
+        this.difficulty = "Hard";
     }
 
     private static List<Enemy> createEnemies(){
