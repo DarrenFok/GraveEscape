@@ -2,7 +2,6 @@ package grave_escape.game;
 
 import grave_escape.levels.*;
 import grave_escape.objectives.HighestResult;
-import grave_escape.levels.Level;
 
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
@@ -30,6 +29,9 @@ public class Game implements KeyListener {
     private boolean onDoor = false;
     private int lives = 3;
     private int moves = 0;
+    private int prevScore = 0;
+    private int prevMoves = 0;
+
 
     /**
      * Constructor for game.Game object. Sets up the game.GamePanel, switches to it, and puts the keyListener on the
@@ -129,13 +131,14 @@ public class Game implements KeyListener {
             JOptionPane.showMessageDialog(mainPanel, "Game Over");
             cardLayout.show(mainPanel, "Menu");
             gameOver = false;
-        } else {
+        } else {//else if campaign mode
             lives--;
             if (lives == 0) {
                 JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
                 saveResult();
             } else {
-                score = 0;
+                score = prevScore;
+                moves = prevMoves;            
                 JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
                 level.resetLevel();
                 setupGamePanel();
@@ -187,6 +190,9 @@ private void saveResult() {
             cardLayout.show(mainPanel, "Menu");
         }
         else if(gameMode == GameMode.CAMPAIGN){
+            // Save current level's score and moves before progressing
+            prevScore = score;
+            prevMoves = moves;
             int currentIndex = levels.indexOf(level);
             if(currentIndex < levels.size()-1){
                 level = levels.get(currentIndex+1);  // Loads next level
