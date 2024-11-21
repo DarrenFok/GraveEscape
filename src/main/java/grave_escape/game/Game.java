@@ -100,7 +100,8 @@ public class Game implements KeyListener {
             level.moveEnemies(); // Ensure this method moves the enemies towards the player
             
             // Update score and check objectives
-            score--;
+            if(score > 0)
+                score--;
             moves++;
             score += level.checkObjective();
             level.checkAndPlaceDoor();
