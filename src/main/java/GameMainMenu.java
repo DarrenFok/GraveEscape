@@ -16,7 +16,7 @@ public class GameMainMenu extends JFrame {
         setTitle("Game Main Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setSize(1280, 720);
+        setSize(1366, 768);
         setLocationRelativeTo(null);
 
         cardLayout = new CardLayout();

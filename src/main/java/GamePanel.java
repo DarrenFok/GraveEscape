@@ -17,33 +17,28 @@ public class GamePanel extends JPanel{
     private List<Wall> walls;
     private Position doorPosition;
 
+    int lives;
+    int score;
+    int moves;
+
     /**
      * Constructor for GamePanel object.
-     * @param numOfRows: The number of rows in the Level's Grid
-     * @param numOfCols: The number of columns in the Level's Grid
-     * @param player: Player object
-     * @param enemies: List of enemies
-     * @param objectives: List of objectives
-     * @param door: Door object
+     * @param level: The level that will be rendered
      */
-    public GamePanel(
-            int numOfRows,
-            int numOfCols,
-            Player player,
-            List<Enemy> enemies,
-            ArrayList<Objective> objectives,
-            Door door,
-            List<Wall> walls,
-            Position doorPosition
-    ) {
-        this.numOfRows = numOfRows;
-        this.numOfCols = numOfCols;
-        this.player = player;
-        this.enemies = enemies;
-        this.objectives = objectives;
-        this.door = door;
-        this.walls = walls;
-        this.doorPosition = doorPosition;
+    public GamePanel(Level level, int lives, int score, int moves) {
+        // get information from level
+        this.numOfRows = level.getNumOfRows();
+        this.numOfCols = level.getNumOfCols();
+        this.player = level.getPlayer();
+        this.enemies = level.getEnemies();
+        this.objectives = level.getObjectives();
+        this.door = level.getDoor();
+        this.walls = level.getWalls();
+        this.doorPosition = level.getDoorPosition();
+
+        this.lives = lives;
+        this.score = score;
+        this.moves = moves;
     }
 
     /**
@@ -156,21 +151,25 @@ public class GamePanel extends JPanel{
             Image image = icon.getImage();
             g.drawImage(image,xOffset + wall.getX()*cellSize, yOffset + wall.getY()*cellSize, cellSize, cellSize, this);
         }
+
+        // Render UI header
+
+
     }
 
     /**
      * Updates positions of players and enemies, and whether objectives and doors exist in the current state. Then
      * re-renders the Grid to reflect the update.
-     * @param player: Updated Player object
-     * @param enemies: Enemy list containing updated Enemy positions
-     * @param objectives: Objective list containing updated Objective states
-     * @param door: Updated Door object
+     * @param level: Level to be updated
      */
-    public void update(Player player, List<Enemy> enemies, ArrayList<Objective> objectives, Door door){
-        this.player = player;
-        this.enemies = enemies;
-        this.objectives = objectives;
-        this.door = door;
+    public void update(Level level, int lives, int score, int moves){
+        this.lives = lives;
+        this.score = score;
+        this.moves = moves;
+        this.player = level.getPlayer();
+        this.enemies = level.getEnemies();
+        this.objectives = level.getObjectives();
+        this.door = level.getDoor();
         repaint();
     }
 

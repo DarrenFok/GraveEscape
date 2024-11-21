@@ -23,6 +23,7 @@ public class Game implements KeyListener {
     private int score;
     private boolean onDoor = false;
     private int lives = 3;
+    private int moves = 0;
 
     /**
      * Constructor for Game object. Sets up the GamePanel, switches to it, and puts the keyListener on the
@@ -56,16 +57,7 @@ public class Game implements KeyListener {
      * Method to set up the Game Panel
      */
     private void setupGamePanel(){
-        gamePanel = new GamePanel(
-                level.getNumOfRows(),
-                level.getNumOfCols(),
-                level.getPlayer(),
-                level.getEnemies(),
-                level.getObjectives(),
-                level.getDoor(),
-                level.getWalls(),
-                level.getDoorPosition()
-        );
+        gamePanel = new GamePanel(level, lives, score, moves);
     }
 
     /**
@@ -103,12 +95,13 @@ public class Game implements KeyListener {
             
             // Update score and check objectives
             score--;
+            moves++;
             score += level.checkObjective();
             level.checkAndPlaceDoor();
             if (level.isDoorOpen()) {
                 onDoor = level.isOnDoor();
             }
-            gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives(), level.getDoor());
+            gamePanel.update(level, lives, score, moves);
         }
     
         gameOver = level.checkCollision();
@@ -164,7 +157,7 @@ public class Game implements KeyListener {
     public void startGame(){
         cardLayout.show(mainPanel, "Game");
         gamePanel.requestFocusInWindow();
-        gamePanel.update(level.getPlayer(), level.getEnemies(), level.getObjectives(), level.getDoor());
+        gamePanel.update(level, lives, score, moves);
     }
 
     /**
