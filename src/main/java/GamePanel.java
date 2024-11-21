@@ -56,6 +56,10 @@ public class GamePanel extends JPanel{
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
 
+        // Paint background image
+        Image gameBackground = new ImageIcon(getClass().getResource("/Game Background/in_game_background.png")).getImage();
+        g.drawImage(gameBackground, 0, 130, 1349, 599, this);
+
         // Draw grid
         g.setColor(Color.lightGray);
 
