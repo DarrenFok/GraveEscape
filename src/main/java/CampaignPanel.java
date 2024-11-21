@@ -2,6 +2,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
+
 /**
  * CampaignPanel class represents the campaign selection menu in the game.
  * Allows the player to choose a difficulty level and displays previous high scores.
@@ -137,7 +138,27 @@ public class CampaignPanel extends JPanel {
         selectorTitle.setBounds((1280) - (700 / 2), 300, 700, 50);
         add(selectorTitle, BorderLayout.CENTER);
 
+
+        HighestResult highestResult = HighestResult.getInstance();
+        List<HighestResult.PlayerResult> leaderboard = highestResult.getLeaderboard();
+        int x = 1;
+
+        if(leaderboard.isEmpty()){
+            JLabel result = new JLabel("No players played yet");
+            result.setFont(new Font("Arial", Font.BOLD, 14));
+            result.setBounds(1280 - (700 / 2), 300 + x * 50, 700, 50);
+            add(result);
+            return;
+        }
+
         // for looping the player name with score (Singleton instance for later)
+        for (HighestResult.PlayerResult entry : leaderboard) {
+            JLabel result = new JLabel(x + ". " + entry.getName() + ": " + entry.getHighestScore());
+            result.setFont(new Font("Arial", Font.BOLD, 14));
+            result.setBounds(1280 - (700 / 2), 300 + x * 50, 700, 50);
+            add(result, BorderLayout.CENTER);
+            x++;
+        }
     }
 
     /**

@@ -126,8 +126,7 @@ public class Game implements KeyListener {
             lives--;
             if (lives == 0) {
                 JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
-                cardLayout.show(mainPanel, "Menu");
-                gameOver = false;
+                saveResult();
             } else {
                 score = 0;
                 JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
@@ -141,7 +140,16 @@ public class Game implements KeyListener {
         }
     }
     
-
+private void saveResult() {
+    String username = JOptionPane.showInputDialog(mainPanel,
+            "Enter your name:",
+            "Game Over - Save Your Score",
+            JOptionPane.PLAIN_MESSAGE);
+    cardLayout.show(mainPanel, "Menu");
+    gameOver = false;
+    HighestResult result = HighestResult.getInstance();
+    result.savePlayerResult(username, score);
+}
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -181,6 +189,7 @@ public class Game implements KeyListener {
             else{
                 // No more levels, return to main menu
                 JOptionPane.showMessageDialog(mainPanel, difficulty + " Campaign mode complete! Thanks for playing!");
+                saveResult();
                 cardLayout.show(mainPanel, "Menu");
             }
         }
