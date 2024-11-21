@@ -22,6 +22,8 @@ public class GameMainMenu extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
+
+
         // Initialize panels
         menuPanel = initializeMenuPanel();
         campaignPanel = new CampaignPanel(cardLayout, mainPanel);
@@ -39,7 +41,14 @@ public class GameMainMenu extends JFrame {
     }
 
     private JPanel initializeMenuPanel() {
-        JPanel menuPanel = new JPanel();
+        JPanel menuPanel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon icon = new ImageIcon(getClass().getResource("/Menu/menu_background.png"));
+                g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         menuPanel.setLayout(null);
 
         JButton campaignButton = new JButton("Campaign");
