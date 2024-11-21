@@ -173,12 +173,25 @@ public class GamePanel extends JPanel{
 
         g.setColor(Color.black);
         // Objectives
-        g.drawString("Objectives", 600, 30);
+        g.drawString("Objectives", 600, 45);
         g.setFont(new Font("Arial", Font.PLAIN, 14));
-        // for each objective remaining
-//        g.drawString("battery 1", 310, 45);
-//        g.drawString("battery 2", 310, 60);
-//        g.drawString("battery 3", 310, 75);
+        int objWidth = 50;
+        int objSpace = 10;
+        int totalWidth = objectives.size() * objWidth + (objectives.size()-1) * objSpace;
+        int startX = 675 - (totalWidth / 2);
+        for(int i = 0; i < objectives.size(); i++){
+            int xPos = startX + i * (objWidth + objSpace);
+            if(objectives.get(i).isMandatory()){ //if mandatory
+                ImageIcon icon = new ImageIcon(getClass().getResource("/In-Game UI Header/Objective_Key_transparent.png"));
+                Image image = icon.getImage();
+                g.drawImage(image, xPos, 60, objWidth, objWidth, this );
+            }
+            else{ // if bonus
+                ImageIcon icon = new ImageIcon(getClass().getResource("/In-Game UI Header/Better_Coin_transparent.png"));
+                Image image = icon.getImage();
+                g.drawImage(image, xPos, 60, objWidth, objWidth, this );
+            }
+        }
 
         // Moves
         g.setFont(new Font("Arial", Font.BOLD, 26));
