@@ -49,10 +49,10 @@ public class Level3Easy extends Level {
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(15,10), true, 5));
-        objectives.add(new Objective(new Position(7,4), true, 10));
-        objectives.add(new Objective(new Position(1,10), false, 15));
-        objectives.add(new Objective(new Position(3,2), false, 20));
+        objectives.add(new Objective(new Position(15,10), true, 25));
+        objectives.add(new Objective(new Position(7,4), true, 25));
+        objectives.add(new Objective(new Position(1,10), false, 50));
+        objectives.add(new Objective(new Position(3,2), false, 50));
 
 
         return objectives;

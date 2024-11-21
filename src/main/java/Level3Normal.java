@@ -53,12 +53,12 @@ public class Level3Normal extends Level {
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(1,9), true, 5));
-        objectives.add(new Objective(new Position(5,9), true, 10));
-        objectives.add(new Objective(new Position(14,1), true, 15));
-        objectives.add(new Objective(new Position(1,1), false, 20));
-        objectives.add(new Objective(new Position(11,4), false, 25));
-        objectives.add(new Objective(new Position(7,4), false, 30));
+        objectives.add(new Objective(new Position(1,9), true, 25));
+        objectives.add(new Objective(new Position(5,9), true, 25));
+        objectives.add(new Objective(new Position(14,1), true, 25));
+        objectives.add(new Objective(new Position(1,1), false, 50));
+        objectives.add(new Objective(new Position(11,4), false, 50));
+        objectives.add(new Objective(new Position(7,4), false, 50));
 
         return objectives;
     }

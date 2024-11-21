@@ -32,11 +32,11 @@ public class Level1Normal extends Level {
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(5,1), true, 5));
-        objectives.add(new Objective(new Position(10,9), true, 10));
-        objectives.add(new Objective(new Position(11,3), true, 15));
-        objectives.add(new Objective(new Position(7,1), false, 20));
-        objectives.add(new Objective(new Position(7,9), false, 25));
+        objectives.add(new Objective(new Position(5,1), true, 25));
+        objectives.add(new Objective(new Position(10,9), true, 25));
+        objectives.add(new Objective(new Position(11,3), true, 25));
+        objectives.add(new Objective(new Position(7,1), false, 50));
+        objectives.add(new Objective(new Position(7,9), false, 50));
 
         return objectives;
     }

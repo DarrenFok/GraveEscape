@@ -49,12 +49,12 @@ public class Level3Hard extends Level {
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(5,1), true, 5));
-        objectives.add(new Objective(new Position(1,10), true, 10));
-        objectives.add(new Objective(new Position(10,2), true, 15));
-        objectives.add(new Objective(new Position(15,2), false, 20));
-        objectives.add(new Objective(new Position(12,4), false, 25));
-        objectives.add(new Objective(new Position(12,2), false, 30));
+        objectives.add(new Objective(new Position(5,1), true, 25));
+        objectives.add(new Objective(new Position(1,10), true, 25));
+        objectives.add(new Objective(new Position(10,2), true, 25));
+        objectives.add(new Objective(new Position(15,2), false, 50));
+        objectives.add(new Objective(new Position(12,4), false, 50));
+        objectives.add(new Objective(new Position(12,2), false, 50));
 
         return objectives;
     }

@@ -43,11 +43,11 @@ public class Level2Easy extends Level {
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(14,1), true, 5));
-        objectives.add(new Objective(new Position(12,6), true, 10));
-        objectives.add(new Objective(new Position(13,10), true, 15));
-        objectives.add(new Objective(new Position(15,4), false, 20));
-        objectives.add(new Objective(new Position(1,8), false, 25));
+        objectives.add(new Objective(new Position(14,1), true, 25));
+        objectives.add(new Objective(new Position(12,6), true, 25));
+        objectives.add(new Objective(new Position(13,10), true, 25));
+        objectives.add(new Objective(new Position(15,4), false, 50));
+        objectives.add(new Objective(new Position(1,8), false, 50));
 
 
         return objectives;
