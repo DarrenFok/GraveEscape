@@ -16,15 +16,18 @@ public class Level2Hard extends Level {
 
     private static List<Enemy> createEnemies(){
         return List.of(
-                new MovingEnemy(new Position(3,8)),
+                new MovingEnemy(new Position(4,6)),
                 new MovingEnemy(new Position(13,5)),
                 new MovingEnemy(new Position(1,2)),
+                new MovingEnemy(new Position(1,10)),
                 new StationaryEnemy(new Position(2,5)),
-                new StationaryEnemy(new Position(6,9)),
+                new StationaryEnemy(new Position(7,2)),
                 new StationaryEnemy(new Position(7,4)),
                 new StationaryEnemy(new Position(7,3)),
                 new StationaryEnemy(new Position(10,4)),
                 new StationaryEnemy(new Position(11,8)),
+                new StationaryEnemy(new Position(11,9)),
+                new StationaryEnemy(new Position(4,9)),
                 new StationaryEnemy(new Position(14,9))
         );
     }
@@ -36,6 +39,7 @@ public class Level2Hard extends Level {
         objectives.add(new Objective(new Position(14,5), true, 15));
         objectives.add(new Objective(new Position(7,6), false, 20));
         objectives.add(new Objective(new Position(10,2), false, 25));
+        objectives.add(new Objective(new Position(1,5), false, 30));
 
         return objectives;
     }
@@ -50,7 +54,6 @@ public class Level2Hard extends Level {
         walls.add(new Wall(new Position(2,8)));
         walls.add(new Wall(new Position(2,7)));
 
-        walls.add(new Wall(new Position(4,9)));
         walls.add(new Wall(new Position(4,7)));
 
         walls.add(new Wall(new Position(5,7)));
@@ -70,6 +73,10 @@ public class Level2Hard extends Level {
         walls.add(new Wall(new Position(12,4)));
         walls.add(new Wall(new Position(12,5)));
         walls.add(new Wall(new Position(12,6)));
+
+        walls.add(new Wall(new Position(6,8)));
+        walls.add(new Wall(new Position(6,9)));
+        walls.add(new Wall(new Position(6,10)));
 
         return walls;
     }

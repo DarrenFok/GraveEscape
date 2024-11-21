@@ -200,11 +200,11 @@ public class Game implements KeyListener {
         }
         else if(difficulty == Difficulty.NORMAL){
             levels.add(new Level2Normal());
-            levels.add(new Level3Normal());
+            levels.add(new Level3Hard());
 
         }
         else if(difficulty == Difficulty.HARD){
-            levels.add(new Level2Hard());
+            levels.add(new Level2Normal());
             levels.add(new Level3Hard());
         }
     }

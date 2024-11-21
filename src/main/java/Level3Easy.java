@@ -19,34 +19,60 @@ public class Level3Easy extends Level {
             new MovingEnemy(new Position(7,8)),
             new MovingEnemy(new Position(3,6)),
             new StationaryEnemy(new Position(1,1)),
+            new StationaryEnemy(new Position(2,1)),
+            new StationaryEnemy(new Position(3,1)),
+            new StationaryEnemy(new Position(4,1)),
+            new StationaryEnemy(new Position(5,1)),
+            new StationaryEnemy(new Position(1,4)),
+            new StationaryEnemy(new Position(5,4)),
+            new StationaryEnemy(new Position(2,4)),
+            new StationaryEnemy(new Position(1,2)),
+            new StationaryEnemy(new Position(1,3)),
+            new StationaryEnemy(new Position(5,2)),
+            new StationaryEnemy(new Position(5,3)),
+
+            new StationaryEnemy(new Position(11,3)),
+            new StationaryEnemy(new Position(11,2)),
+            new StationaryEnemy(new Position(11,4)),
+
             new StationaryEnemy(new Position(4,4)),
             new StationaryEnemy(new Position(8,10)),
-            new StationaryEnemy(new Position(4,8))
+            new StationaryEnemy(new Position(4,8)),
+            new StationaryEnemy(new Position(2,8))
+
 
         );
     }
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(7,7), true, 5));
+        objectives.add(new Objective(new Position(15,10), true, 5));
+        objectives.add(new Objective(new Position(7,4), true, 10));
+        objectives.add(new Objective(new Position(1,10), false, 15));
+        objectives.add(new Objective(new Position(3,2), false, 20));
+
 
         return objectives;
     }
 
     private static ArrayList<Wall> createWalls(){
         ArrayList<Wall> walls = new ArrayList<>();
-        walls.add(new Wall(new Position(6,5)));
         walls.add(new Wall(new Position(7,5)));
-        walls.add(new Wall(new Position(5,1)));
-        walls.add(new Wall(new Position(5,1)));
-        walls.add(new Wall(new Position(5,2)));
-        walls.add(new Wall(new Position(5,3)));
-        walls.add(new Wall(new Position(5,4)));
-        walls.add(new Wall(new Position(5,5)));
-        walls.add(new Wall(new Position(5,6)));
+        walls.add(new Wall(new Position(8,5)));
+        walls.add(new Wall(new Position(6,1)));
+        walls.add(new Wall(new Position(6,2)));
+        walls.add(new Wall(new Position(6,3)));
+        walls.add(new Wall(new Position(6,4)));
+        walls.add(new Wall(new Position(6,5)));
+        walls.add(new Wall(new Position(6,6)));
         walls.add(new Wall(new Position(3,9)));
         walls.add(new Wall(new Position(12,2)));
+        walls.add(new Wall(new Position(12,3)));
+        walls.add(new Wall(new Position(12,4)));
 
+        walls.add(new Wall(new Position(13,10)));
+        walls.add(new Wall(new Position(13,9)));
+        walls.add(new Wall(new Position(13,8)));
 
         return walls;
     }
