@@ -26,12 +26,16 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(2, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(15, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(17, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(3, numObj, "The number of objectives is unexpected");
         assertEquals(117, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 1", levelName, "The level name is unexpected");
+        assertEquals("Easy", difficulty, "The difficulty is unexpected");
     }
 
     @Test
@@ -50,12 +54,16 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(2, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(6, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(8, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(5, numObj, "The number of objectives is unexpected");
         assertEquals(85, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 1", levelName, "The level name is unexpected");
+        assertEquals("Normal", difficulty, "The difficulty is unexpected");
     }
 
     @Test
@@ -74,12 +82,16 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(2, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(12, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(14, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(5, numObj, "The number of objectives is unexpected");
         assertEquals(89, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 1", levelName, "The level name is unexpected");
+        assertEquals("Hard", difficulty, "The difficulty is unexpected");
     }
 
     @Test
@@ -98,12 +110,16 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(3, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(16, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(19, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(5, numObj, "The number of objectives is unexpected");
         assertEquals(118, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 2", levelName, "The level name is unexpected");
+        assertEquals("Easy", difficulty, "The difficulty is unexpected");
     }
 
     @Test
@@ -122,12 +138,16 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(2, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(16, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(18, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(5, numObj, "The number of objectives is unexpected");
         assertEquals(107, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 2", levelName, "The level name is unexpected");
+        assertEquals("Normal", difficulty, "The difficulty is unexpected");
     }
 
     @Test
@@ -146,12 +166,16 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(4, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(9, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(13, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(6, numObj, "The number of objectives is unexpected");
         assertEquals(83, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 2", levelName, "The level name is unexpected");
+        assertEquals("Hard", difficulty, "The difficulty is unexpected");
     }
 
     @Test
@@ -170,12 +194,16 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(2, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(19, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(21, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(4, numObj, "The number of objectives is unexpected");
         assertEquals(73, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 3", levelName, "The level name is unexpected");
+        assertEquals("Easy", difficulty, "The difficulty is unexpected");
     }
 
     @Test
@@ -194,12 +222,16 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(3, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(19, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(22, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(6, numObj, "The number of objectives is unexpected");
         assertEquals(86, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 3", levelName, "The level name is unexpected");
+        assertEquals("Normal", difficulty, "The difficulty is unexpected");
     }
 
     @Test
@@ -218,11 +250,15 @@ public class LevelInitializationTest {
         int totalEnemies = stationaryEnemies + movingEnemies;
         int numObj = level.getObjectives().size();
         int numWalls = level.getWalls().size();
+        String levelName = level.getLevelName();
+        String difficulty = level.getDifficulty();
 
         assertEquals(3, movingEnemies, "The number of moving enemies is unexpected");
         assertEquals(16, stationaryEnemies, "The number of stationary enemies is unexpected");
         assertEquals(19, totalEnemies, "The total number of enemies is unexpected");
         assertEquals(6, numObj, "The number of objectives is unexpected");
         assertEquals(95, numWalls, "The number of walls is unexpected");
+        assertEquals("Level 3", levelName, "The level name is unexpected");
+        assertEquals("Hard", difficulty, "The difficulty is unexpected");
     }
 }
