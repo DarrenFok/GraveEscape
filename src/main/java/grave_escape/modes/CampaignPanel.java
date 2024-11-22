@@ -17,12 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import grave_escape.game.Game;
-import grave_escape.levels.Difficulty;
-import grave_escape.levels.GameMode;
-import grave_escape.levels.Level;
-import grave_escape.levels.Level1Easy;
-import grave_escape.levels.Level1Hard;
-import grave_escape.levels.Level1Normal;
+import grave_escape.game.GameFactory;
+import grave_escape.levels.*;
 import grave_escape.objectives.HighestResult;
 
 
@@ -121,31 +117,29 @@ public class CampaignPanel extends JPanel {
         difficultyPanel.setLayout(null);
         difficultyPanel.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         difficultyPanel.setBounds((1280 / 2) - (300 / 2), 175, 300, 300);
+
+        // Game factory class to create multiple game levels
+        GameFactory gameFactory = new GameFactory(cardLayout, mainPanel, GameMode.CAMPAIGN);
+
         // Draw difficulty buttons
         easyButton = drawButton("Easy", new Rectangle(50, 50, 200, 50), 20);
         difficultyPanel.add(easyButton);
         easyButton.addActionListener(e -> {
-            difficulty = Difficulty.EASY;
-            Level level = new Level1Easy();
-            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.CAMPAIGN, level);
+            Game game = gameFactory.createGame(Difficulty.EASY, GameLevel.Level1);
             game.startGame();
         });
 
         normalButton = drawButton("Normal", new Rectangle(50, 125, 200, 50), 20);
         difficultyPanel.add(normalButton);
         normalButton.addActionListener(e -> {
-            difficulty = Difficulty.NORMAL;
-            Level level = new Level1Normal();
-            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.CAMPAIGN, level);
+            Game game = gameFactory.createGame(Difficulty.NORMAL, GameLevel.Level1);
             game.startGame();
         });
 
         hardButton = drawButton("Hard", new Rectangle(50, 200, 200, 50), 20);
         difficultyPanel.add(hardButton);
         hardButton.addActionListener(e -> {
-            difficulty = Difficulty.HARD;
-            Level level = new Level1Hard();
-            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.CAMPAIGN, level);
+            Game game = gameFactory.createGame(Difficulty.HARD, GameLevel.Level1);
             game.startGame();
         });
 
