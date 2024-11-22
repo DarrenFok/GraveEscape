@@ -1,3 +1,5 @@
+package levels;
+
 import grave_escape.enemy.Enemy;
 import grave_escape.game.Direction;
 import grave_escape.game.Position;
