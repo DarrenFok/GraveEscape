@@ -150,19 +150,20 @@ public class Game implements KeyListener {
         }
     }
     
-private void saveResult() {
-    String username = JOptionPane.showInputDialog(mainPanel,
-            "Enter your name:",
-            "Game Over - Save Your Score",
-            JOptionPane.PLAIN_MESSAGE);
-    cardLayout.show(mainPanel, "Menu");
-    gameOver = false;
-    HighestResult result = HighestResult.getInstance();
-    if (username == null){
-        username = "Player";
+    private void saveResult() {
+        String username = JOptionPane.showInputDialog(mainPanel,
+                "Enter your name:",
+                "Game Over - Save Your Score",
+                JOptionPane.PLAIN_MESSAGE);
+        cardLayout.show(mainPanel, "Menu");
+        gameOver = false;
+        HighestResult result = HighestResult.getInstance();
+        if (username == null){
+            username = "Player";
+        }
+        result.savePlayerResult(username, score);
     }
-    result.savePlayerResult(username, score);
-}
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
