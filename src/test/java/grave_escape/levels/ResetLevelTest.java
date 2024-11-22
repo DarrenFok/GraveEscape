@@ -1,4 +1,4 @@
-package levels;
+package grave_escape.levels;
 
 import grave_escape.enemy.Enemy;
 import grave_escape.enemy.MovingEnemy;
