@@ -146,7 +146,7 @@ public class Level {
                         }
                     } else {
                         // Move left
-                        if (movingEnemy.getX() > 0 && !isWall(movingEnemy.getX() - 1, movingEnemy.getY())) {
+                        if (movingEnemy.getX() > 1 && !isWall(movingEnemy.getX() - 1, movingEnemy.getY())) {
                             movingEnemy.setPosition(new Position(movingEnemy.getX() - 1, movingEnemy.getY()));
                         }
                     }
@@ -159,7 +159,7 @@ public class Level {
                         }
                     } else {
                         // Move up
-                        if (movingEnemy.getY() > 0 && !isWall(movingEnemy.getX(), movingEnemy.getY() - 1)) {
+                        if (movingEnemy.getY() > 1 && !isWall(movingEnemy.getX(), movingEnemy.getY() - 1)) {
                             movingEnemy.setPosition(new Position(movingEnemy.getX(), movingEnemy.getY() - 1));
                         }
                     }
