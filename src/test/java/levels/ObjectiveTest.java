@@ -57,9 +57,11 @@ public class ObjectiveTest {
         level.getPlayer().setPosition(new Position(1,2));
         int reward = level.checkObjective();
         boolean doorOpen = level.isDoorOpen();
+        Position expectedDoor = level.getDoorPosition();
         assertEquals(25, reward, "A reward of value 25 should have been collected");
         assertEquals(0, level.getMandatoryCount(), "MandatoryCount should have gone down to 0");
         assertTrue(doorOpen, "Door should be open");
+        assertEquals(new Position(4,4), expectedDoor, "Door is not in the expected position");
         level.checkAndPlaceDoor();
     }
 
