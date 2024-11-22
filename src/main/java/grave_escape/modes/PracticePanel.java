@@ -1,6 +1,7 @@
 package grave_escape.modes;
 
 import grave_escape.game.Game;
+import grave_escape.game.GameFactory;
 import grave_escape.levels.*;
 import grave_escape.game.Game;
 
@@ -155,68 +156,29 @@ public class PracticePanel extends JPanel {
         selectorPanel.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         selectorPanel.setBounds(530, 175, 700, 300);
 
+        // Game factory class to create multiple game levels
+        GameFactory gameFactory = new GameFactory(cardLayout, mainPanel, GameMode.PRACTICE);
+
         // Add level buttons
         oneButton = drawButton("Level One - " + difficulty.name(), new Rectangle(50, 50, 600, 50), 20);
         selectorPanel.add(oneButton);
         oneButton.addActionListener(e -> {
-            Level level;
-            if(difficulty == Difficulty.EASY){
-                level = new Level1Easy();
-            }
-            else if(difficulty == Difficulty.NORMAL){
-                // TODO: Replace levels.Level1Easy object with levels.Level1Normal (similar to example above in level 1 easy)
-                level = new Level1Normal();
-            }
-            else{
-                // TODO: Replace levels.Level1Easy object with levels.Level1Hard (similar to example above in level 1 easy)
-                level = new Level1Hard();
-            }
-            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
+            Game game = gameFactory.createGame(difficulty, GameLevel.Level1);
             game.startGame();
         });
 
         twoButton = drawButton("Level Two - " + difficulty.name(), new Rectangle(50, 125, 600, 50), 20);
         selectorPanel.add(twoButton);
         twoButton.addActionListener(e -> {
-            // TODO: Do something similar to action in oneButton on line 135
-            /* 
-            levels.Level level = new Level2();
-            game.Game game = new game.Game(cardLayout, mainPanel, difficulty, levels.GameMode.PRACTICE, level);
-            game.startGame();*/
-            Level level;
-            if(difficulty == Difficulty.EASY){
-                level = new Level2Easy();
-            }
-            else if(difficulty == Difficulty.NORMAL){
-                // TODO: Replace levels.Level1Easy object with levels.Level1Normal (similar to example above in level 1 easy)
-                level = new Level2Normal();
-            }
-            else{
-                // TODO: Replace levels.Level1Easy object with levels.Level1Hard (similar to example above in level 1 easy)
-                level = new Level2Hard();
-            }
-            Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
+            Game game = gameFactory.createGame(difficulty, GameLevel.Level2);
             game.startGame();
         });
 
         threeButton = drawButton("Level Three - " + difficulty.name(), new Rectangle(50, 200, 600, 50), 20);
         selectorPanel.add(threeButton);
         threeButton.addActionListener(e -> {
-        // TODO: Do something similar to action in oneButton on line 135
-        Level level;
-        if(difficulty == Difficulty.EASY){
-            level = new Level3Easy();
-        }
-        else if(difficulty == Difficulty.NORMAL){
-            // TODO: Replace levels.Level1Easy object with levels.Level1Normal (similar to example above in level 1 easy)
-            level = new Level3Normal();
-        }
-        else{
-            // TODO: Replace levels.Level1Easy object with levels.Level1Hard (similar to example above in level 1 easy)
-            level = new Level3Hard();
-        }
-        Game game = new Game(cardLayout, mainPanel, difficulty, GameMode.PRACTICE, level);
-        game.startGame();
+            Game game = gameFactory.createGame(difficulty, GameLevel.Level3);
+            game.startGame();
         });
         add(selectorPanel);
     }
