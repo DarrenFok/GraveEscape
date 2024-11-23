@@ -12,7 +12,7 @@ import java.util.List;
 
 public class HighestResult {
 
-    private static final String FILENAME = "leaderboard.csv";
+    private static final String FILENAME = "Data/leaderboard.csv";
     private final List<PlayerResult> leaderboard;
     private static HighestResult instance = null;
 
