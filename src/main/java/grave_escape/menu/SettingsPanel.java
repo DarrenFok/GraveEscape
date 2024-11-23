@@ -21,7 +21,7 @@ public class SettingsPanel extends JPanel {
     private JSlider volumeSlider;
     private JTextField volumeTextBox;
     private int previousVolume;
-
+    private MusicController musicController;
     private Image backgroundImage;
     
     public SettingsPanel(CardLayout cardLayout, JPanel mainPanel) {
@@ -29,6 +29,9 @@ public class SettingsPanel extends JPanel {
         this.mainPanel = mainPanel;
         backgroundImage = new ImageIcon(getClass().getResource("/Menu/menu_background.png")).getImage();
         setLayout(null);
+        musicController = MusicController.getInstance();
+        musicController.playMusic(getClass().getResource("/Audio/Game.wav"));
+        musicController.setVolume(70);
 
         // Create sound control panel
         JPanel soundPanel = new JPanel();
@@ -63,6 +66,7 @@ public class SettingsPanel extends JPanel {
             int currVolume = volumeSlider.getValue();
             previousVolume = currVolume;
             volumeTextBox.setText(Integer.toString(currVolume));
+            musicController.setVolume(currVolume);
                 });
         soundPanel.add(volumeSlider);
         add(soundPanel);
@@ -80,6 +84,7 @@ public class SettingsPanel extends JPanel {
             }
             previousVolume = parsedVolume;
             volumeSlider.setValue(parsedVolume);
+            musicController.setVolume(parsedVolume);
         });
         soundPanel.add(volumeTextBox);
 
