@@ -109,6 +109,7 @@ public class PracticePanel extends JPanel {
         difficultyPanel.setBounds(50, 175, 300, 300);
         // Draw difficulty buttons
         easyButton = drawButton("Easy", new Rectangle(50, 50, 200, 50), 20);
+        easyButton.setName("Easy");
         difficultyPanel.add(easyButton);
         easyButton.addActionListener(e -> {
             difficulty = Difficulty.EASY;
@@ -118,6 +119,7 @@ public class PracticePanel extends JPanel {
         });
 
         normalButton = drawButton("Normal", new Rectangle(50, 125, 200, 50), 20);
+        normalButton.setName("Normal");
         difficultyPanel.add(normalButton);
         normalButton.addActionListener(e -> {
             difficulty = Difficulty.NORMAL;
@@ -127,6 +129,7 @@ public class PracticePanel extends JPanel {
         });
 
         hardButton = drawButton("Hard", new Rectangle(50, 200, 200, 50), 20);
+        hardButton.setName("Hard");
         difficultyPanel.add(hardButton);
         hardButton.addActionListener(e -> {
             difficulty = Difficulty.HARD;
@@ -161,6 +164,7 @@ public class PracticePanel extends JPanel {
 
         // Add level buttons
         oneButton = drawButton("Level One - " + difficulty.name(), new Rectangle(50, 50, 600, 50), 20);
+        oneButton.setName("Level One");
         selectorPanel.add(oneButton);
         oneButton.addActionListener(e -> {
             Game game = gameFactory.createGame(difficulty, GameLevel.Level1);
@@ -168,6 +172,7 @@ public class PracticePanel extends JPanel {
         });
 
         twoButton = drawButton("Level Two - " + difficulty.name(), new Rectangle(50, 125, 600, 50), 20);
+        twoButton.setName("Level Two");
         selectorPanel.add(twoButton);
         twoButton.addActionListener(e -> {
             Game game = gameFactory.createGame(difficulty, GameLevel.Level2);
@@ -175,6 +180,7 @@ public class PracticePanel extends JPanel {
         });
 
         threeButton = drawButton("Level Three - " + difficulty.name(), new Rectangle(50, 200, 600, 50), 20);
+        threeButton.setName("Level Three");
         selectorPanel.add(threeButton);
         threeButton.addActionListener(e -> {
             Game game = gameFactory.createGame(difficulty, GameLevel.Level3);
