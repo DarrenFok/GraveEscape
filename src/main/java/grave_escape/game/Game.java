@@ -210,6 +210,9 @@ public class Game implements KeyListener {
                 cardLayout.show(mainPanel, "Menu");
             }
         }
+        else{
+            throw new IllegalArgumentException("Invalid game mode");
+        }
     }
 
     public void initializeLevels(){
@@ -229,6 +232,10 @@ public class Game implements KeyListener {
         else{
             throw new IllegalArgumentException("Invalid difficulty");
         }
+    }
+
+    public Level getLevel() {
+        return level;
     }
 
     public List<Level> getLevels() {
