@@ -1,9 +1,6 @@
 package grave_escape.menu;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.*;
 import java.io.InputStream;
 
 import javax.swing.ImageIcon;
@@ -103,6 +100,10 @@ public class GameMainMenu extends JFrame {
         practiceButton.setBounds(buttonX, startY + gap, buttonWidth, buttonHeight);
 
         settingButton = new JButton("Settings");
+        ImageIcon icon = new ImageIcon(GameMainMenu.class.getResource("/Menu/settings.png"));
+        settingButton.setIcon(icon);
+        settingButton.setText(null);
+        settingButton.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
         settingButton.setBounds(1180, 600, 50, 50);
 
         quitButton = new JButton("Quit");
