@@ -22,6 +22,11 @@ public class GameMainMenu extends JFrame {
     private JPanel campaignPanel;
     private JPanel practicePanel;
 
+    private JButton campaignButton;
+    private JButton practiceButton;
+    private JButton settingButton;
+    private JButton quitButton;
+
     private final CardLayout cardLayout;
 
     public GameMainMenu() {
@@ -34,13 +39,17 @@ public class GameMainMenu extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-
-
         // Initialize panels
         menuPanel = initializeMenuPanel();
         campaignPanel = new CampaignPanel(cardLayout, mainPanel);
         practicePanel = new PracticePanel(cardLayout, mainPanel);
         JPanel settingPanel = new SettingsPanel(cardLayout, mainPanel);
+
+        // Set names for panels
+        menuPanel.setName("Menu");
+        campaignPanel.setName("Campaign");
+        practicePanel.setName("Practice");
+        settingPanel.setName("Settings");
 
         // Add panels to main panel
         mainPanel.add(menuPanel, "Menu");
@@ -52,7 +61,7 @@ public class GameMainMenu extends JFrame {
         setContentPane(mainPanel);
     }
 
-    private JPanel initializeMenuPanel() {
+    JPanel initializeMenuPanel() {
         JPanel menuPanel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
@@ -87,16 +96,16 @@ public class GameMainMenu extends JFrame {
         int startY = 400; // Start Y position for buttons
         int gap = 75; // Gap between buttons
 
-        JButton campaignButton = new JButton("Campaign");
+        campaignButton = new JButton("Campaign");
         campaignButton.setBounds(buttonX, startY, buttonWidth, buttonHeight);
 
-        JButton practiceButton = new JButton("Practice");
+        practiceButton = new JButton("Practice");
         practiceButton.setBounds(buttonX, startY + gap, buttonWidth, buttonHeight);
 
-        JButton settingButton = new JButton("Settings");
+        settingButton = new JButton("Settings");
         settingButton.setBounds(1180, 600, 50, 50);
 
-        JButton quitButton = new JButton("Quit");
+        quitButton = new JButton("Quit");
         quitButton.setBounds(buttonX, startY + gap * 2, buttonWidth, buttonHeight);
 
         // Add action listeners to buttons
@@ -114,7 +123,7 @@ public class GameMainMenu extends JFrame {
         return menuPanel;
     }
 
-    private void showPanel(String panelName) {
+    void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
     }
 
