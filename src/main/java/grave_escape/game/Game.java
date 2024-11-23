@@ -126,12 +126,13 @@ public class Game implements KeyListener {
         }
     }
     
-    private void handleGameOver() {
+    public void handleGameOver() {
         if (gameMode == GameMode.PRACTICE) {
             JOptionPane.showMessageDialog(mainPanel, "Game Over");
             cardLayout.show(mainPanel, "Menu");
             gameOver = false;
-        } else {//else if campaign mode
+        }
+        else {  // else if campaign mode
             lives--;
             if (lives == 0) {
                 JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
@@ -232,10 +233,6 @@ public class Game implements KeyListener {
         else{
             throw new IllegalArgumentException("Invalid difficulty");
         }
-    }
-
-    public Level getLevel() {
-        return level;
     }
 
     public List<Level> getLevels() {
