@@ -18,6 +18,7 @@ public class GameMainMenu extends JFrame {
     private JPanel menuPanel;
     private JPanel campaignPanel;
     private JPanel practicePanel;
+    private JPanel settingPanel;
 
     private JButton campaignButton;
     private JButton practiceButton;
@@ -40,7 +41,7 @@ public class GameMainMenu extends JFrame {
         menuPanel = initializeMenuPanel();
         campaignPanel = new CampaignPanel(cardLayout, mainPanel);
         practicePanel = new PracticePanel(cardLayout, mainPanel);
-        JPanel settingPanel = new SettingsPanel(cardLayout, mainPanel);
+        settingPanel = new SettingsPanel(cardLayout, mainPanel);
 
         // Set names for panels
         menuPanel.setName("Menu");
@@ -101,10 +102,10 @@ public class GameMainMenu extends JFrame {
 
         settingButton = new JButton("Settings");
         ImageIcon icon = new ImageIcon(GameMainMenu.class.getResource("/Menu/settings.png"));
+        settingButton.setFont(new Font("Arial", Font.PLAIN, 0));
         settingButton.setIcon(icon);
-        settingButton.setText(null);
         settingButton.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
-        settingButton.setBounds(1180, 600, 50, 50);
+        settingButton.setBounds(1180, 600, 60, 60);
 
         quitButton = new JButton("Quit");
         quitButton.setBounds(buttonX, startY + gap * 2, buttonWidth, buttonHeight);
