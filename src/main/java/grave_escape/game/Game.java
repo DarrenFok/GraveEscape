@@ -226,6 +226,13 @@ public class Game implements KeyListener {
             levels.add(new Level2Hard());
             levels.add(new Level3Hard());
         }
+        else{
+            throw new IllegalArgumentException("Invalid difficulty");
+        }
+    }
+
+    public List<Level> getLevels() {
+        return levels;
     }
 
 }
