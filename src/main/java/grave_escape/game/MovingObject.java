@@ -1,7 +1,4 @@
-package grave_escape.player;
-
-import grave_escape.game.Direction;
-import grave_escape.game.Position;
+package grave_escape.game;
 
 public class MovingObject {
     protected Position position;
