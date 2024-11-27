@@ -82,7 +82,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.Main</mainClass>
+                            <mainClass>grave_escape.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

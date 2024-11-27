@@ -76,7 +76,7 @@ public class GameMainMenu extends JFrame {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         try{
             // Load the font from resources
-            InputStream fontStream = getClass().getResourceAsStream("/fonts/Storm Gust.ttf");
+            InputStream fontStream = getClass().getResourceAsStream("/Fonts/Storm Gust.ttf");
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(Font.BOLD, 72);
             titleLabel.setFont(customFont);
         }
