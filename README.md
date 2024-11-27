@@ -11,6 +11,9 @@ Players must strategize on how to collect all the keys on each level while avoid
 it out to the next level.
 ### Timeline
 1. Requirement Engineering and Design (~10.11.2024)
+2. Game Implementation (~10.27.2024)
+3. Game Improvement, Unit Test Writing, and Manual Testing (~11.22.2024)
+4. Finalization and Presentatoin (~12.6.2024)
 
 ### How to Build, Run, and Test
 **NOTE**: This game requires JDE 18+ to build and run. Please ensure that you have it installed before
