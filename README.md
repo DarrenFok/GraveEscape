@@ -5,7 +5,10 @@
 - Darren Fok
 - Daehyung Kwak
 
-## Arcade Style 2D Game
+## Grave Escape
+Grave Escape is a Turn-Based Movement Puzzle game, where each move the player makes changes the layout of the level.
+Players must strategize on how to collect all the keys on each level while avoiding ghosts and traps in order to make
+it out to the next level.
 ### Timeline
 1. Requirement Engineering and Design (~10.11.2024)
 
