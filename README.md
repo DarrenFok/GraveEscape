@@ -9,7 +9,14 @@
 ### Timeline
 1. Requirement Engineering and Design (~10.11.2024)
 
-### How To Run The Game
-1. Clone the game from the repository
-2. Open "Main.java" in src/main/java/grave_escape/Main.java
-3. Using JDE 18+, build game and run.
+### How to Build, Run, and Test
+**NOTE**: This game requires JDE 18+ to build and run. Please ensure that you have it installed before
+attempting to build and run Grave Escape.
+#### Building
+Run `mvn clean package`. This will clean the `/target/` directory and compile the package into a .jar file.
+#### Running
+Enter `java -jar .\target\CMPT276F24_group10-1.0.jar` into the terminal. This will start the game.
+#### Testing
+Run `mvn test` to run all tests within the `src/test/java/` directory.
+To read the test coverage, `.html` files for each class can be found in `/target/site/jacoco/`. Opening these
+a browser of your choice will display the class' coverage report.
