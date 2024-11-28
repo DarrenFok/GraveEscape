@@ -59,6 +59,22 @@ public class CampaignPanel extends JPanel {
         returnButton.addActionListener(e -> showPanel("Menu"));
     }
 
+    public void refreshLeaderboard() {
+        // Remove all previous leaderboard components
+        removeAll();
+        // Redraw the components
+        drawBorderedTextBox("Campaign", new Rectangle((1280 / 2) - 100, 50, 200, 50), 25);
+        drawDifficulties();
+        drawPreviousHiScore();
+
+        JButton returnButton = drawButton("Return to Main Menu", new Rectangle((1280 / 2) - (200 / 2), 600, 200, 50), 15);
+        returnButton.addActionListener(e -> showPanel("Menu"));
+
+        // Revalidate and repaint the panel
+        revalidate();
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Paint the panel as usual
