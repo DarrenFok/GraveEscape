@@ -1,6 +1,7 @@
 package grave_escape.game;
 
 import grave_escape.levels.*;
+import grave_escape.modes.CampaignPanel;
 import grave_escape.objectives.HighestResult;
 
 import java.awt.CardLayout;
@@ -9,8 +10,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * game.Game class acts as the main controller for the game, handles overall game flow, player interactions, and
@@ -163,6 +163,10 @@ public class Game implements KeyListener {
             username = "Player";
         }
         result.savePlayerResult(username, score);
+        SwingUtilities.invokeLater(() -> {
+            CampaignPanel campaignPanel = (CampaignPanel) mainPanel.getComponent(1); // Adjust index if needed
+            campaignPanel.refreshLeaderboard();
+        });
     }
 
     @Override
