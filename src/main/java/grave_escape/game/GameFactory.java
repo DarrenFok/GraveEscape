@@ -1,9 +1,22 @@
 package grave_escape.game;
 
-import grave_escape.levels.*;
+import java.awt.CardLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+
+import grave_escape.levels.Difficulty;
+import grave_escape.levels.GameLevel;
+import grave_escape.levels.GameMode;
+import grave_escape.levels.Level;
+import grave_escape.levels.Level1.Level1Easy;
+import grave_escape.levels.Level1.Level1Hard;
+import grave_escape.levels.Level1.Level1Normal;
+import grave_escape.levels.Level2.Level2Easy;
+import grave_escape.levels.Level2.Level2Hard;
+import grave_escape.levels.Level2.Level2Normal;
+import grave_escape.levels.Level3.Level3Easy;
+import grave_escape.levels.Level3.Level3Hard;
+import grave_escape.levels.Level3.Level3Normal;
 
 public class GameFactory {
     CardLayout cardLayout;

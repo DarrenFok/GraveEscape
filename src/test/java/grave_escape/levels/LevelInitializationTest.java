@@ -3,6 +3,16 @@ package grave_escape.levels;
 import grave_escape.enemy.MovingEnemy;
 import grave_escape.enemy.StationaryEnemy;
 import grave_escape.levels.*;
+import grave_escape.levels.Level1.Level1Easy;
+import grave_escape.levels.Level1.Level1Hard;
+import grave_escape.levels.Level1.Level1Normal;
+import grave_escape.levels.Level2.Level2Easy;
+import grave_escape.levels.Level2.Level2Hard;
+import grave_escape.levels.Level2.Level2Normal;
+import grave_escape.levels.Level3.Level3Easy;
+import grave_escape.levels.Level3.Level3Hard;
+import grave_escape.levels.Level3.Level3Normal;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

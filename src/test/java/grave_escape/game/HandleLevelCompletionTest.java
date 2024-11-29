@@ -1,6 +1,9 @@
 package grave_escape.game;
 
 import grave_escape.levels.*;
+import grave_escape.levels.Level1.Level1Easy;
+import grave_escape.levels.Level2.Level2Easy;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

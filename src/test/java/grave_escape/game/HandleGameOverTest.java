@@ -2,7 +2,8 @@ package grave_escape.game;
 
 import grave_escape.levels.Difficulty;
 import grave_escape.levels.GameMode;
-import grave_escape.levels.Level1Easy;
+import grave_escape.levels.Level1.Level1Easy;
+
 import org.junit.Before;
 import org.junit.Test;
 

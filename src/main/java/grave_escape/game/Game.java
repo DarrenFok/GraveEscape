@@ -1,16 +1,26 @@
 package grave_escape.game;
 
-import grave_escape.levels.*;
-import grave_escape.modes.CampaignPanel;
-import grave_escape.objectives.HighestResult;
-
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import grave_escape.levels.Difficulty;
+import grave_escape.levels.GameMode;
+import grave_escape.levels.Level;
+import grave_escape.levels.Level2.Level2Easy;
+import grave_escape.levels.Level2.Level2Hard;
+import grave_escape.levels.Level2.Level2Normal;
+import grave_escape.levels.Level3.Level3Easy;
+import grave_escape.levels.Level3.Level3Hard;
+import grave_escape.levels.Level3.Level3Normal;
+import grave_escape.modes.CampaignPanel;
+import grave_escape.objectives.HighestResult;
 
 /**
  * game.Game class acts as the main controller for the game, handles overall game flow, player interactions, and
