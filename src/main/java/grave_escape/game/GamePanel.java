@@ -1,17 +1,22 @@
 package grave_escape.game;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 import grave_escape.enemy.Enemy;
 import grave_escape.enemy.StationaryEnemy;
 import grave_escape.levels.Level;
-import grave_escape.objectives.Door;
 import grave_escape.objectives.Objective;
-import grave_escape.objectives.Wall;
 import grave_escape.player.Player;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import grave_escape.structure.Door;
+import grave_escape.structure.Wall;
 
 /**
  * game.GamePanel class represents the panel where the actual game (grid, player, enemy, etc.) are rendered.

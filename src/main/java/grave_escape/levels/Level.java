@@ -8,10 +8,10 @@ import grave_escape.enemy.MovingEnemy;
 import grave_escape.game.Direction;
 import grave_escape.game.Grid;
 import grave_escape.game.Position;
-import grave_escape.objectives.Door;
 import grave_escape.objectives.Objective;
-import grave_escape.objectives.Wall;
 import grave_escape.player.Player;
+import grave_escape.structure.Door;
+import grave_escape.structure.Wall;
 
 
 /**

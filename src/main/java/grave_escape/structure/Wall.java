@@ -1,4 +1,4 @@
-package grave_escape.objectives;
+package grave_escape.structure;
 
 import grave_escape.game.Position;
 

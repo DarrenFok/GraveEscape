@@ -9,7 +9,7 @@ import grave_escape.enemy.StationaryEnemy;
 import grave_escape.game.Position;
 import grave_escape.levels.Level;
 import grave_escape.objectives.Objective;
-import grave_escape.objectives.Wall;
+import grave_escape.structure.Wall;
 
 public class Level3Normal extends Level {
     public Level3Normal(){

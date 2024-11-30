@@ -5,7 +5,8 @@ import grave_escape.enemy.MovingEnemy;
 import grave_escape.game.Position;
 import grave_escape.levels.Level;
 import grave_escape.objectives.Objective;
-import grave_escape.objectives.Wall;
+import grave_escape.structure.Wall;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
