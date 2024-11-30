@@ -24,6 +24,7 @@ import grave_escape.structure.Wall;
 public class GamePanel extends JPanel{
     private int numOfRows;
     private int numOfCols;
+    private Grid grid;
     private final int cellSize = 50;
     private Player player;
     private List<Enemy> enemies;

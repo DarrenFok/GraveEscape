@@ -325,21 +325,24 @@ public class Level {
         return this.objectives;
     }
 
+
     /**
      * Method to return number of rows within the levels.Level's game.Grid
      * @return: Integer value representing number of rows
      */
+    
     public int getNumOfRows(){
         return grid.getNumOfRows();
-    }
+    } 
 
     /**
      * Method to return number of columns within the levels.Level's game.Grid
      * @return: Integer value representing number of columns
-     */
+     */ 
     public int getNumOfCols(){
         return grid.getNumOfCols();
     }
+
 
     /**
      * Method to return objectives.Door object within a level
@@ -363,13 +366,13 @@ public class Level {
      */
     public List<Wall> getWalls(){
         //Add perimeter walls
-        for(int i = 0; i < getNumOfCols(); i++){
+        for(int i = 0; i < grid.getNumOfCols(); i++){
             walls.add(new Wall(new Position(i, 0)));
-            walls.add(new Wall(new Position(i, getNumOfRows()-1)));
+            walls.add(new Wall(new Position(i, grid.getNumOfRows()-1)));
         }
-        for(int j = 0; j < getNumOfRows(); j++){
+        for(int j = 0; j < grid.getNumOfRows(); j++){
             walls.add(new Wall(new Position(0, j)));
-            walls.add(new Wall(new Position(getNumOfCols()-1, j)));
+            walls.add(new Wall(new Position(grid.getNumOfCols()-1, j)));
         }
         return this.walls;
     }

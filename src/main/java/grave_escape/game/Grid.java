@@ -16,4 +16,5 @@ public class Grid {
     public int getNumOfCols() {
         return this.numOfCols;
     }
+    
 }
