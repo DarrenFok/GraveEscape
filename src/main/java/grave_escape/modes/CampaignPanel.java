@@ -9,7 +9,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.List;
 
-import javax.print.attribute.ResolutionSyntax;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,10 +17,10 @@ import javax.swing.JPanel;
 
 import grave_escape.game.Game;
 import grave_escape.game.GameFactory;
-import grave_escape.levels.*;
+import grave_escape.levels.Difficulty;
+import grave_escape.levels.GameLevel;
+import grave_escape.levels.GameMode;
 import grave_escape.objectives.HighestResult;
-
-
 
 
 /**
