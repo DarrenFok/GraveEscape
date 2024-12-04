@@ -2,27 +2,27 @@ package grave_escape.game;
 
 import grave_escape.structure.Position;
 
-public class MovingObject {
-    protected Position position;
+public class MovingObject extends Position{
     protected Direction facing;
     private int matchPrevMove;
+
     public MovingObject(Position position) {
-        this.position = position;
+        super(position.getX(), position.getY());
         this.facing = Direction.LEFT;
     }
 
     public Position getPosition() {
-        return position;
+        return this;
     }
 
     public void setPosition(Position p) {
         Direction prevMove = this.facing;
 
-        if(p.getX() - this.position.getX() > 0) {
+        if(p.getX() - this.getX() > 0) {
             this.facing = Direction.RIGHT;
-        } else if(p.getX() - this.position.getX() < 0) {
+        } else if(p.getX() - this.getX() < 0) {
             this.facing = Direction.LEFT;
-        } else if(p.getY() - this.position.getY() > 0) {
+        } else if(p.getY() - this.getY() > 0) {
             this.facing = Direction.DOWN;
         } else {
             this.facing = Direction.UP;
@@ -34,16 +34,17 @@ public class MovingObject {
             this.matchPrevMove--;
         }
 
-        this.position = p;
+        super.setX(p.getX());
+        super.setY(p.getY());
 
     }
 
     public int getX() {
-        return position.getX();
+        return super.getX();
     }
 
     public int getY() {
-        return position.getY();
+        return super.getY();
     }
 
     public Direction getFacing() {
