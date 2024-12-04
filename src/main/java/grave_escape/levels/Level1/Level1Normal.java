@@ -3,6 +3,8 @@ package grave_escape.levels.Level1;
 import java.util.ArrayList;
 import java.util.List;
 
+import static grave_escape.game.Values.MANDATORY_VALUE;
+import static grave_escape.game.Values.OPTIONAL_VALUE;
 import grave_escape.enemy.Enemy;
 import grave_escape.enemy.MovingEnemy;
 import grave_escape.enemy.StationaryEnemy;
@@ -42,11 +44,11 @@ public class Level1Normal extends Level {
 
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
-        objectives.add(new Objective(new Position(5,1), true, 25));
-        objectives.add(new Objective(new Position(10,9), true, 25));
-        objectives.add(new Objective(new Position(11,3), true, 25));
-        objectives.add(new Objective(new Position(7,1), false, 50));
-        objectives.add(new Objective(new Position(7,9), false, 50));
+        objectives.add(new Objective(new Position(5,1), true, MANDATORY_VALUE));
+        objectives.add(new Objective(new Position(10,9), true, MANDATORY_VALUE));
+        objectives.add(new Objective(new Position(11,3), true, MANDATORY_VALUE));
+        objectives.add(new Objective(new Position(7,1), false, OPTIONAL_VALUE));
+        objectives.add(new Objective(new Position(7,9), false, OPTIONAL_VALUE));
 
         return objectives;
     }
