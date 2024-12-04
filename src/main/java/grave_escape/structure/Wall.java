@@ -1,7 +1,5 @@
 package grave_escape.structure;
 
-import grave_escape.game.Position;
-
 /**
  * objectives.Wall class represents a objectives.Wall cell within the game.Grid that the player.Player and any enemy.MovingEnemy cannot walk into.
  */

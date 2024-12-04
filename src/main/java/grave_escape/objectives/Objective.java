@@ -1,6 +1,6 @@
 package grave_escape.objectives;
 
-import grave_escape.game.Position;
+import grave_escape.structure.Position;
 
 /**
  * The objectives.Objective class represents a collectable objectives.Objective within a game.

@@ -6,7 +6,7 @@ import java.util.List;
 import grave_escape.enemy.Enemy;
 import grave_escape.enemy.MovingEnemy;
 import grave_escape.enemy.StationaryEnemy;
-import grave_escape.game.Position;
+import grave_escape.structure.Position;
 import grave_escape.levels.Level;
 import grave_escape.objectives.Objective;
 import grave_escape.structure.Wall;
