@@ -11,4 +11,11 @@ public class PositionUtils {
         }
         return null;
     }
+
+    public static boolean isWall(int x, int y, List<Wall> walls){
+        if(isEntityAtPosition(x, y, walls) != null){
+            return true;
+        }
+        return false;
+    }
 }
