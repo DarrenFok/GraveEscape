@@ -95,33 +95,7 @@ public class Level {
      * @param direction: The direction in which the player will move
      */
     public void movePlayer(Direction direction){
-        if(direction == null){
-            throw new IllegalArgumentException("Direction cannot be null");
-        }
-        switch(direction){
-            case UP:
-                if(player.getY() > 1 && !isWall(player.getX(), player.getY()-1)){
-                    player.setPosition(new Position(player.getX(), player.getY()-1));
-                }
-                break;
-            case DOWN:
-                if(player.getY() < grid.getNumOfRows()-2 && !isWall(player.getX(), player.getY()+1)){
-                    player.setPosition(new Position(player.getX(), player.getY()+1));
-                }
-                break;
-            case LEFT:
-                if(player.getX() > 1 && !isWall(player.getX()-1, player.getY())){
-                    player.setPosition(new Position(player.getX()-1, player.getY()));
-                }
-                break;
-            case RIGHT:
-                if(player.getX() < grid.getNumOfCols()-2 && !isWall(player.getX()+1, player.getY())){
-                    player.setPosition(new Position(player.getX()+1, player.getY()));
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid direction");
-        }
+        player.move(direction, grid.getNumOfRows(), grid.getNumOfCols(), walls);
     }
 
     /**
