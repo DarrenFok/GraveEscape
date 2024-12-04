@@ -11,6 +11,7 @@ import grave_escape.structure.Position;
 import grave_escape.objectives.Objective;
 import grave_escape.player.Player;
 import grave_escape.structure.Door;
+import grave_escape.structure.PositionUtils;
 import grave_escape.structure.Wall;
 
 
@@ -174,11 +175,8 @@ public class Level {
      * @return: Boolean indicating whether a player is currently on the same tile as an enemy
      */
     public boolean checkCollision(){
-        for(int i = 0; i < enemies.size(); i++){
-            if(enemies.get(i).getPosition().equals(player.getPosition())){
-                // Reset level
-                return true;
-            }
+        if(PositionUtils.isEntityAtPosition(player.getX(), player.getY(), enemies) != null){
+            return true;
         }
         return false;
     }
@@ -189,21 +187,15 @@ public class Level {
      * @return: The score of the objective collected
      */
     public int checkObjective(){
-        for(int i = 0; i < objectives.size(); i++){
-            Objective objective = objectives.get(i);
 
-            // Check if player's position matches the current objectives.Objective in list's position
-            if(player.getX() == objective.getX() && player.getY() == objective.getY()){
-                removeObjective(objective);
-                if(objective.isMandatory()){
-                    mandatoryCount--;
-                }
-                // Immediately check if all mandatory objectives have been collected
-                checkAndPlaceDoor();
-
-                // return score of objective
-                return objective.getScoreValue();
+        Objective objective = PositionUtils.isEntityAtPosition(player.getX(), player.getY(), objectives);
+        if(objective != null){
+            removeObjective(objective);
+            if(objective.isMandatory()){
+                mandatoryCount--;
             }
+            checkAndPlaceDoor();
+            return objective.getScoreValue();
         }
         return 0;
     }
@@ -265,10 +257,8 @@ public class Level {
      * @return: Boolean value representing whether a coordinate is a objectives.Wall
      */
     public boolean isWall(int x, int y){
-        for(Wall wall: walls){
-            if(wall.getX() == x && wall.getY() == y){
-                return true;
-            }
+        if(PositionUtils.isEntityAtPosition(x, y, walls) != null){
+            return true;
         }
         return false;
     }
