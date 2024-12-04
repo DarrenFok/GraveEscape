@@ -130,41 +130,8 @@ public class Level {
      */
     public void moveEnemies() {
         for (Enemy enemy : enemies) {
-            if (enemy instanceof MovingEnemy) {
-                MovingEnemy movingEnemy = (MovingEnemy) enemy;
-    
-                // Calculate the difference between the enemy's position and the player's position
-                int deltaX = player.getX() - movingEnemy.getX();
-                int deltaY = player.getY() - movingEnemy.getY();
-    
-                // Determine the direction the enemy should move
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    // Move horizontally first
-                    if (deltaX > 0) {
-                        // Move right
-                        if (movingEnemy.getX() < grid.getNumOfCols() - 1 && !isWall(movingEnemy.getX() + 1, movingEnemy.getY())) {
-                            movingEnemy.setPosition(new Position(movingEnemy.getX() + 1, movingEnemy.getY()));
-                        }
-                    } else {
-                        // Move left
-                        if (movingEnemy.getX() > 1 && !isWall(movingEnemy.getX() - 1, movingEnemy.getY())) {
-                            movingEnemy.setPosition(new Position(movingEnemy.getX() - 1, movingEnemy.getY()));
-                        }
-                    }
-                } else {
-                    // Move vertically
-                    if (deltaY > 0) {
-                        // Move down
-                        if (movingEnemy.getY() < grid.getNumOfRows() - 1 && !isWall(movingEnemy.getX(), movingEnemy.getY() + 1)) {
-                            movingEnemy.setPosition(new Position(movingEnemy.getX(), movingEnemy.getY() + 1));
-                        }
-                    } else {
-                        // Move up
-                        if (movingEnemy.getY() > 1 && !isWall(movingEnemy.getX(), movingEnemy.getY() - 1)) {
-                            movingEnemy.setPosition(new Position(movingEnemy.getX(), movingEnemy.getY() - 1));
-                        }
-                    }
-                }
+            if (enemy instanceof MovingEnemy){
+                ((MovingEnemy) enemy).moveTowardsPlayer(player, grid, walls);
             }
         }
     }
@@ -253,14 +220,11 @@ public class Level {
     /**
      * Checks whether the given coordinates are a objectives.Wall.
      * @param x: The x coordinate to be checked
-     * @param y: THe y coordinate to be checked
+     * @param y: The y coordinate to be checked
      * @return: Boolean value representing whether a coordinate is a objectives.Wall
      */
     public boolean isWall(int x, int y){
-        if(PositionUtils.isEntityAtPosition(x, y, walls) != null){
-            return true;
-        }
-        return false;
+        return PositionUtils.isWall(x, y, walls);
     }
 
     public void resetLevel(){
