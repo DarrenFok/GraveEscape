@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import grave_escape.game.Values.*;
 import grave_escape.enemy.Enemy;
 import grave_escape.enemy.StationaryEnemy;
 import grave_escape.levels.Level;
@@ -74,7 +75,7 @@ public class GamePanel extends JPanel{
         super.paintComponent(g);
 
         // Paint background image
-        Image gameBackground = new ImageIcon(getClass().getResource("/Game Background/in_game_background.png")).getImage();
+        Image gameBackground = new ImageIcon(getClass().getResource(Values.GAME_BACKGROUND)).getImage();
         g.drawImage(gameBackground, 0, 130, 1349, 599, this);
 
         // Draw grid
@@ -92,7 +93,7 @@ public class GamePanel extends JPanel{
 
         for(int i = 0; i < numOfRows; i++){
             for(int j = 0; j < numOfCols; j++){
-                ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Swamp.png"));
+                ImageIcon icon = new ImageIcon(getClass().getResource(Values.SWAMP));
                 Image image = icon.getImage();
                 g.drawImage(image, xOffset + j*cellSize, yOffset + i*cellSize, cellSize, cellSize, this);
             }
@@ -100,12 +101,12 @@ public class GamePanel extends JPanel{
 
         if(door != null){
             Door door = this.door;// If door exists, then render open door
-            ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Door_Open.png"));
+            ImageIcon icon = new ImageIcon(getClass().getResource(Values.DOOR_OPEN));
             Image image = icon.getImage();
             g.drawImage(image,xOffset + door.getX()*cellSize, yOffset + door.getY()*cellSize, cellSize, cellSize, this);
         }
         else{ // else, render closed door
-            ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Door_Close.png"));
+            ImageIcon icon = new ImageIcon(getClass().getResource(Values.DOOR_CLOSE));
             Image image = icon.getImage();
             g.drawImage(image,xOffset + doorPosition.getX()*cellSize, yOffset + doorPosition.getY()*cellSize, cellSize, cellSize, this);
         }
@@ -113,13 +114,13 @@ public class GamePanel extends JPanel{
         // Draw player
         String playerImgName = new String();
         if(player.getFacing() == Direction.RIGHT) {
-            playerImgName = "/Player/Hero_Right_1.png";
+            playerImgName = Values.HERO_RIGHT_1;
         } else if(player.getFacing() == Direction.LEFT) {
-            playerImgName = "/Player/Hero_Left_1.png";
+            playerImgName = Values.HERO_LEFT_1;
         } else if(player.getFacing() == Direction.UP) {
-            playerImgName = "/Player/Hero_Up_1.png";
+            playerImgName = Values.HERO_UP_1;
         } else if(player.getFacing() == Direction.DOWN) {
-            playerImgName = "/Player/Hero_Down_1.png";
+            playerImgName = Values.HERO_DOWN_1;
         }
 
         if(player.isMatchPrevMove() % 2 == 0) {
@@ -132,12 +133,12 @@ public class GamePanel extends JPanel{
         // Draw objectives
         for(Objective objective: objectives){
             if(objective.isMandatory()){ //if mandatory
-                ImageIcon icon = new ImageIcon(getClass().getResource("/Objectives/Objective_Key.png"));
+                ImageIcon icon = new ImageIcon(getClass().getResource(Values.OBJECTIVE_KEY));
                 Image image = icon.getImage();
                 g.drawImage(image, xOffset + objective.getX()*cellSize, yOffset + objective.getY()*cellSize, cellSize, cellSize, this );
             }
             else{ // if bonus
-                ImageIcon icon = new ImageIcon(getClass().getResource("/Objectives/Coin.png"));
+                ImageIcon icon = new ImageIcon(getClass().getResource(Values.OBJECTIVE_COIN));
                 Image image = icon.getImage();
                 g.drawImage(image, xOffset + objective.getX()*cellSize, yOffset + objective.getY()*cellSize, cellSize, cellSize, this );
             }
@@ -146,20 +147,20 @@ public class GamePanel extends JPanel{
         // Draw enemies
         for(Enemy enemy: enemies){
             if(enemy instanceof StationaryEnemy){
-                ImageIcon icon = new ImageIcon(getClass().getResource("/Enemies/Thorns.png"));
+                ImageIcon icon = new ImageIcon(getClass().getResource(Values.THORN_ENEMY));
                 Image image = icon.getImage();
                 g.drawImage(image, xOffset + enemy.getX()*cellSize, yOffset + enemy.getY()*cellSize, cellSize, cellSize, this );
             }
             else{
-                String enemyImgName = "/Enemies/Ghost_Down_1.png";
+                String enemyImgName = Values.GHOST_DOWN_1;
                 if(enemy.getFacing() == Direction.RIGHT) {
-                    enemyImgName = "/Enemies/Ghost_Right_1.png";
+                    enemyImgName = Values.GHOST_RIGHT_1;
                 } else if(enemy.getFacing() == Direction.LEFT) {
-                    enemyImgName = "/Enemies/Ghost_Left_1.png";
+                    enemyImgName = Values.GHOST_LEFT_1;
                 } else if(enemy.getFacing() == Direction.UP) {
-                    enemyImgName = "/Enemies/Ghost_Up_1.png";
+                    enemyImgName = Values.GHOST_UP_1;
                 } else if(enemy.getFacing() == Direction.DOWN) {
-                    enemyImgName = "/Enemies/Ghost_Down_1.png";
+                    enemyImgName = Values.GHOST_DOWN_1;
                 }
                 if(enemy.isMatchPrevMove() % 2 == 0) {
                     enemyImgName = enemyImgName.replace('1', '2');
@@ -173,7 +174,7 @@ public class GamePanel extends JPanel{
         // Draw walls
         g.setColor(Color.lightGray);
         for(Wall wall: walls){
-            ImageIcon icon = new ImageIcon(getClass().getResource("/Terrain/Tree.png"));
+            ImageIcon icon = new ImageIcon(getClass().getResource(Values.TREE_TERRAIN));
             Image image = icon.getImage();
             g.drawImage(image,xOffset + wall.getX()*cellSize, yOffset + wall.getY()*cellSize, cellSize, cellSize, this);
         }
@@ -190,7 +191,7 @@ public class GamePanel extends JPanel{
 
         // Lives
         g.drawString("Lives", 220, 45);
-        ImageIcon heartIcon = new ImageIcon(getClass().getResource("/In-Game UI Header/heart.png"));
+        ImageIcon heartIcon = new ImageIcon(getClass().getResource(Values.HEART_UI));
         Image heartImage = heartIcon.getImage();
         for(int i = 0; i < lives; i++){
             g.drawImage(heartImage, 220 + (i*60), 60, 50, 50, this);
@@ -206,12 +207,12 @@ public class GamePanel extends JPanel{
         for(int i = 0; i < objectives.size(); i++){
             int xPos = startX + i * (objWidth + objSpace);
             if(objectives.get(i).isMandatory()){ //if mandatory
-                ImageIcon icon = new ImageIcon(getClass().getResource("/In-Game UI Header/Objective_Key_transparent.png"));
+                ImageIcon icon = new ImageIcon(getClass().getResource(Values.OBJECTIVE_KEY_UI));
                 Image image = icon.getImage();
                 g.drawImage(image, xPos, 60, objWidth, objWidth, this );
             }
             else{ // if bonus
-                ImageIcon icon = new ImageIcon(getClass().getResource("/In-Game UI Header/Better_Coin_transparent.png"));
+                ImageIcon icon = new ImageIcon(getClass().getResource(Values.OBJECTIVE_COIN_UI));
                 Image image = icon.getImage();
                 g.drawImage(image, xPos, 60, objWidth, objWidth, this );
             }
