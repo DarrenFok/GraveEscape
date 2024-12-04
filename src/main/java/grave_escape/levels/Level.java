@@ -11,6 +11,7 @@ import grave_escape.structure.Position;
 import grave_escape.objectives.Objective;
 import grave_escape.player.Player;
 import grave_escape.structure.Door;
+import grave_escape.structure.PositionUtils;
 import grave_escape.structure.Wall;
 
 
@@ -94,33 +95,7 @@ public class Level {
      * @param direction: The direction in which the player will move
      */
     public void movePlayer(Direction direction){
-        if(direction == null){
-            throw new IllegalArgumentException("Direction cannot be null");
-        }
-        switch(direction){
-            case UP:
-                if(player.getY() > 1 && !isWall(player.getX(), player.getY()-1)){
-                    player.setPosition(new Position(player.getX(), player.getY()-1));
-                }
-                break;
-            case DOWN:
-                if(player.getY() < grid.getNumOfRows()-2 && !isWall(player.getX(), player.getY()+1)){
-                    player.setPosition(new Position(player.getX(), player.getY()+1));
-                }
-                break;
-            case LEFT:
-                if(player.getX() > 1 && !isWall(player.getX()-1, player.getY())){
-                    player.setPosition(new Position(player.getX()-1, player.getY()));
-                }
-                break;
-            case RIGHT:
-                if(player.getX() < grid.getNumOfCols()-2 && !isWall(player.getX()+1, player.getY())){
-                    player.setPosition(new Position(player.getX()+1, player.getY()));
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid direction");
-        }
+        player.move(direction, grid.getNumOfRows(), grid.getNumOfCols(), walls);
     }
 
     /**
@@ -129,41 +104,8 @@ public class Level {
      */
     public void moveEnemies() {
         for (Enemy enemy : enemies) {
-            if (enemy instanceof MovingEnemy) {
-                MovingEnemy movingEnemy = (MovingEnemy) enemy;
-    
-                // Calculate the difference between the enemy's position and the player's position
-                int deltaX = player.getX() - movingEnemy.getX();
-                int deltaY = player.getY() - movingEnemy.getY();
-    
-                // Determine the direction the enemy should move
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    // Move horizontally first
-                    if (deltaX > 0) {
-                        // Move right
-                        if (movingEnemy.getX() < grid.getNumOfCols() - 1 && !isWall(movingEnemy.getX() + 1, movingEnemy.getY())) {
-                            movingEnemy.setPosition(new Position(movingEnemy.getX() + 1, movingEnemy.getY()));
-                        }
-                    } else {
-                        // Move left
-                        if (movingEnemy.getX() > 1 && !isWall(movingEnemy.getX() - 1, movingEnemy.getY())) {
-                            movingEnemy.setPosition(new Position(movingEnemy.getX() - 1, movingEnemy.getY()));
-                        }
-                    }
-                } else {
-                    // Move vertically
-                    if (deltaY > 0) {
-                        // Move down
-                        if (movingEnemy.getY() < grid.getNumOfRows() - 1 && !isWall(movingEnemy.getX(), movingEnemy.getY() + 1)) {
-                            movingEnemy.setPosition(new Position(movingEnemy.getX(), movingEnemy.getY() + 1));
-                        }
-                    } else {
-                        // Move up
-                        if (movingEnemy.getY() > 1 && !isWall(movingEnemy.getX(), movingEnemy.getY() - 1)) {
-                            movingEnemy.setPosition(new Position(movingEnemy.getX(), movingEnemy.getY() - 1));
-                        }
-                    }
-                }
+            if (enemy instanceof MovingEnemy){
+                ((MovingEnemy) enemy).moveTowardsPlayer(player, grid, walls);
             }
         }
     }
@@ -174,11 +116,8 @@ public class Level {
      * @return: Boolean indicating whether a player is currently on the same tile as an enemy
      */
     public boolean checkCollision(){
-        for(int i = 0; i < enemies.size(); i++){
-            if(enemies.get(i).getPosition().equals(player.getPosition())){
-                // Reset level
-                return true;
-            }
+        if(PositionUtils.isEntityAtPosition(player.getX(), player.getY(), enemies) != null){
+            return true;
         }
         return false;
     }
@@ -189,21 +128,14 @@ public class Level {
      * @return: The score of the objective collected
      */
     public int checkObjective(){
-        for(int i = 0; i < objectives.size(); i++){
-            Objective objective = objectives.get(i);
-
-            // Check if player's position matches the current objectives.Objective in list's position
-            if(player.getX() == objective.getX() && player.getY() == objective.getY()){
-                removeObjective(objective);
-                if(objective.isMandatory()){
-                    mandatoryCount--;
-                }
-                // Immediately check if all mandatory objectives have been collected
-                checkAndPlaceDoor();
-
-                // return score of objective
-                return objective.getScoreValue();
+        Objective objective = PositionUtils.isEntityAtPosition(player.getX(), player.getY(), objectives);
+        if(objective != null){
+            removeObjective(objective);
+            if(objective.isMandatory()){
+                mandatoryCount--;
             }
+            checkAndPlaceDoor();
+            return objective.getScoreValue();
         }
         return 0;
     }
@@ -261,16 +193,11 @@ public class Level {
     /**
      * Checks whether the given coordinates are a objectives.Wall.
      * @param x: The x coordinate to be checked
-     * @param y: THe y coordinate to be checked
+     * @param y: The y coordinate to be checked
      * @return: Boolean value representing whether a coordinate is a objectives.Wall
      */
     public boolean isWall(int x, int y){
-        for(Wall wall: walls){
-            if(wall.getX() == x && wall.getY() == y){
-                return true;
-            }
-        }
-        return false;
+        return PositionUtils.isWall(x, y, walls);
     }
 
     public void resetLevel(){

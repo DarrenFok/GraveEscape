@@ -151,17 +151,12 @@ public class Game implements KeyListener {
         }
     }
 
+    /**
+     * Checks for practice mode for game over. This is because in practice mode, you technically only have one life. Once
+     * you lose it, it's considered a full game over, and you have to restart. This kicks you out to the main menu,
+     * where you'll have to re-select and enter practice mode.
+     */
     public void handleGameOver() {
-        /*
-            Checks for practice mode for game over
-            This is because in practice mode, you
-            technically only have one life. Once
-            you lose it, it's considered a full
-            game over, and you have to restart.
-            This kicks you out to the main menu,
-            where you'll have to re-select and
-            enter practice mode.
-         */
         if (gameMode == GameMode.PRACTICE) {
             JOptionPane.showMessageDialog(mainPanel, "Game Over");
             cardLayout.show(mainPanel, "Menu");
