@@ -5,8 +5,7 @@ import grave_escape.structure.Position;
 /**
  * The objectives.Objective class represents a collectable objectives.Objective within a game.
  */
-public class Objective {
-    private Position position;
+public class Objective extends Position{
     private boolean isMandatory;
     private int scoreValue;
 
@@ -17,7 +16,7 @@ public class Objective {
      * @param scoreValue: Score to be added to total when objectives.Objective is collected
      */
     public Objective(Position position, boolean isMandatory, int scoreValue) {
-        this.position = position;
+        super(position.getX(), position.getY());
         this.isMandatory = isMandatory;
         this.scoreValue = scoreValue;
     }
@@ -27,7 +26,7 @@ public class Objective {
      * @return: game.Position of objectives.Objective
      */
     public Position getPosition() {
-        return position;
+        return this;
     }
 
     /**
@@ -43,7 +42,7 @@ public class Objective {
      * @return: objectives.Objective's X coordinate
      */
     public int getX(){
-        return position.getX();
+        return super.getX();
     }
 
     /**
@@ -51,7 +50,7 @@ public class Objective {
      * @return: objectives.Objective's Y coordinate
      */
     public int getY(){
-        return position.getY();
+        return super.getY();
     }
 
     /**
