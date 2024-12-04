@@ -36,7 +36,7 @@ public class Game implements KeyListener {
     private Level level;
     private GamePanel gamePanel;
     private int score;
-    private boolean onDoor = false;
+    private boolean playerIsOnDoor = false;
     private int lives = 3;
     private int moves = 0;
     private int prevScore = 0;
@@ -84,59 +84,84 @@ public class Game implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
+        // Checks if game is over
+        // If true, returns and ends function
+        // otherwise, moves on
         if (gameOver) return;
-    
+
+        // Sets player moved state to false whenever the function runs
+        // This is to set a "new turn", per se
         boolean playerMoved = false;
-    
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_UP -> {
+
+        switch (e.getKeyCode()) { // switch/case statement to check for directional movement
+            case KeyEvent.VK_UP -> { // Checks for up key input
                 level.movePlayer(Direction.UP);
                 playerMoved = true;
             }
-            case KeyEvent.VK_DOWN -> {
+            case KeyEvent.VK_DOWN -> { // Checks for down key input
                 level.movePlayer(Direction.DOWN);
                 playerMoved = true;
             }
-            case KeyEvent.VK_LEFT -> {
+            case KeyEvent.VK_LEFT -> { // Checks for left key input
                 level.movePlayer(Direction.LEFT);
                 playerMoved = true;
             }
-            case KeyEvent.VK_RIGHT -> {
+            case KeyEvent.VK_RIGHT -> { // Checks for right key input
                 level.movePlayer(Direction.RIGHT);
                 playerMoved = true;
             }
         }
-    
+
         if (playerMoved) {
-            // Move enemies towards the player after the player moves
-            level.moveEnemies(); // Ensure this method moves the enemies towards the player
-            
-            // Update score and check objectives
-            if(score > 0)
-                score--;
-            moves++;
-            score += level.checkObjective();
-            level.checkAndPlaceDoor();
-            if (level.isDoorOpen()) {
-                onDoor = level.isOnDoor();
-            }
-            gamePanel.update(level, lives, score, moves);
+            // Originally had all of this function code inside here
+            // However, it made this one function do way too much
+            // Moved code down to handleAfterPlayerMovement()
+            handleAfterPlayerMovement();
         }
-    
+    }
+
+    public void handleAfterPlayerMovement() {
+        // Move enemies towards the player after the player moves
+        level.moveEnemies(); // Ensure this method moves the enemies towards the player
+
+        // Update score and check objectives
+        if (score > 0)
+            score--;
+
+        moves++;
+        score += level.checkObjective();
+        level.checkAndPlaceDoor();
+
+        if (level.isDoorOpen()) {
+            playerIsOnDoor = level.isOnDoor();
+        }
+
+        gamePanel.update(level, lives, score, moves);
+
         gameOver = level.checkCollision();
-    
+
         if (gameOver) {
             // Handle game over logic
             handleGameOver();
         }
-    
-        if (onDoor) {
+
+        if (playerIsOnDoor) {
             handleLevelCompletion();
-            onDoor = false;
+            playerIsOnDoor = false;
         }
     }
-    
+
     public void handleGameOver() {
+        /*
+            Checks for practice mode for game over
+            This is because in practice mode, you
+            technically only have one life. Once
+            you lose it, it's considered a full
+            game over, and you have to restart.
+            This kicks you out to the main menu,
+            where you'll have to re-select and
+            enter practice mode.
+         */
         if (gameMode == GameMode.PRACTICE) {
             JOptionPane.showMessageDialog(mainPanel, "Game Over");
             cardLayout.show(mainPanel, "Menu");
@@ -144,10 +169,10 @@ public class Game implements KeyListener {
         }
         else {  // else if campaign mode
             lives--;
-            if (lives == 0) {
+            if (lives == 0) { // Checks for full game over (lives = 0)
                 JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
                 saveResult();
-            } else {
+            } else { // Otherwise, "soft-resets" the level, a.k.a. reverts back to the state where you entered the level.
                 score = prevScore;
                 moves = prevMoves;            
                 JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
@@ -179,14 +204,27 @@ public class Game implements KeyListener {
         });
     }
 
+    /**
+     *
+     * For both keyTyped() and keyReleased(),
+     * we need to have them implemented as we implement KeyListener, and
+     * these two are part of the KeyListener class and need to be implemented, or else
+     * we get an error. However, they're implemented
+     * as just empty functions as they don't do anything or
+     * are not required for our game.
+     */
+
     @Override
     public void keyTyped(KeyEvent e) {
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
 
     }
+
+    /*                                                  */
 
     /**
      * Starts the game by switching panels to the game.GamePanel.
