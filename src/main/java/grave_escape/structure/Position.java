@@ -1,4 +1,4 @@
-package grave_escape.game;
+package grave_escape.structure;
 
 public class Position {
     private int x;

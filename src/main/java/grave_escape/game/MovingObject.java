@@ -1,5 +1,7 @@
 package grave_escape.game;
 
+import grave_escape.structure.Position;
+
 public class MovingObject {
     protected Position position;
     protected Direction facing;

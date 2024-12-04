@@ -1,6 +1,6 @@
 package grave_escape.enemy;
 
-import grave_escape.game.Position;
+import grave_escape.structure.Position;
 
 public class StationaryEnemy extends Enemy {
 
