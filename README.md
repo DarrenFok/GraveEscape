@@ -19,7 +19,7 @@ it out to the next level.
 **NOTE**: This game requires JDE 18+ to build and run. Please ensure that you have it installed before
 attempting to build and run Grave Escape.
 #### Building
-Run `mvn clean package`. This will clean the `/target/` directory and compile the package into a .jar file.
+In a terminal, navigate to the directory that the game is under (directory `CMPT276F24_group10`) and run `mvn clean package`. This will clean the `/target/` directory and compile the package into a .jar file.
 #### Running
 Enter `java -jar .\target\CMPT276F24_group10-1.0.jar` into the terminal. This will start the game.
 #### Testing
