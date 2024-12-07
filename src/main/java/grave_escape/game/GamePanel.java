@@ -23,15 +23,55 @@ import grave_escape.structure.Wall;
  * game.GamePanel class represents the panel where the actual game (grid, player, enemy, etc.) are rendered.
  */
 public class GamePanel extends JPanel{
+
+    /**
+     * The number of rows in the game grid.
+     */
     private int numOfRows;
+
+    /**
+     * The number of columns in the game grid.
+     */
     private int numOfCols;
+
+    /**
+     * The grid of the game, which contains all the cells where elements like player, enemies, and walls are placed.
+     */
     private Grid grid;
+
+    /**
+     * The size of each cell in the grid.
+     */
     private final int cellSize = 50;
+
+    /**
+     * The player object, representing the player character in the game.
+     */
     private Player player;
+
+    /**
+     * The list of enemies in the game, which are the obstacles for the player.
+     */
     private List<Enemy> enemies;
+
+    /**
+     * The list of objectives that the player needs to collect to win or progress in the game.
+     */
     private ArrayList<Objective> objectives;
+
+    /**
+     * The door object representing the exit point of the game level.
+     */
     private Door door;
+
+    /**
+     * The list of walls in the game, which block the movement of the player and enemies.
+     */
     private List<Wall> walls;
+
+    /**
+     * The position of the door in the grid.
+     */
     private Position doorPosition;
 
     int lives;
