@@ -20,7 +20,13 @@ import grave_escape.structure.Wall;
  * It manages the elements and their interactions between one another.
  */
 public class Level {
+    /**
+     * Holds the name of the level (e.g. "Level 1)
+     */
     protected String levelName;
+    /**
+     * Holds the name of the difficulty (e.g. "Easy")
+     */
     protected String difficulty;
     private ArrayList<Objective> objectives;
     private Player player;
@@ -43,7 +49,9 @@ public class Level {
      * @param numOfCols: Number of columns in the Levels' grid (value of max X-coordinate)
      * @param playerStart: The coordinates of where the player will start on a grid
      * @param enemies: A list of enemies on the grid
+     * @param objectives: A list of objectives on the grid
      * @param doorPosition: The game.Position of the objectives.Door within the levels.Level
+     * @param walls: A list of walls on the grid
      */
     public Level(
             int numOfRows,
@@ -113,7 +121,7 @@ public class Level {
 
     /**
      * This method checks whether a player has collided with an enemy.
-     * @return: Boolean indicating whether a player is currently on the same tile as an enemy
+     * @return Boolean indicating whether a player is currently on the same tile as an enemy
      */
     public boolean checkCollision(){
         if(PositionUtils.isEntityAtPosition(player.getX(), player.getY(), enemies) != null){
@@ -125,7 +133,7 @@ public class Level {
     /**
      * Checks whether a player is on the same position as an objectives.Objective. If it is, it will remove it from the grid and
      * return its score. Furthermore, if the last mandatory objective is collected, it will open the door immediately.
-     * @return: The score of the objective collected
+     * @return The score of the objective collected
      */
     public int checkObjective(){
         Objective objective = PositionUtils.isEntityAtPosition(player.getX(), player.getY(), objectives);
@@ -150,7 +158,7 @@ public class Level {
 
     /**
      * Function used to calculate how many mandatory objectives are initially in the level.
-     * @return: The amount of mandatory objectives that are initially in the level
+     * @return The amount of mandatory objectives that are initially in the level
      */
     private int countMandatory(){
         for(int i = 0; i < objectives.size(); i++){
@@ -173,7 +181,7 @@ public class Level {
 
     /**
      * Checks whether the player is on the same position as the objectives.Door.
-     * @return: Boolean indicating whether play is on the same position as the door
+     * @return Boolean indicating whether play is on the same position as the door
      */
     public boolean isOnDoor(){
         if(player.getX() == door.getX() && player.getY() == door.getY()){
@@ -184,7 +192,7 @@ public class Level {
 
     /**
      * Checks whether the door is open.
-     * @return: Boolean value representing whether door is open
+     * @return Boolean value representing whether door is open
      */
     public boolean isDoorOpen(){
         return isDoorOpen;
@@ -194,12 +202,17 @@ public class Level {
      * Checks whether the given coordinates are a objectives.Wall.
      * @param x: The x coordinate to be checked
      * @param y: The y coordinate to be checked
-     * @return: Boolean value representing whether a coordinate is a objectives.Wall
+     * @return Boolean value representing whether a coordinate is a objectives.Wall
      */
     public boolean isWall(int x, int y){
         return PositionUtils.isWall(x, y, walls);
     }
 
+    /**
+     * Method that will reset the level upon a player dying. This includes operations such as returning the player,
+     * enemies, objectives back to their original positions, resetting the door (by closing it and making it null), and
+     * resetting the amount of mandatory objectives collected.
+     */
     public void resetLevel(){
         // Reset player position
         player.setPosition(new Position(initialPlayerPosition.getX(), initialPlayerPosition.getY()));
@@ -230,7 +243,7 @@ public class Level {
 
     /**
      * Method to return player.Player object within a level, namely for the player.Player's position.
-     * @return: player.Player object
+     * @return player.Player object
      */
     public Player getPlayer(){
         return this.player;
@@ -238,7 +251,7 @@ public class Level {
 
     /**
      * Method to return List of enemies within a level, namely for the enemy.Enemy positions.
-     * @return: List of enemies
+     * @return List of enemies
      */
     public List<Enemy> getEnemies(){
         return this.enemies;
@@ -246,7 +259,7 @@ public class Level {
 
     /**
      * Method to return List of Objectives within a level, namely for the objectives.Objective positions.
-     * @return: List of objectives
+     * @return List of objectives
      */
     public ArrayList<Objective> getObjectives(){
         return this.objectives;
@@ -255,7 +268,7 @@ public class Level {
 
     /**
      * Method to return number of rows within the levels.Level's game.Grid
-     * @return: Integer value representing number of rows
+     * @return Integer value representing number of rows
      */
     
     public int getNumOfRows(){
@@ -264,7 +277,7 @@ public class Level {
 
     /**
      * Method to return number of columns within the levels.Level's game.Grid
-     * @return: Integer value representing number of columns
+     * @return Integer value representing number of columns
      */ 
     public int getNumOfCols(){
         return grid.getNumOfCols();
@@ -273,7 +286,7 @@ public class Level {
 
     /**
      * Method to return objectives.Door object within a level
-     * @return: objectives.Door object
+     * @return objectives.Door object
      */
     public Door getDoor(){
         return this.door;
@@ -281,7 +294,7 @@ public class Level {
 
     /**
      * Method to return the initial door position
-     * @return: game.Position with coordinates to door
+     * @return game.Position with coordinates to door
      */
     public Position getDoorPosition(){
         return this.doorPosition;
@@ -289,7 +302,7 @@ public class Level {
 
     /**
      * Method to return List of Walls within a level, namely for the objectives.Wall positions.
-     * @return: List of Walls
+     * @return List of Walls
      */
     public List<Wall> getWalls(){
         //Add perimeter walls
@@ -304,14 +317,26 @@ public class Level {
         return this.walls;
     }
 
+    /**
+     * Method to return the amount of mandatory objectives left
+     * @return int value representing the number of mandatory objectives left
+     */
     public int getMandatoryCount(){
         return mandatoryCount;
     }
 
+    /**
+     * Method to return the name of the level
+     * @return String value containing the level name (e.g. "Level 1")
+     */
     public String getLevelName(){
         return levelName;
     }
 
+    /**
+     * Method to return the difficulty name of the level
+     * @return String value containing the difficulty name (e.g. "Easy")
+     */
     public String getDifficulty(){
         return difficulty;
     }
