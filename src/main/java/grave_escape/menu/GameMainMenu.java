@@ -23,17 +23,46 @@ import grave_escape.modes.PracticePanel;
  * Campaign mode, Practice mode, and Settings.
  */
 public class GameMainMenu extends JFrame {
+    /**
+     * The main JPanel. All other panels are overlaid onto this one.
+     */
     private JPanel mainPanel;
+    /**
+     * This JPanel represents the main menu, which is the menu first opened upon opening the game.
+     */
     private JPanel menuPanel;
+    /**
+     * This JPanel represents the campaign menu.
+     */
     private JPanel campaignPanel;
+    /**
+     * This JPanel represents the practice menu.
+     */
     private JPanel practicePanel;
+    /**
+     * This JPanel represents the settings panel.
+     */
     private JPanel settingPanel;
 
+    /**
+     * The JButton object representing the button to be clicked to open the Campaign menu.
+     */
     private JButton campaignButton;
+    /**
+     * The JButton object representing the button to be clicked to open the Practice menu.
+     */
     private JButton practiceButton;
+    /**
+     * The JButton object representing the button to be clicked to open the Settings menu.
+     */
     private JButton settingButton;
+    /**
+     * The JButton object representing the button to be clicked to quit the game.
+     */
     private JButton quitButton;
-
+    /**
+     * The CardLayout object manages the layout of multiple panels, and allows for easy switching between them.
+     */
     private final CardLayout cardLayout;
 
     /**

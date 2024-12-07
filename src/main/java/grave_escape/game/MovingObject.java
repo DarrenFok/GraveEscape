@@ -8,6 +8,9 @@ import grave_escape.structure.Position;
  * The object also tracks whether its movement matches the previous move direction.
  */
 public class MovingObject extends Position {
+    /**
+     * Stores the Direction in which the Object will be facing
+     */
     protected Direction facing;
     private int matchPrevMove;
 

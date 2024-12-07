@@ -74,12 +74,29 @@ public class GamePanel extends JPanel{
      */
     private Position doorPosition;
 
+    /**
+     * The amount of lives the player has left, affects how many hearts will be rendered in the header UI.
+     */
     int lives;
+    /**
+     * The score the player has. This will be rendered in the header UI.
+     */
     int score;
+    /**
+     * The amount of moves the player has made. This will be rendered in the header UI.
+     */
     int moves;
+    /**
+     * The name of the Level that will be rendered in the header UI.
+     */
     String levelName;
+    /**
+     * The name of the Difficulty of the Level that will be rendered in the header UI.
+     */
     String difficulty;
-
+    /**
+     * The height of the UI header in pixels.
+     */
     int uiHeaderHeight = 130;
 
     /**

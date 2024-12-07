@@ -13,6 +13,13 @@ import grave_escape.menu.GameMainMenu;
  */
 public class Main {
     /**
+     * Default constructor for the {@code Main} class.
+     * Initializes the primary components of the application.
+     */
+    public Main(){
+        // No logic Constructor logic
+    }
+    /**
      * The main method that serves as the entry point for the application.
      * <p>
      * It creates and displays the GameMainMenu in a thread-safe manner

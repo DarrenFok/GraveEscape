@@ -25,19 +25,49 @@ import grave_escape.levels.GameMode;
  * It allows the player to select a difficulty and certain level to play independently for practice.
  */
 public class PracticePanel extends JPanel {
+    /**
+     * A layout manager for organizing multiple components (cards) within a single container.
+     */
     private CardLayout cardLayout;
+    /**
+     * The primary panel used as the container for the application components.
+     */
     private JPanel mainPanel;
+    /**
+     * Represents the current difficulty level of the game or application.
+     * Initialized to {@code Difficulty.EASY}.
+     */
     private Difficulty difficulty = Difficulty.EASY;
 
     // Components
+    /**
+     * A button for selecting the "Easy" difficulty level.
+     */
     JButton easyButton;
+    /**
+     * A button for selecting the "Normal" difficulty level.
+     */
     JButton normalButton;
+    /**
+     * A button for selecting the "Hard" difficulty level.
+     */
     JButton hardButton;
 
+    /**
+     * A button for selecting Level One.
+     */
     JButton oneButton;
+    /**
+     * A button for selecting Level Two.
+     */
     JButton twoButton;
+    /**
+     * A button for selecting Level Three.
+     */
     JButton threeButton;
-
+    /**
+     * An image used as the background for the Practice Menu panel.
+     */
     private Image backgroundImage;
 
     /**

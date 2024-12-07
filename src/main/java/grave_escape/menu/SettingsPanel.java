@@ -21,12 +21,33 @@ import javax.swing.JTextField;
  * to return to the main menu. The background of the panel is customizable with an image.
  */
 public class SettingsPanel extends JPanel {
+    /**
+     * A layout manager for managing multiple components (cards) that can be swapped dynamically.
+     */
     private CardLayout cardLayout;
+    /**
+     * The main container panel that holds different components or "cards."
+     */
     private JPanel mainPanel;
+    /**
+     * A slider component for adjusting the volume level.
+     */
     private JSlider volumeSlider;
+    /**
+     * A text box for displaying and editing the volume level as a numeric value.
+     */
     private JTextField volumeTextBox;
+    /**
+     * The previous volume level, stored as an integer for tracking changes.
+     */
     private int previousVolume;
+    /**
+     * A controller for managing music playback functionality.
+     */
     private MusicController musicController;
+    /**
+     * An image used as the background for the Settings panel.
+     */
     private Image backgroundImage;
 
     /**
