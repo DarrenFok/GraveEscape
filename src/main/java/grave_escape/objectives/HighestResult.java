@@ -10,17 +10,27 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * The {@code HighestResult} class manages the leaderboard of the game.
+ * It loads and saves player results, allowing the addition or update of a player's highest score.
+ */
 public class HighestResult {
 
     private static final String FILENAME = "Data/leaderboard.csv";
     private final List<PlayerResult> leaderboard;
     private static HighestResult instance = null;
 
-    // Constructor
+    /**
+     * Private constructor to initialize the leaderboard by loading from the file.
+     */
     private HighestResult() {
         this.leaderboard = loadLeaderboard();
     }
 
+    /**
+     * Returns the singleton instance of the {@code HighestResult} class.
+     * @return the singleton instance of {@code HighestResult}.
+     */
     public static HighestResult getInstance() {
         if(instance == null) {
             instance = new HighestResult();
@@ -28,7 +38,10 @@ public class HighestResult {
         return instance;
     }
 
-    // Load the leaderboard from the CSV file
+    /**
+     * Loads the leaderboard from a CSV file.
+     * @return a list of {@code PlayerResult} objects representing the leaderboard.
+     */
     private List<PlayerResult> loadLeaderboard() {
         List<PlayerResult> results = new ArrayList<>();
         File file = new File(FILENAME);
@@ -53,7 +66,9 @@ public class HighestResult {
         return results;
     }
 
-    // Save the leaderboard to the CSV file
+    /**
+     * Saves the current leaderboard to the CSV file.
+     */
     private void saveLeaderboard() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILENAME))) {
             for (PlayerResult result : leaderboard) {
@@ -65,7 +80,11 @@ public class HighestResult {
         }
     }
 
-    // Add or update a player's highest score
+    /**
+     * Adds or updates a player's highest score in the leaderboard.
+     * @param name  the player's name.
+     * @param score the player's score to save.
+     */
     public void savePlayerResult(String name, int score) {
         leaderboard.sort(Comparator.comparingInt(PlayerResult::getHighestScore).reversed());
         boolean playerExists = false;
@@ -84,38 +103,68 @@ public class HighestResult {
         saveLeaderboard();
     }
 
-    // Get the leaderboard
+    /**
+     * Retrieves the current leaderboard, sorted by highest score.
+     * @return a list of {@code PlayerResult} objects representing the sorted leaderboard.
+     */
     public List<PlayerResult> getLeaderboard() {
         leaderboard.sort(Comparator.comparingInt(PlayerResult::getHighestScore).reversed());
         return leaderboard;
     }
 
-    // PlayerResult class to represent individual player data
+    /**
+     * The {@code PlayerResult} class represents a player's data, including their name and highest score.
+     */
     public static class PlayerResult {
         private String name;
         private int highestScore;
 
+        /**
+         * Constructs a {@code PlayerResult} object with the given name and highest score.
+         * @param name         the player's name.
+         * @param highestScore the player's highest score.
+         */
         public PlayerResult(String name, int highestScore) {
             this.name = name;
             this.highestScore = highestScore;
         }
 
+        /**
+         * Retrieves the player's name.
+         * @return the player's name.
+         */
         public String getName() {
             return name;
         }
 
+        /**
+         * Sets the player's name.
+         * @param name the player's name.
+         */
         public void setName(String name) {
             this.name = name;
         }
 
+        /**
+         * Retrieves the player's highest score.
+         * @return the player's highest score.
+         */
         public int getHighestScore() {
             return highestScore;
         }
 
+        /**
+         * Sets the player's highest score.
+         * @param highestScore the player's highest score.
+         */
         public void setHighestScore(int highestScore) {
             this.highestScore = highestScore;
         }
 
+        /**
+         * Returns a string representation of the player's result.
+         * @return a string representation of the player's name and highest score.
+         */
         @Override
         public String toString() {
             return "PlayerResult{" +

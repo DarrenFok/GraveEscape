@@ -10,7 +10,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import grave_escape.game.Values.*;
 import grave_escape.enemy.Enemy;
 import grave_escape.enemy.StationaryEnemy;
 import grave_escape.levels.Level;
@@ -45,7 +44,10 @@ public class GamePanel extends JPanel{
 
     /**
      * Constructor for game.GamePanel object.
-     * @param level: The level that will be rendered
+     * @param level The level that will be rendered.
+     * @param lives The amount of lives the player has.
+     * @param score The score that the player collects.
+     * @param moves The number of moves made.
      */
     public GamePanel(Level level, int lives, int score, int moves) {
         // get information from level
@@ -232,7 +234,10 @@ public class GamePanel extends JPanel{
     /**
      * Updates positions of players and enemies, and whether objectives and doors exist in the current state. Then
      * re-renders the game.Grid to reflect the update.
-     * @param level: levels.Level to be updated
+     * @param level Level to be updated.
+     * @param lives The amount of lives the player has updated.
+     * @param score The score that the player collects updated.
+     * @param moves The number of moves made updated.
      */
     public void update(Level level, int lives, int score, int moves){
         this.lives = lives;

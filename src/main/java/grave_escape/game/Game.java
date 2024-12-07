@@ -23,8 +23,8 @@ import grave_escape.modes.CampaignPanel;
 import grave_escape.objectives.HighestResult;
 
 /**
- * game.Game class acts as the main controller for the game, handles overall game flow, player interactions, and
- * game state management.
+ * The {@code Game} class acts as the main controller for the game, handling the overall game flow,
+ * player interactions, and game state management.
  */
 public class Game implements KeyListener {
     private CardLayout cardLayout;
@@ -42,16 +42,14 @@ public class Game implements KeyListener {
     private int prevScore = 0;
     private int prevMoves = 0;
 
-
     /**
-     * Constructor for game.Game object. Sets up the game.GamePanel, switches to it, and puts the keyListener on the
-     * aforementioned game.GamePanel
+     * Constructs a {@code Game} object and initializes the game panel, levels, and state.
      *
-     * @param cardLayout: CardLayout used to switch between panels
-     * @param mainPanel: The window for the game
-     * @param difficulty: The difficulty of the game
-     * @param gameMode: The game mode selected (practice, campaign)
-     * @param level: The level being played
+     * @param cardLayout The {@code CardLayout} used for switching between panels.
+     * @param mainPanel  The main {@code JPanel} containing all game components.
+     * @param difficulty The difficulty level of the game.
+     * @param gameMode   The selected game mode (e.g., Practice, Campaign).
+     * @param level      The initial level to be played.
      */
     public Game(CardLayout cardLayout, JPanel mainPanel, Difficulty difficulty, GameMode gameMode, Level level) {
         this.cardLayout = cardLayout;
@@ -63,71 +61,63 @@ public class Game implements KeyListener {
         // Initialize levels
         initializeLevels();
 
-        // Create game panel, and add to mainPanel
+        // Create game panel and add it to the main panel
         setupGamePanel();
         mainPanel.add(gamePanel, "Game");
 
-        // KeyListener in game.GamePanel
+        // Add KeyListener to the game panel
         gamePanel.addKeyListener(this);
     }
 
     /**
-     * Method to set up the game.Game Panel
+     * Sets up the {@code GamePanel} with the current level, lives, score, and moves.
      */
-    private void setupGamePanel(){
+    private void setupGamePanel() {
         gamePanel = new GamePanel(level, lives, score, moves);
     }
 
     /**
-     * Method that tells game what to do when key is pressed. player.Player is moved with arrow keys, and enemies move
-     * whenever the player moves.
+     * Handles key press events to move the player and trigger game actions.
+     *
+     * @param e The {@code KeyEvent} triggered by user input.
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        // Checks if game is over
-        // If true, returns and ends function
-        // otherwise, moves on
         if (gameOver) return;
 
-        // Sets player moved state to false whenever the function runs
-        // This is to set a "new turn", per se
         boolean playerMoved = false;
 
-        switch (e.getKeyCode()) { // switch/case statement to check for directional movement
-            case KeyEvent.VK_UP -> { // Checks for up key input
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP -> {
                 level.movePlayer(Direction.UP);
                 playerMoved = true;
             }
-            case KeyEvent.VK_DOWN -> { // Checks for down key input
+            case KeyEvent.VK_DOWN -> {
                 level.movePlayer(Direction.DOWN);
                 playerMoved = true;
             }
-            case KeyEvent.VK_LEFT -> { // Checks for left key input
+            case KeyEvent.VK_LEFT -> {
                 level.movePlayer(Direction.LEFT);
                 playerMoved = true;
             }
-            case KeyEvent.VK_RIGHT -> { // Checks for right key input
+            case KeyEvent.VK_RIGHT -> {
                 level.movePlayer(Direction.RIGHT);
                 playerMoved = true;
             }
         }
 
         if (playerMoved) {
-            // Originally had all of this function code inside here
-            // However, it made this one function do way too much
-            // Moved code down to handleAfterPlayerMovement()
             handleAfterPlayerMovement();
         }
     }
 
+    /**
+     * Handles game updates after the player moves, including enemy movement,
+     * score updates, and collision detection.
+     */
     public void handleAfterPlayerMovement() {
-        // Move enemies towards the player after the player moves
-        level.moveEnemies(); // Ensure this method moves the enemies towards the player
-
-        // Update score and check objectives
-        if (score > 0)
-            score--;
-
+        level.moveEnemies();
+        if (score > 0) score--;
         moves++;
         score += level.checkObjective();
         level.checkAndPlaceDoor();
@@ -139,11 +129,7 @@ public class Game implements KeyListener {
         gamePanel.update(level, lives, score, moves);
 
         gameOver = level.checkCollision();
-
-        if (gameOver) {
-            // Handle game over logic
-            handleGameOver();
-        }
+        if (gameOver) handleGameOver();
 
         if (playerIsOnDoor) {
             handleLevelCompletion();
@@ -152,24 +138,21 @@ public class Game implements KeyListener {
     }
 
     /**
-     * Checks for practice mode for game over. This is because in practice mode, you technically only have one life. Once
-     * you lose it, it's considered a full game over, and you have to restart. This kicks you out to the main menu,
-     * where you'll have to re-select and enter practice mode.
+     * Handles the logic when the game ends, including saving results and resetting levels.
      */
     public void handleGameOver() {
         if (gameMode == GameMode.PRACTICE) {
             JOptionPane.showMessageDialog(mainPanel, "Game Over");
             cardLayout.show(mainPanel, "Menu");
             gameOver = false;
-        }
-        else {  // else if campaign mode
+        } else {
             lives--;
-            if (lives == 0) { // Checks for full game over (lives = 0)
+            if (lives == 0) {
                 JOptionPane.showMessageDialog(mainPanel, "No more lives. Game Over!");
                 saveResult();
-            } else { // Otherwise, "soft-resets" the level, a.k.a. reverts back to the state where you entered the level.
+            } else {
                 score = prevScore;
-                moves = prevMoves;            
+                moves = prevMoves;
                 JOptionPane.showMessageDialog(mainPanel, lives + " lives remaining.");
                 level.resetLevel();
                 setupGamePanel();
@@ -180,18 +163,16 @@ public class Game implements KeyListener {
             }
         }
     }
-    
+
+    /**
+     * Saves the player's results and updates the leaderboard.
+     */
     private void saveResult() {
-        String username = JOptionPane.showInputDialog(mainPanel,
-                "Enter your name:",
-                "Game Over - Save Your Score",
-                JOptionPane.PLAIN_MESSAGE);
+        String username = JOptionPane.showInputDialog(mainPanel, "Enter your name:", "Game Over - Save Your Score", JOptionPane.PLAIN_MESSAGE);
         cardLayout.show(mainPanel, "Menu");
         gameOver = false;
         HighestResult result = HighestResult.getInstance();
-        if (username == null){
-            username = "Player";
-        }
+        if (username == null) username = "Player";
         result.savePlayerResult(username, score);
         SwingUtilities.invokeLater(() -> {
             CampaignPanel campaignPanel = (CampaignPanel) mainPanel.getComponent(1); // Adjust index if needed
@@ -200,90 +181,72 @@ public class Game implements KeyListener {
     }
 
     /**
-     *
-     * For both keyTyped() and keyReleased(),
-     * we need to have them implemented as we implement KeyListener, and
-     * these two are part of the KeyListener class and need to be implemented, or else
-     * we get an error. However, they're implemented
-     * as just empty functions as they don't do anything or
-     * are not required for our game.
+     * Starts the game by displaying the {@code GamePanel}.
      */
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    /*                                                  */
-
-    /**
-     * Starts the game by switching panels to the game.GamePanel.
-     */
-    public void startGame(){
+    public void startGame() {
         cardLayout.show(mainPanel, "Game");
         gamePanel.requestFocusInWindow();
         gamePanel.update(level, lives, score, moves);
     }
 
     /**
-     * This function handles what level will be loaded next depending on levels.GameMode and levels.Difficulty selected in the menu.
+     * Handles the completion of a level, transitioning to the next level or ending the campaign.
      */
-    public void handleLevelCompletion(){
-        if(gameMode == GameMode.PRACTICE){
+    public void handleLevelCompletion() {
+        if (gameMode == GameMode.PRACTICE) {
             JOptionPane.showMessageDialog(mainPanel, "Level complete!");
             cardLayout.show(mainPanel, "Menu");
-        }
-        else if(gameMode == GameMode.CAMPAIGN){
-            // Save current level's score and moves before progressing
+        } else if (gameMode == GameMode.CAMPAIGN) {
             prevScore = score;
             prevMoves = moves;
             int currentIndex = levels.indexOf(level);
-            if(currentIndex < levels.size()-1){
-                level = levels.get(currentIndex+1);  // Loads next level
+            if (currentIndex < levels.size() - 1) {
+                level = levels.get(currentIndex + 1);
                 setupGamePanel();
                 mainPanel.add(gamePanel, "Game");
                 gamePanel.addKeyListener(this);
                 JOptionPane.showMessageDialog(gamePanel, "Level complete! Ready to continue?");
                 startGame();
-            }
-            else{
-                // No more levels, return to main menu
+            } else {
                 JOptionPane.showMessageDialog(mainPanel, difficulty + " Campaign mode complete! Thanks for playing!");
                 saveResult();
                 cardLayout.show(mainPanel, "Menu");
             }
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("Invalid game mode");
         }
     }
 
-    public void initializeLevels(){
-        if(difficulty == Difficulty.EASY){
+    /**
+     * Initializes the levels based on the selected difficulty.
+     */
+    public void initializeLevels() {
+        if (difficulty == Difficulty.EASY) {
             levels.add(new Level2Easy());
             levels.add(new Level3Easy());
-        }
-        else if(difficulty == Difficulty.NORMAL){
+        } else if (difficulty == Difficulty.NORMAL) {
             levels.add(new Level2Normal());
             levels.add(new Level3Normal());
-
-        }
-        else if(difficulty == Difficulty.HARD){
+        } else if (difficulty == Difficulty.HARD) {
             levels.add(new Level2Hard());
             levels.add(new Level3Hard());
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("Invalid difficulty");
         }
     }
 
+    /**
+     * Returns the list of levels in the game.
+     *
+     * @return A {@code List} of {@code Level} objects.
+     */
     public List<Level> getLevels() {
         return levels;
     }
 
+    @Override
+    public void keyTyped(KeyEvent e) { }
+
+    @Override
+    public void keyReleased(KeyEvent e) { }
 }

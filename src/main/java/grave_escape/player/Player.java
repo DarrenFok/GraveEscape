@@ -1,12 +1,12 @@
 package grave_escape.player;
 
+import java.util.List;
+
 import grave_escape.game.Direction;
 import grave_escape.game.MovingObject;
 import grave_escape.structure.Position;
 import grave_escape.structure.PositionUtils;
 import grave_escape.structure.Wall;
-
-import java.util.List;
 
 public class Player extends MovingObject {
 

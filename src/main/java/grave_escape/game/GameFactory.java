@@ -18,16 +18,34 @@ import grave_escape.levels.Level3.Level3Easy;
 import grave_escape.levels.Level3.Level3Hard;
 import grave_escape.levels.Level3.Level3Normal;
 
+/**
+ * Extracting logic for creating game levels and difficulties
+ * consoling level and object creation based on the difficulty of the level
+ */
+
 public class GameFactory {
     CardLayout cardLayout;
     JPanel mainPanel;
     GameMode gameMode;
+
+    /**
+    * Initializing the variables
+    * @param cardLayout  the layout for switching between panels
+    * @param mainPanel   the main menu panel to select the difficulty/mode
+    * @param mode        the game mode of the game
+    */
     public GameFactory(CardLayout cardLayout, JPanel mainPanel, GameMode mode) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.gameMode = mode;
     }
 
+    /**
+    * creation of the game
+    * @param difficulty  the difficulty of the game
+    * @param level       the level of the game 
+    * @return            A new {@code Game} object configured with the given difficulty and level.
+    */
     public Game createGame(Difficulty difficulty, GameLevel level) {
         Level lvl = null;
         if(difficulty == Difficulty.EASY) {
