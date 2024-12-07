@@ -23,7 +23,7 @@ public class Objective extends Position{
 
     /**
      * Method to return objectives.Objective's position.
-     * @return: game.Position of objectives.Objective
+     * @return Position of Objective
      */
     public Position getPosition() {
         return this;
@@ -31,7 +31,7 @@ public class Objective extends Position{
 
     /**
      * Method to return whether it is mandatory to collect objectives.Objective.
-     * @return: Boolean for whether objectives.Objective is mandatory
+     * @return Boolean for whether objectives.Objective is mandatory
      */
     public boolean isMandatory() {
         return isMandatory;
@@ -39,7 +39,7 @@ public class Objective extends Position{
 
     /**
      * Method to return objectives.Objective's X coordinate on game.Grid.
-     * @return: objectives.Objective's X coordinate
+     * @return Objective's X coordinate
      */
     public int getX(){
         return super.getX();
@@ -47,7 +47,7 @@ public class Objective extends Position{
 
     /**
      * Method to return objectives.Objective's Y coordinate on game.Grid.
-     * @return: objectives.Objective's Y coordinate
+     * @return Objective's Y coordinate
      */
     public int getY(){
         return super.getY();
@@ -55,7 +55,7 @@ public class Objective extends Position{
 
     /**
      * Method to return objectives.Objective's score value.
-     * @return: objectives.Objective's score value
+     * @return Objective's score value
      */
     public int getScoreValue(){
         return scoreValue;

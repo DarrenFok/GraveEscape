@@ -15,6 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
+/**
+ * The {@code SettingsPanel} class is a JPanel that provides the settings screen of the game.
+ * It includes a volume slider and text box to control the game music volume and a button 
+ * to return to the main menu. The background of the panel is customizable with an image.
+ */
 public class SettingsPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
@@ -23,7 +28,14 @@ public class SettingsPanel extends JPanel {
     private int previousVolume;
     private MusicController musicController;
     private Image backgroundImage;
-    
+
+    /**
+     * Constructs a {@code SettingsPanel} object and initializes the user interface components.
+     * Sets up the music controller, the volume slider, and a button to return to the main menu.
+     * 
+     * @param cardLayout the CardLayout instance used to switch between panels.
+     * @param mainPanel the main panel containing all the views.
+     */
     public SettingsPanel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -67,11 +79,12 @@ public class SettingsPanel extends JPanel {
             previousVolume = currVolume;
             volumeTextBox.setText(Integer.toString(currVolume));
             musicController.setVolume(currVolume);
-                });
+        });
         soundPanel.add(volumeSlider);
         add(soundPanel);
         previousVolume = volumeSlider.getValue();
 
+        // Create and configure volume text box
         volumeTextBox = new JTextField();
         volumeTextBox.setBounds((1280 / 2) - (300 / 2) - 200, 120, 30, 30);
         volumeTextBox.addActionListener(e -> {
@@ -88,27 +101,44 @@ public class SettingsPanel extends JPanel {
         });
         soundPanel.add(volumeTextBox);
 
-                // Add return button
-                JButton returnButton = drawButton("Return to Main Menu",
-                        new Rectangle(100, 180, 200, 50), 15);
+        // Add return button to return to the main menu
+        JButton returnButton = drawButton("Return to Main Menu",
+                new Rectangle(100, 180, 200, 50), 15);
         returnButton.addActionListener(e -> showPanel("Menu"));
         soundPanel.add(returnButton);
-
     }
 
+    /**
+     * Paints the background image of the panel.
+     * 
+     * @param g the graphics object used to paint the panel.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Paint the panel as usual
-        // Draw the background image
+        // Draw the background image if it is available
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
     }
 
+    /**
+     * Switches to the specified panel using the CardLayout.
+     * 
+     * @param panelName the name of the panel to switch to.
+     */
     private void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
     }
 
+    /**
+     * Creates and returns a button with the specified properties.
+     * 
+     * @param text the text to be displayed on the button.
+     * @param location the location and size of the button.
+     * @param fontSize the font size of the button text.
+     * @return the created {@code JButton}.
+     */
     private JButton drawButton(String text, Rectangle location, int fontSize) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, fontSize));
@@ -116,6 +146,4 @@ public class SettingsPanel extends JPanel {
         add(button);
         return button;
     }
-
-
 }
