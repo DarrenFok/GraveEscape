@@ -1,6 +1,10 @@
 package grave_escape.menu;
 
-import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.io.InputStream;
 
 import javax.swing.ImageIcon;
@@ -13,6 +17,11 @@ import javax.swing.SwingConstants;
 import grave_escape.modes.CampaignPanel;
 import grave_escape.modes.PracticePanel;
 
+/**
+ * The {@code GameMainMenu} class represents the main menu of the Grave Escape game.
+ * It serves as the entry point for navigating different parts of the game, such as
+ * Campaign mode, Practice mode, and Settings.
+ */
 public class GameMainMenu extends JFrame {
     private JPanel mainPanel;
     private JPanel menuPanel;
@@ -27,6 +36,11 @@ public class GameMainMenu extends JFrame {
 
     private final CardLayout cardLayout;
 
+    /**
+     * Constructs the main menu window for the Grave Escape game.
+     * Initializes the layout, panels, and buttons, and sets the default behavior
+     * for the JFrame.
+     */
     public GameMainMenu() {
         setTitle("Grave Escape");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,8 +73,13 @@ public class GameMainMenu extends JFrame {
         setContentPane(mainPanel);
     }
 
+    /**
+     * Initializes the main menu panel with a custom background, title, and buttons.
+     * 
+     * @return A {@code JPanel} representing the main menu panel.
+     */
     JPanel initializeMenuPanel() {
-        JPanel menuPanel = new JPanel(){
+        JPanel menuPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -74,13 +93,12 @@ public class GameMainMenu extends JFrame {
         JLabel titleLabel = new JLabel("Grave Escape");
         titleLabel.setBounds(385, 250, 500, 100);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        try{
+        try {
             // Load the font from resources
             InputStream fontStream = getClass().getResourceAsStream("/Fonts/Storm Gust.ttf");
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(Font.BOLD, 72);
             titleLabel.setFont(customFont);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             // Fall back font, in case font is missing
             titleLabel.setFont(new Font("Arial", Font.BOLD, 72));
@@ -125,9 +143,12 @@ public class GameMainMenu extends JFrame {
         return menuPanel;
     }
 
+    /**
+     * Switches the displayed panel in the main card layout to the specified panel name.
+     * 
+     * @param panelName The name of the panel to display (e.g., "Campaign", "Practice").
+     */
     void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
     }
-
-
 }

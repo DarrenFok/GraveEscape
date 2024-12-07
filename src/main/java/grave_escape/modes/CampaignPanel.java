@@ -22,29 +22,54 @@ import grave_escape.levels.GameLevel;
 import grave_escape.levels.GameMode;
 import grave_escape.objectives.HighestResult;
 
-
 /**
- * modes.CampaignPanel class represents the campaign selection menu in the game.
+ * Represents the campaign selection menu in the game.
  * Allows the player to choose a difficulty level and displays previous high scores.
  */
 public class CampaignPanel extends JPanel {
+    /**
+     * The CardLayout used for switching panels.
+     */
     private CardLayout cardLayout;
+
+    /**
+     * The main JPanel containing all cards (panels).
+     */
     private JPanel mainPanel;
+
+    /**
+     * The currently selected difficulty level.
+     */
     private Difficulty difficulty = Difficulty.EASY;
 
     // Components
+    /**
+     * Button for selecting "Easy" difficulty.
+     */
     JButton easyButton;
+
+    /**
+     * Button for selecting "Normal" difficulty.
+     */
     JButton normalButton;
+
+    /**
+     * Button for selecting "Hard" difficulty.
+     */
     JButton hardButton;
 
+    /**
+     * The background image for the panel.
+     */
     private Image backgroundImage;
 
     /**
-     * Constructor for the modes.CampaignPanel class.
+     * Constructor for the CampaignPanel class.
+     * 
      * @param cardLayout The CardLayout used for switching panels.
      * @param mainPanel  The main JPanel containing all cards (panels).
      */
-    public CampaignPanel(CardLayout cardLayout, JPanel mainPanel){
+    public CampaignPanel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         backgroundImage = new ImageIcon(getClass().getResource("/Menu/menu_background.png")).getImage();
@@ -58,6 +83,9 @@ public class CampaignPanel extends JPanel {
         returnButton.addActionListener(e -> showPanel("Menu"));
     }
 
+    /**
+     * Refreshes the leaderboard by clearing existing components and redrawing them.
+     */
     public void refreshLeaderboard() {
         // Remove all previous leaderboard components
         removeAll();
@@ -74,6 +102,11 @@ public class CampaignPanel extends JPanel {
         repaint();
     }
 
+    /**
+     * Paints the component with the background image.
+     * 
+     * @param g The Graphics object used for drawing.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Paint the panel as usual
@@ -85,11 +118,12 @@ public class CampaignPanel extends JPanel {
 
     /**
      * Draws a bordered text box with specified text, location, and font size.
+     * 
      * @param text     The text to be displayed inside the text box.
      * @param location The location and size of the text box on the panel.
      * @param fontSize The font size of the text.
      */
-    public void drawBorderedTextBox(String text, Rectangle location, int fontSize){
+    public void drawBorderedTextBox(String text, Rectangle location, int fontSize) {
         JPanel panel = new JPanel();
         panel.setOpaque(false);
         panel.setBorder(BorderFactory.createLineBorder(Color.white, 2));
@@ -103,12 +137,13 @@ public class CampaignPanel extends JPanel {
 
     /**
      * Creates and returns a button with specified text, location, and font size.
+     * 
      * @param text     The text to be displayed on the button.
      * @param location The location and size of the button on the panel.
      * @param fontSize The font size of the button text.
-     * @return The JButton created
+     * @return The JButton created.
      */
-    public JButton drawButton(String text, Rectangle location, int fontSize){
+    public JButton drawButton(String text, Rectangle location, int fontSize) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, fontSize));
         button.setBounds(location);
@@ -117,9 +152,9 @@ public class CampaignPanel extends JPanel {
     }
 
     /**
-     * Draws difficulty selection panels
+     * Draws difficulty selection panels.
      */
-    public void drawDifficulties(){
+    public void drawDifficulties() {
         // Draw text
         JLabel diffcultyTitle = new JLabel("Difficulty Selection");
         diffcultyTitle.setFont(new Font("Arial", Font.BOLD, 20));
@@ -164,7 +199,7 @@ public class CampaignPanel extends JPanel {
     /**
      * Displays previous high scores for different levels.
      */
-    public void drawPreviousHiScore(){
+    public void drawPreviousHiScore() {
         // Draw text
         JLabel selectorTitle = new JLabel("Previous Hi-Score");
         selectorTitle.setForeground(Color.white);
@@ -172,12 +207,11 @@ public class CampaignPanel extends JPanel {
         selectorTitle.setBounds((1280) - (700 / 2), 300, 700, 50);
         add(selectorTitle, BorderLayout.CENTER);
 
-
         HighestResult highestResult = HighestResult.getInstance();
         List<HighestResult.PlayerResult> leaderboard = highestResult.getLeaderboard();
         int x = 1;
 
-        if(leaderboard.isEmpty()){
+        if (leaderboard.isEmpty()) {
             JLabel result = new JLabel("No players played yet");
             result.setForeground(Color.gray);
             result.setFont(new Font("Arial", Font.BOLD, 14));
@@ -199,6 +233,7 @@ public class CampaignPanel extends JPanel {
 
     /**
      * Shows a specified panel based on the panel name provided.
+     * 
      * @param panelName The name of the panel to be displayed.
      */
     private void showPanel(String panelName) {
