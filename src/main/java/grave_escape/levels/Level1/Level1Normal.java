@@ -13,7 +13,17 @@ import grave_escape.levels.Level;
 import grave_escape.objectives.Objective;
 import grave_escape.structure.Wall;
 
+/**
+ * Represents the normal version of Level 1.
+ * This class extends the Level class and initializes specific configurations
+ * such as enemies, objectives, walls, starting position, and exit position
+ * for normal difficulty of Level 1.
+ */
 public class Level1Normal extends Level {
+    /**
+     * Constructs the Level1Normal object with predefined settings for the level,
+     * including its grid size, starting and ending positions, enemies, objectives, and walls.
+     */
     public Level1Normal(){
         super(
                 10,
@@ -29,6 +39,11 @@ public class Level1Normal extends Level {
         this.difficulty = "Normal";
     }
 
+    /**
+     * Creates a list of enemies for the level.
+     *
+     * @return a list of Enemy objects including moving and stationary enemies.
+     */
     private static List<Enemy> createEnemies(){
         return List.of(
                 new MovingEnemy(new Position(14,2)),
@@ -42,6 +57,11 @@ public class Level1Normal extends Level {
         );
     }
 
+    /**
+     * Creates a list of objectives for the level.
+     *
+     * @return an ArrayList of Objective objects
+     */
     private static ArrayList<Objective> createObjectives(){
         ArrayList<Objective> objectives = new ArrayList<>();
         objectives.add(new Objective(new Position(5,1), true, MANDATORY_VALUE));
@@ -53,6 +73,11 @@ public class Level1Normal extends Level {
         return objectives;
     }
 
+    /**
+     * Creates a list of walls for the level.
+     *
+     * @return an ArrayList of Wall objects, defining the boundaries in the level.
+     */
     private static ArrayList<Wall> createWalls(){
         ArrayList<Wall> walls = new ArrayList<>();
         walls.add(new Wall(new Position(6,1)));
