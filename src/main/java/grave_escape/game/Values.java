@@ -18,6 +18,7 @@ public final class Values {
         // Private constructor to prevent instantiation
     }
 
+
     // Values for collectable objectives
     /**
      * The amount of points obtained when collecting a mandatory objective
@@ -25,7 +26,6 @@ public final class Values {
     public static final int MANDATORY_VALUE = 25;
     /**
      * The amount of points obtained when collecting an optional value
->>>>>>> a824f650e5bbe26dc5f9f02bcafee1c0a19b3116
      */
     public static final int OPTIONAL_VALUE = 50;
 
@@ -44,7 +44,6 @@ public final class Values {
     public static final String DOOR_OPEN = "/Terrain/Door_Open.png";
     /**
      * The path for the .png file for the closed-door tile sprite
->>>>>>> a824f650e5bbe26dc5f9f02bcafee1c0a19b3116
      */
     public static final String DOOR_CLOSE = "/Terrain/Door_Close.png";
 
@@ -62,7 +61,6 @@ public final class Values {
     public static final String HERO_UP_1 = "/Player/Hero_Up_1.png";
     /**
      * The path for the .png file for the hero looking down sprite
->>>>>>> a824f650e5bbe26dc5f9f02bcafee1c0a19b3116
      */
     public static final String HERO_DOWN_1 = "/Player/Hero_Down_1.png";
 
@@ -72,13 +70,11 @@ public final class Values {
     public static final String OBJECTIVE_KEY = "/Objectives/Objective_Key.png";
     /**
      * The path for the .png file for the optional coin objective sprite
->>>>>>> a824f650e5bbe26dc5f9f02bcafee1c0a19b3116
      */
     public static final String OBJECTIVE_COIN = "/Objectives/Coin.png";
 
     /**
      * The path for the .png file for the thorn enemy tile sprite
->>>>>>> a824f650e5bbe26dc5f9f02bcafee1c0a19b3116
      */
     public static final String THORN_ENEMY = "/Enemies/Thorns.png";
 
@@ -96,13 +92,11 @@ public final class Values {
     public static final String GHOST_UP_1 = "/Enemies/Ghost_Up_1.png";
     /**
      * The path for the .png file for the hero looking down sprite
->>>>>>> a824f650e5bbe26dc5f9f02bcafee1c0a19b3116
      */
     public static final String GHOST_DOWN_1 = "/Enemies/Ghost_Down_1.png";
 
     /**
      * The path for the .png file for the tree terrain tile sprite
->>>>>>> a824f650e5bbe26dc5f9f02bcafee1c0a19b3116
      */
     public static final String TREE_TERRAIN = "/Terrain/Tree.png";
 
@@ -118,7 +112,35 @@ public final class Values {
     /**
      * The path for the .png file for the optional coin objective icon in the header UI representing the number of
      * optional objectives left
->>>>>>> a824f650e5bbe26dc5f9f02bcafee1c0a19b3116
      */
     public static final String OBJECTIVE_COIN_UI = "/In-Game UI Header/Better_Coin_transparent.png";
+
+
+    // Paths for audio files
+    /**
+     * The path for the .wav file to be played when a button is pressed
+     */
+    public static final String BUTTON_PRESS_SOUND = "/Audio/Button Press 3.wav";
+    /**
+     * The path for the .wav file to be played when a mandatory key objective is collected
+     */
+    public static final String COLLECT_OBJECTIVE_KEY_SOUND = "/Audio/Collect Objective 1.wav";
+    /**
+     * The path for the .wav file to be played when an optional coin objective is collected
+     */
+    public static final String COLLECT_OBJECTIVE_COIN_SOUND = "/Audio/Collect Objective 2.wav";
+    /**
+     * The path for the .wav file to be played when a door is opened
+     */
+    public static final String DOOR_OPEN_SOUND = "/Audio/Door Open.wav";
+    /**
+     * The path for the .wav file to be played when a door is unlocked
+     */
+    public static final String DOOR_UNLOCK_SOUND = "/Audio/Door Unlock.wav";
+    /**
+     * The path for the .wav file to be played when a player dies within a level
+     */
+    public static final String GAME_OVER_SOUND = "/Audio/Game Over 3.wav";
+
+
 }

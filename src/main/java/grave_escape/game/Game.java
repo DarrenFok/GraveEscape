@@ -84,7 +84,7 @@ public class Game implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (gameOver) return;
-
+        AudioUtils.playAudio(Values.BUTTON_PRESS_SOUND);
         boolean playerMoved = false;
 
         switch (e.getKeyCode()) {
@@ -132,6 +132,7 @@ public class Game implements KeyListener {
         if (gameOver) handleGameOver();
 
         if (playerIsOnDoor) {
+            AudioUtils.playAudio(Values.DOOR_OPEN_SOUND);
             handleLevelCompletion();
             playerIsOnDoor = false;
         }
@@ -141,6 +142,7 @@ public class Game implements KeyListener {
      * Handles the logic when the game ends, including saving results and resetting levels.
      */
     public void handleGameOver() {
+        AudioUtils.playAudio(Values.GAME_OVER_SOUND);
         if (gameMode == GameMode.PRACTICE) {
             JOptionPane.showMessageDialog(mainPanel, "Game Over");
             cardLayout.show(mainPanel, "Menu");

@@ -13,7 +13,8 @@ import grave_escape.player.Player;
 import grave_escape.structure.Door;
 import grave_escape.structure.PositionUtils;
 import grave_escape.structure.Wall;
-
+import grave_escape.game.AudioUtils;
+import grave_escape.game.Values;
 
 /**
  * levels.Level class represents a template for a level.
@@ -140,7 +141,11 @@ public class Level {
         if(objective != null){
             removeObjective(objective);
             if(objective.isMandatory()){
+                AudioUtils.playAudio(Values.COLLECT_OBJECTIVE_KEY_SOUND);
                 mandatoryCount--;
+            }
+            else{
+                AudioUtils.playAudio(Values.COLLECT_OBJECTIVE_COIN_SOUND);
             }
             checkAndPlaceDoor();
             return objective.getScoreValue();
@@ -174,6 +179,7 @@ public class Level {
      */
     public void checkAndPlaceDoor(){
         if(mandatoryCount == 0 && door == null){
+            AudioUtils.playAudio(Values.DOOR_UNLOCK_SOUND);
             door = new Door(this.doorPosition);
             isDoorOpen = true;
         }
